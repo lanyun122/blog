@@ -1,14 +1,72 @@
-site_name: 我的全新博客
+site_name: 小V博客
 site_url: https://你的用户名.github.io/blog/
 
 theme:
   name: material
   language: zh
+  custom_dir: overrides  # 👈 1. 开启自定义模板覆盖
   features:
-    - navigation.tabs  # 👈 就是加了这一行来开启顶部导航
+    - navigation.tabs
+    - navigation.top
+    - navigation.indexes  # 👈 新增：允许点击顶级导航的标题本身
+    - content.tabs.link # 👈 新增：让页面内所有相同标题的选项卡同步切换
+    - content.code.copy  # 👈 必须添加这一行，开启一键复制按钮
+    - content.code.annotate # 允许在代码中添加注释气泡（官网常用）
+  # 1. 主题颜色开关（深浅色模式切换）
+  palette:
+    - scheme: default
+      primary: white
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off-outline # 👈 变成了关闭状态的开关
+        name: 切换到深色模式
+    - scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch             # 👈 变成了开启状态的开关
+        name: 切换到浅色模式
+# 额外样式       
+extra_css:
+  - stylesheets/extra.css
+# 2. 插件设置（开启搜索和博客）
 plugins:
-  - blog
+  - search:
+      lang: zh           # 设置搜索支持中文
+  - tags        # 👈 新增这一行，开启标签功能    
+  - blog:                       # 👈 后面要加一个冒号
+      pagination_per_page: 5    # 👈 必须比上面的 - blog 缩进更多
 
+markdown_extensions:
+  - admonition          # 警告框 (!!! note)
+  - pymdownx.details    # 详情折叠 (??? note)
+  - attr_list           # 👈 重要：实现卡片布局 (.grid .cards) 必须有它
+  - md_in_html          # 👈 重要：让 <div> 标签内的 Markdown 能被解析
+  - pymdownx.highlight: # 👈 合并为一个：处理代码高亮和行号
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite # 行内代码高亮
+  - pymdownx.snippets     # 代码片段插入
+  - pymdownx.superfences: # 合并：支持 Mermaid 流程图和复杂代码块
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:      # 选项卡切换 (=== "Tab")
+      alternate_style: true
+  
+# 3. 导航栏结构（含二级导航）
 nav:
   - 首页: index.md
-  - 专栏博客: blog/index.md
+  - 专栏博客:             # 👈 关键点1：把它变成一个有层级的菜单
+    - blog/index.md       # 👈 关键点2：把博客主页作为子项放进去
+  - 推荐及工具:             # (保留你原来的内容)
+    - 推荐: 
+          - recommend/index.md  # 👈 自动识别为该目录的首页
+          - Bitget 注册: recommend/bitget-guide.md
+          - OKX 注册: recommend/okx-guide.md
+    - 工具: 
+          - tools/index.md      # 👈 自动识别为该目录的首页
+          - AI 工具合集: tools/ai-tools.md
+          - 网络加速工具: tools/vpn-tools.md
