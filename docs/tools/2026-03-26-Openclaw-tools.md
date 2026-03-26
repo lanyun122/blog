@@ -36,10 +36,6 @@ tags:
 * 远程控制软件（Todesk）：[https://www.todesk.com](https://www.todesk.com/download.html)
 * 代理软件（V2rayN）:[https://github.com/2dust/v2rayN](https://github.com/2dust/v2rayN)
 
-* 节点订阅地址（自用）
-```powershell
-https://usapi.saojc.xyz/assets/user/avatar/ab4e66a5e278.png?ref=8eda51132217e4f36e7f5a85b033a003
-```
 
 ---
 
