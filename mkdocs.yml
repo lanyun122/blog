@@ -67,9 +67,8 @@ nav:
   - 推荐及工具:
       - 推荐: 
           - recommend/index.md
-          - Bitget 注册: recommend/bitget-guide.md
-          - OKX 注册: recommend/okx-guide.md
+          
       - 工具: 
           - tools/index.md
-          - AI 工具合集: tools/ai-tools.md
-          - 网络加速工具: tools/vpn-tools.md
+          - 常用工具: tools/2026-03-26-tools.md
+          - Openclaw安装、使用文档:   tools/2026-03-26-Openclaw-tools.md
