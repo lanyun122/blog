@@ -50,14 +50,12 @@ https://usapi.saojc.xyz/assets/user/avatar/ab4e66a5e278.png?ref=8eda51132217e4f3
 
 * 检查node版本命令：
 ```powershell
-node -v  
-# 正确返回结果示例：v24.13.0
+node -v # 正确返回结果示例：v24.13.0
 ```
 
 * 检查npm版本命令
 ```powershell
-npm -v 
-# 正确返回结果示例：11.6.2
+npm -v # 正确返回结果示例：11.6.2
 ```
 ### 2.安装Git
 * 下载地址 Git官网[https://git-scm.com/](https://git-scm.com/)
