@@ -62,22 +62,19 @@ npm -v # 正确返回结果示例：11.6.2
 
 * 检查git版本命令
 ```powershell
-git --version
-# 正确返回示例：git version 2.53.0.windows.1
+git --version # 正确返回示例：git version 2.53.0.windows.1
 ```
 
 ### 3.Windows脚本权限开启
 
 - 脚本权限开启命令
 ```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser 
-# 正确返回示例：无
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser # 正确返回示例：无
 ```
 
 - 脚本权限检查命令
 ```powershell
-Get-ExecutionPolicy -Scope CurrentUser 
-# 正确返回示例：RemoteSigned
+Get-ExecutionPolicy -Scope CurrentUser # 正确返回示例：RemoteSigned
 ```
 
 ### 4.安装Openclaw命令
@@ -134,8 +131,7 @@ brew install git
 
 - 版本检查命令：
 ```zsh
-git --version 
-# 正确返回示例：git version 2.39.5（Apple Git-154）
+git --version # 正确返回示例：git version 2.39.5（Apple Git-154）
 ```
 
 ### 4.安装Node.js
@@ -147,14 +143,12 @@ brew install node
 
 - 版本检查命令：
 ```zsh
-node -v
-# 正确返回结果示例：v24.14.0
+node -v # 正确返回结果示例：v24.14.0
 ```
 
 - 
 ```zsh
-npm -v 
-# 正确返回结果示例：11.9.0
+npm -v # 正确返回结果示例：11.9.0
 ```
 
 ### 5.安装Openclaw
