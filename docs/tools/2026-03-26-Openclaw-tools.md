@@ -189,9 +189,10 @@ openclaw onboard
 - 飞书插件安装说明网址：[OpenClaw飞书官方插件使用指南（公开版）](https://bytedance.larkoffice.com/docx/MFK7dDFLFoVlOGxWCv5cTXKmnMh)
 
 - 飞书插件安装命令：
+
 ```powershell
 npx -y @larksuite/openclaw-lark-tools install
- ```
+```
 
 - 扫码创建机器人
 - 重启Openclaw，在飞书的机器人聊天中开启权限：/feishu auth ，根据提示操作
