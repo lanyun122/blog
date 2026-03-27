@@ -203,7 +203,6 @@ npx -y @larksuite/openclaw-lark-tools install
 ```powershell
 npx -y @wecom/wecom-openclaw-cli install
 ```
-
 - 企业微信扫码创建机器人，如果提示有问题，就重新输入openclaw config配置机器人ID和Secret
 
 - 配对代码命令：
