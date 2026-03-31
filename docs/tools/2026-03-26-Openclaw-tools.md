@@ -372,9 +372,9 @@ if __name__ == "__main__":
 ## 六、Skills（技能）安装
 
 * 官方Skills（技能）网站：[https://clawhub.ai/](https://clawhub.ai/)
-* Self-Improving + Proactive Agent（自我进化技能）：https://clawhub.ai/ivangdavila/self-improving
-* Tavily AI Search（联网搜索技能）：https://clawhub.ai/bert-builder/tavily
-* Multi Search Engine（多搜索引擎技能）：https://clawhub.ai/gpyAngyoujun/multi-search-engine
+* Self-Improving + Proactive Agent（自我进化技能）：[点击跳转](https://clawhub.ai/ivangdavila/self-improving)
+* Tavily AI Search（联网搜索技能）：[点击跳转](https://clawhub.ai/bert-builder/tavily)
+* Multi Search Engine（多搜索引擎技能）：[点击跳转](https://clawhub.ai/gpyAngyoujun/multi-search-engine)
 * 浏览器控制扩展程序，Windows、Mac通用：Chrome浏览器拓展商店搜索（OpenClaw Browser Relay for Windows）
 
 ## 七、多Agent创建
