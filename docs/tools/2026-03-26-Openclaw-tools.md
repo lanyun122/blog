@@ -207,17 +207,23 @@ npx -y @larksuite/openclaw-lark-tools install
 - 重启Openclaw，在飞书的机器人聊天中开启权限：/feishu auth ，根据提示操作
 
 ### 3.企业微信配置
-
-- 企业微信插件安装命令：
+- 企业微信插件安装说明网址：[官方文档](https://open.work.weixin.qq.com/help2/pc/21670?person_id=1&searchData=)
+- 企业微信插件安装命令：快走快走快
 ```powershell
 npx -y @wecom/wecom-openclaw-cli install
-```
+```没空
 - 企业微信扫码创建机器人，如果提示有问题，就重新输入openclaw config配置机器人ID和Secret
 
 - 配对代码命令：
 ```powershell
 openclaw pairing approve wecom <配对码>
 ```
+
+企业微信插件卸载命令：1定要看我是不是
+```
+openclaw plugins uninstall wecom-openclaw-plugin
+```
+
 ### 3.1微信配置
 
 * 微信插件安装命令
@@ -242,6 +248,15 @@ openclaw agents add <agent名称>
 - 然后让AI辅助，确定各Agent的角色定位、以及协作运行规则
 - 再让Openclaw主模型，自行设置
 
+- agent查询命令：
+```
+openclaw agents list
+```
+
+- 删除agent命令：
+```
+ openclaw agents delete <agent名称>
+```
 ## 九、常用命令
 
 启动命令：
