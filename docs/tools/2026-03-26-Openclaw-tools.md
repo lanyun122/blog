@@ -272,7 +272,7 @@ npx clawhub@latest install <skill-name>
 
 Openclaw卸载命令：
 ```
-npm uninstall openclaw
+npm uninstall -g openclaw
 ```
 
 将Git的SSH地址改为http地址命令：
