@@ -216,159 +216,6 @@ openclaw pairing approve wecom <配对码>
 npx -y @tencent-weixin/openclaw-weixin-cli@latest install
 ```
 
-### 4.Lark连接
-- 登录开发者后台——创建企业应用——添加机器人——开启权限——创建事件（打开长连接功能）——Openclaw中配置机器人ID+密钥
-- 注意：在openclaw config中配置lark的时候，要选择open（对所有频道开启）
-
-权限导入代码：
-```powershell
-{
-  "scopes": {
-    "tenant": [
-      "application:application:self_manage",
-      "cardkit:card:read",
-      "cardkit:card:write",
-      "contact:contact.base:readonly",
-      "docx:document:readonly",
-      "im:chat:read",
-      "im:chat:update",
-      "im:message.group_at_msg:readonly",
-      "im:message.p2p_msg:readonly",
-      "im:message.pins:read",
-      "im:message.pins:write_only",
-      "im:message.reactions:read",
-      "im:message.reactions:write_only",
-      "im:message:readonly",
-      "im:message:recall",
-      "im:message:send_as_bot",
-      "im:message:send_multi_users",
-      "im:message:send_sys_msg",
-      "im:message:update",
-      "im:resource"
-    ],
-    "user": [
-      "base:app:copy",
-      "base:app:create",
-      "base:app:read",
-      "base:app:update",
-      "base:field:create",
-      "base:field:delete",
-      "base:field:read",
-      "base:field:update",
-      "base:record:create",
-      "base:record:delete",
-      "base:record:retrieve",
-      "base:record:update",
-      "base:table:create",
-      "base:table:delete",
-      "base:table:read",
-      "base:table:update",
-      "base:view:read",
-      "base:view:write_only",
-      "board:whiteboard:node:create",
-      "board:whiteboard:node:read",
-      "calendar:calendar.event:create",
-      "calendar:calendar.event:delete",
-      "calendar:calendar.event:read",
-      "calendar:calendar.event:reply",
-      "calendar:calendar.event:update",
-      "calendar:calendar.free_busy:read",
-      "calendar:calendar:read",
-      "contact:contact.base:readonly",
-      "contact:user.base:readonly",
-      "contact:user.employee_id:readonly",
-      "contact:user:search",
-      "docs:document.comment:create",
-      "docs:document.comment:read",
-      "docs:document.comment:update",
-      "docs:document.media:download",
-      "docs:document.media:upload",
-      "docs:document:copy",
-      "docs:document:export",
-      "docx:document:create",
-      "docx:document:readonly",
-      "docx:document:write_only",
-      "drive:drive.metadata:readonly",
-      "drive:file:download",
-      "drive:file:upload",
-      "im:chat.members:read",
-      "im:chat:read",
-      "im:message",
-      "im:message.group_msg:get_as_user",
-      "im:message.p2p_msg:get_as_user",
-      "im:message:readonly",
-      "offline_access",
-      "search:docs:read",
-      "search:message",
-      "sheets:spreadsheet.meta:read",
-      "sheets:spreadsheet:create",
-      "sheets:spreadsheet:read",
-      "sheets:spreadsheet:write_only",
-      "space:document:delete",
-      "space:document:move",
-      "space:document:retrieve",
-      "task:comment:read",
-      "task:comment:write",
-      "task:task:read",
-      "task:task:write",
-      "task:task:writeonly",
-      "task:tasklist:read",
-      "task:tasklist:write",
-      "wiki:node:copy",
-      "wiki:node:create",
-      "wiki:node:move",
-      "wiki:node:read",
-      "wiki:node:retrieve",
-      "wiki:space:read",
-      "wiki:space:retrieve",
-      "wiki:space:write_only"
-    ]
-  }
-}
-```
-
-长连接开启pathy脚本：
-```powershell
-# 飞书官方 SDK 长连接最终版（无语法/缩进错误）
-import lark_oapi as lark
-
-# *
-# 替换为你的真实参数
-APP_ID = "cli_a93e674effb8de15"
-APP_SECRET = "a6s0Dn1j8xGQYbwxkgiODfphr8ZfhMmw"
-# *
-
-# v2.0 消息接收事件处理函数
-def do_p2_im_message_receive_v1(data: lark.im.v1.P2ImMessageReceiveV1) -> None:
-    print(f'/n✅ [v2.0 消息事件] 收到消息：/n{lark.JSON.marshal(data, indent=4)}')
-
-# v1.0 自定义事件处理函数（可选）
-def do_message_event(data: lark.CustomizedEvent) -> None:
-    print(f'/n✅ [v1.0 自定义事件] 收到事件：/n{lark.JSON.marshal(data, indent=4)}')
-
-# 初始化事件处理器（核心：注释行去掉末尾的 /）
-event_handler = lark.EventDispatcherHandler.builder("", "") /
-.register_p2_im_message_receive_v1(do_p2_im_message_receive_v1)
-# .register_p1_customized_event("out_approval", do_message_event)  # 注释行无 /
-event_handler = event_handler.build()
-
-# 初始化并启动长连接客户端
-def main():
-    # 严格按官方参数初始化
-    cli = lark.ws.Client(
-        APP_ID,
-        APP_SECRET,
-        event_handler=event_handler,
-        log_level=lark.LogLevel.DEBUG,
-        domain=lark.LARK_DOMAIN
-    )
-    print("🚀 飞书长连接客户端已初始化，正在连接...")
-    cli.start()
-
-if __name__ == "__main__":
-    main()
-```
-
 ## 六、Skills（技能）安装
 
 * 官方Skills（技能）网站：[https://clawhub.ai/](https://clawhub.ai/)
@@ -421,6 +268,11 @@ openclaw --version
 ClawHub技能安装命令：
 ```powershell
 npx clawhub@latest install <skill-name>
+```
+
+Openclaw卸载命令：
+```
+npm uninstall openclaw
 ```
 
 将Git的SSH地址改为http地址命令：
