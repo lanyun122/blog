@@ -171,6 +171,15 @@ sudo npm install -g openclaw@latest
 openclaw onboard
 ```
 
+## 五、Ollama部署
+
+* Ollama官网地址：[https://ollama.com/](https://ollama.com/)
+* 步骤：下载安装ollama客户端 → 安装客户端 → 注册登录账号（QQ邮箱也可以） → 输入命令启动、部署云模型（每日有免费额度）
+* ollama启动openclaw命令：
+```
+ollama launch openclaw --config
+```
+
 ## 五、Channels连接
 
 ### 1.Telegram连接
