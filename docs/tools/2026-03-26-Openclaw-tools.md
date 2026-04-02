@@ -324,27 +324,60 @@ npm config set registry https://registry.npmjs.org/
 sudo npm install -g openclaw@latest --registry=https://registry.npmmirror.com --unsafe-perm=true --allow-root --strict-ssl=false
 ```
 
+## 十、Token转接平台
 
-命令
-```powershell
+### （一）接入指南与定价说明
 
-```
-命令
-```powershell
+- 为了满足不同场景下的成本与稳定性需求，为大伙提供了“按量付费”与“月卡订阅”两种服务模式。
 
-```
+#### 1. API 按量付费服务
+- 核心业务，支持 OpenAI 格式直接调用。我们提供两条不同技术路径的线路，丰俭由人，按需选择。
+- 适用场景： 日常开发、高频调用、测试环境、个人工具集成。
+- 定价策略：
+  - 兑换比例： 1 RMB = 1 USD 额度
+  - （相当于官方原价的 1.4 折，极具市场竞争力）
+- 举个例子大伙就明白:
+![封面](../assets/images/Claude-Opus-4.6官方Token价格.PNG)
+- opus4.6 是5美金/百万token 输入,在咱们网站,你只需要使用5人民币使用同样的量
 
-命令
-```powershell
+#### 1. 月卡订阅服务
+- 适合不想折腾配置，直接在网页或客户端进行高频、大流量使用的个人开发者与创作者。
+- 套餐价格表
 
-```
 
-命令
-```powershell
+| 套餐档位 | 价格 (RMB/月) | 每日刷新额度 | 适用人群 |
+| :---: | :---: | :---: | :---: |
+| 入门版 | **¥199** | **$15 / 天** | 个人开发者、日常编程辅助 |
+| 轻量版 | **¥339** | **$30 / 天** | 个人开发者、日常编程辅助 |
+| 标准版 | **¥499** | **$50 / 天** | 重度代码编写、长文档分析 |
+| 高级版 | **¥1,118** | **$120 / 天** | 全职独立开发者、AI 极客 |
+| 团队版 | **¥1,888** | **$200 / 天** | 极高频用户、小型工作室 |
+| 商业版 | **¥4,688** | **$500 / 天** | 资深高频用户、中大型工作室 |
+| 企业版 | **¥9,188** | **$1000 / 天** | 资深高频用户、中大型工作室 |
 
-```
 
-命令
-```powershell
+- 帮大伙提前算了,买499的套餐,每天都把50美金用完,相当于一个月能花1500美金,折合下来是0.33人民币/1美金
 
-```
+- 💡 选购建议： 标准版（$50/天）已能满足绝大多数高强度开发需求。如需更高并发或多人共享，可选购或灵活升级（多退少补）高阶套餐。
+
+#### 3. 企业服务与合作
+- 企业长期合作： 针对有稳定大额需求的企业客户，我们可以提供定制化 API 部署方案及备用线路保障。
+- 合规支持： 支持企业对公转账及开具发票，解决报销与合规后顾之忧。
+
+### （二）购买、使用相关文档
+
+- 闲鱼交付文档：[点击跳转](https://my.feishu.cn/wiki/ZmM6wSSfAiRbWZkR2WGctTO6nXb)
+
+- XueDingtoken｜小白AI无门槛宝典:[点击跳转](https://ocnoacy9az5w.feishu.cn/wiki/YL29wbEzpiAW6hk1DFEctDIenfd)
+
+- Xuedingtoken API 服务接入指南与定价说:[点击跳转](https://ocnoacy9az5w.feishu.cn/wiki/SZDWwE99DiO5o2kRkUhc8ufvnFh?fromScene=spaceOverview)
+
+- Claude Code 安装指南 · 小白操作指南（Windows）:[点击跳转](https://ocnoacy9az5w.feishu.cn/wiki/BJMHwKhRJigezhkJPZ7ccnBsn5c)
+
+- Claude code 安装指南·小白操作指南（MacOS 版本）:[点击跳转](https://ocnoacy9az5w.feishu.cn/wiki/KVSywKq4fih0pikGdlxcVjb8nAe)
+
+- Claude Code 配置指南：快速完成 claude code 配置避坑经验:[点击跳转](https://ocnoacy9az5w.feishu.cn/wiki/HqgGwWd7uictajkWszbcN1Hmnab)
+
+- 如何在 openclaw(小龙虾) 配置 xuedingtoken API 指南:[点击跳转](https://ocnoacy9az5w.feishu.cn/wiki/Gr6kwcH7DirNyVkyoogcPcwqnqf)
+
+- OpenClaw | ClaudeCode | OpenCode  安装教程:[点击跳转](https://ocnoacy9az5w.feishu.cn/wiki/JzMGwg1QSi1QzakHfCdcjTNxnJe)
