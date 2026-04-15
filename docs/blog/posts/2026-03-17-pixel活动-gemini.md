@@ -57,8 +57,12 @@ tags:
 
 !!! info "相关工具网站"
     - **2FA 接码**：[2fa.vip](https://2fa.vip/)
+    - **认证方法一（付费）**
     - **验证平台**：[one.idkey.cc](https://one.idkey.cc/?ref=taoqiwa)
     - **积分购买**：[car.kennygmail.com](https://car.kennygmail.com?invite=24735)
+    - **认证方法二(免费)**
+    - **电报机器人认证**：[点击跳转](https://t.me/PixelAuto_Xixi_Bot?start=ref_I92AA47D0C7F)
+    - **命令格式要求**：/verify2 账号 密码 2FA
 
 !!! quote "其他相关推荐"
     - **网络方案**：[自用机场推荐 (白月光)](https://www.sibker.com/register?invite_code=6AbO5kCw)
