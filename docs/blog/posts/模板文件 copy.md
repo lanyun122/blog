@@ -24,7 +24,8 @@ tags:
 <!-- more -->
 ---
 ## 视频相关工具
-- Telegram汉化连接：[t.me/jisou?start=a_8225391452](t.me/jisou?start=a_8225391452)
+- 小V交流群：[点击跳转](https://t.me/xiaovchat)
+- Telegram汉化连接：[点击跳转](https://t.me/jisou?start=a_8225391452)
 
 ## 🎯 活动速览
 
