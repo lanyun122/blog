@@ -24,50 +24,20 @@ tags:
 <!-- more -->
 
 ---
-## 视频相关工具
-- 账号购买平台（账号星球）：[点击跳转](https://accboy7kjxv.acceboy.com/)
-- 小V交流群：[https://t.me/xiaovchat](https://t.me/xiaovchat)
-
-## 其他工具
-- 自用机场：有需要的可以[点击获取](https://www.sibker.com/register?invite_code=6AbO5kCw)
-- 代理软件（V2rayN）:[电脑端下载地址](https://github.com/2dust/v2rayN)
-- 代理软件（V2rayNG）:[安卓手机下载地址](https://github.com/2dust/v2rayNG)
-
-
-## 🎯 活动速览
-
-=== "✅ 优惠适用"
-    * [对象1]
-    * [对象2]
-
-=== "❌ 不适用"
-    * [人群1]
-    * [人群2]
-
----
-
-## 📋 实操流程
-
-1. **[第一步]**：[简述]
-2. **[第二步]**：[简述]
-3. **[第三步]**：[简述]
-
-!!! warning "风控/避坑指南"
-    [这里写最重要的操作注意事项]
-
----
 
 ## 🔗 资源与推荐
 
 !!! info "视频相关工具"
-    * [链接名称1]：[URL]
-    * [链接名称2]：[URL]
+    * 账号购买平台（账号星球）：[点击跳转](https://accboy7kjxv.acceboy.com/)
+    * 小V交流群：[https://t.me/xiaovchat](https://t.me/xiaovchat)
 
-!!! quote "站长推荐"
-    * [推荐1]
-    * [推荐2]
+!!! quote "其他工具"
+    - 自用机场：有需要的可以[点击获取](https://www.sibker.com/register?invite_code=6AbO5kCw)
+    - 代理软件（V2rayN）:[电脑端下载地址](https://github.com/2dust/v2rayN)
+    - 代理软件（V2rayNG）:[安卓手机下载地址](https://github.com/2dust/v2rayNG)
 
----
+
+
 
 ## ⚠️ 免责声明
 * 本文内容仅供技术交流，请遵守当地法律法规。
