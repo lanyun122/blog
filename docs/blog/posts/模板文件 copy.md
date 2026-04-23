@@ -36,6 +36,8 @@ tags:
 * **🔍 IP 纯净度检测 (Ping0)：** [点击查询节点 IP 信息](https://ping0.cc/)
 * **🔨代理软件（V2rayN）:**[电脑端下载地址](https://github.com/2dust/v2rayN)
 * **🔨代理软件（V2rayNG）:**[安卓手机下载地址](https://github.com/2dust/v2rayNG)
+* **👉加入小V交流群➡️抽奖：**[https://t.me/xiaovchat](https://t.me/xiaovchat)
+
 ---
 
 ## 🛠️ 第一步：连接云服务器
