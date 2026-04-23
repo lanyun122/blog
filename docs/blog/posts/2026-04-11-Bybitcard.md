@@ -43,7 +43,7 @@ tags:
 
 ## 📝 第一步：注册 Bybit 与实名认证
 
-- **🔗 官方注册**：[点击跳转](https://www.bsmkweb.cc/join?ref=XIAOV002)（专属推荐码：`XIAOV002`）
+- **🔗 官方注册**：[点击跳转](https://partner.bybit.com/b/XIAOV001)（专属推荐码：`XIAOV001`）
 - **💡 提示**：若网页打不开或提示地区受限，请在上方“推荐节点”中切换尝试。
 
 ---
