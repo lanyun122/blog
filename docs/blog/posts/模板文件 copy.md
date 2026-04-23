@@ -34,7 +34,8 @@ tags:
 * **🏠 住宅代理 (TailorData)：** [点击注册获取高质量动态/静态 IP](https://dashboard.talordata.com/reg?inviter_code=xiaov001)
 * **⚡ 测速工具 (Speedtest)：** [点击前往测速](https://www.speedtest.net/zh-Hans)
 * **🔍 IP 纯净度检测 (Ping0)：** [点击查询节点 IP 信息](https://ping0.cc/)
-
+* **🔨代理软件（V2rayN）:**[电脑端下载地址](https://github.com/2dust/v2rayN)
+* **🔨代理软件（V2rayNG）:**[安卓手机下载地址](https://github.com/2dust/v2rayNG)
 ---
 
 ## 🛠️ 第一步：连接云服务器
