@@ -67,7 +67,8 @@ nav:
   - 推荐及工具:
       - 推荐: 
           - recommend/index.md
-      - 工具: 
+      - 详细文档: 
           - tools/index.md
           - 常用工具: tools/2026-03-26-tools.md
           - Openclaw安装、使用文档: tools/2026-03-26-Openclaw-tools.md
+          - Banwagong(搬瓦工VPS): tools/2026-04-25-VPS-banwagong.md

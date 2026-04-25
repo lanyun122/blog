@@ -16,6 +16,14 @@
 
 ---
 
+### 🖥️ 云服务器（VPS）推荐
+* **⚡️ 最顶级的海外老牌主机商（Banwagong）：** [点击查看具体详情](../tools/2026-04-25-VPS-banwagong.md)
+
+* **☁️ 云服务器 (Jtti)：** [点击获取您的中转服务器（2.5折优惠码：kjxv2026）](https://www.jtti.cc?k=T7KBH7)
+* **🌍 云服务器 (Vmess)：** [点击获取您的中转服务器](https://app.vmiss.com/aff.php?aff=3992)
+
+---
+
 ## 📚 新手注册教程 & 常见问题
 
 * ▶️ **Bybit 注册教程 & 常见问题**：[📺 观看视频](https://youtu.be/HVpqQJ1KnH4)
