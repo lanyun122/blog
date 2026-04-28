@@ -1,16 +1,16 @@
 ---
-date: 2026-04-22
+date: 2026-04-28
 categories:
   - 工具视频教程
-slug: yunfuwuqi
+slug: Amazon-vps
 tags:
   - 魔法
   - 工具
 ---
 
-# 🌏【2026】最新VPN搭建教程：小白也能学会的云服务器自建梯子指南丨独享节点+全球住宅IP
+# 🌏【2026】
 
-![封面图](../../assets/images/2026-04-22-VPN-JD.jpg){ width="300" align=left style="border-radius: 8px; margin-right: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 10px;" }
+![封面图](../../assets/images/muban.png){ width="300" align=left style="border-radius: 8px; margin-right: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 10px;" }
 
 **本期要点：** 搭建专属的全球节点，有手就行！
 
@@ -29,7 +29,10 @@ tags:
 ## 🎯 必备工具清单
 
 在开始之前，请准备好以下工具和平台：
+### 🎁 免费-云服务器：
+* Amazon注册地址：[点击跳转](https://aws.amazon.com/cn/free/)
 
+### 💰付费-云服务器推荐：
 * **🌍 性价比-云服务器 (Vmiss)：** [点击获取您的中转服务器](https://app.vmiss.com/aff.php?aff=3992)
 * **☁️ 均衡款-云服务器 (Jtti)：** [点击获取您的中转服务器（2.5折优惠码：kjxv2026）](https://www.jtti.cc?k=T7KBH7)
 * **⚡️ 高质量（天花板）-海外老牌主机商（Banwagong）** [点击查看详情](https://tgl2775284503-hash.github.io/blog/tools/2026-04-25-VPS-banwagong/)
@@ -54,17 +57,17 @@ tags:
 打开本地电脑的命令行工具（推荐使用 Windows PowerShell 或 macOS Terminal），输入以下命令：
 
 ```powershell
-ssh root@<您的服务器IP地址> -p 22
+# 替换一下私钥本地路径、替换最后的IP地址。
+ssh -i "C:\Users\Administrator\Downloads\my-us-o.pem" ubuntu@44.248.17.190
 ```
 
-> **💡 操作提示：**
-> 
-> 1. 请将 `<您的服务器IP地址>` 替换为实际 IP。
-> 2. 首次连接需输入 `yes` 确认指纹，随后**粘贴/盲打**输入 Root 密码即可登录。
-
+获取root权限命令：
+```powershell
+sudo -i
+```
 ---
 
-## ⚙️ 第二步：选择核心部署方案
+## ⚙️ 第二步：核心部署方案
 
 请根据您的技术基础，任选**其中一种**脚本在服务器运行：
 
@@ -82,6 +85,20 @@ bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-b
 * **部署命令：**
 ```bash
 bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
+```
+
+---
+开启BBR功能，依次执行以下命令：
+```powershell
+echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+```
+
+```powershell
+echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+```
+
+```powershell
+sysctl -p
 ```
 
 ---
