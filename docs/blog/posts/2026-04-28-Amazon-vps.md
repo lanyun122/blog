@@ -25,14 +25,9 @@ tags:
 <!-- more -->
 ---
 
+## 在开始之前，请准备好以下工具和平台：
 
-## 🎯 必备工具清单
-
-在开始之前，请准备好以下工具和平台：
-### 🎁 免费-云服务器：
-* Amazon注册地址：[点击跳转](https://aws.amazon.com/cn/free/)
-
-### 💰付费-云服务器推荐：
+### 💰服务器（VPS）及相关推荐：
 * **🌍 性价比-云服务器 (Vmiss)：** [点击获取您的中转服务器](https://app.vmiss.com/aff.php?aff=3992)
 * **☁️ 均衡款-云服务器 (Jtti)：** [点击获取您的中转服务器（2.5折优惠码：kjxv2026）](https://www.jtti.cc?k=T7KBH7)
 * **⚡️ 高质量（天花板）-海外老牌主机商（Banwagong）** [点击查看详情](https://tgl2775284503-hash.github.io/blog/tools/2026-04-25-VPS-banwagong/)
@@ -52,8 +47,28 @@ tags:
 
 ---
 
-## 🛠️ 第一步：连接云服务器
+## 亚马逊AWS云服务免费试用6个月教程：
 
+### 🎁 第一步注册新账号
+* Amazon注册地址：[点击跳转](https://aws.amazon.com/cn/free/)
+---
+
+### 🛠️ 第二步：连接云服务器
+#### 普通服务器连接方式：
+打开本地电脑的命令行工具（推荐使用 Windows PowerShell 或 macOS Terminal），输入以下命令：
+
+```powershell
+ssh root@<您的服务器IP地址> -p 22
+```
+
+> **💡 操作提示：**
+> 
+> 1. 请将 `<您的服务器IP地址>` 替换为实际 IP。
+> 2. 首次连接需输入 `yes` 确认指纹，随后**粘贴/盲打**输入 Root 密码即可登录。
+
+---
+
+#### 亚马逊AWS云服务器连接方式：
 打开本地电脑的命令行工具（推荐使用 Windows PowerShell 或 macOS Terminal），输入以下命令：
 
 ```powershell
@@ -67,11 +82,11 @@ sudo -i
 ```
 ---
 
-## ⚙️ 第二步：核心部署方案
+### ⚙️ 第三步：核心部署方案
 
 请根据您的技术基础，任选**其中一种**脚本在服务器运行：
 
-### 🤺 方案一：Sing-box 纯内核 (💻 一键配置各代理软件节点)
+#### 🤺 方案一：Sing-box 纯内核 (💻 一键配置各代理软件节点)
 * **特点：** 无网页后台，纯代码驱动。
 * **优势：** 资源占用极低，适合低配服务器或追求极致纯净的硬核玩家。
 * **部署命令：**
@@ -79,7 +94,7 @@ sudo -i
 bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-box.sh)
 ```
 
-### 🤷‍♂️ 方案二：3x-ui 可视化面板 (🌟手动添加节点、更加灵活)
+#### 🤷‍♂️ 方案二：3x-ui 可视化面板 (🌟手动添加节点、更加灵活)
 * **特点：** 自带 Web 图形界面。
 * **优势：** 像设置路由器一样简单，后期管理、修改链式节点极方便。
 * **部署命令：**
@@ -88,6 +103,8 @@ bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.
 ```
 
 ---
+
+### 第四步：网络拥堵优化
 开启BBR功能，依次执行以下命令：
 ```powershell
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
