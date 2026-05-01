@@ -8,14 +8,14 @@ tags:
   - 工具
 ---
 
-# 🌏【2026】
+# 🌐 如何选择VPS？手机搭建节点保姆级教程：从服务器选购到AWS免费方案全公开丨VPS推荐丨免费VPS丨节点搭建丨科学上网
 
-![封面图](../../assets/images/muban.png){ width="300" align=left style="border-radius: 8px; margin-right: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 10px;" }
+![封面图](../../assets/images/2026-04-28-Amazon-vps.jpg){ width="300" align=left style="border-radius: 8px; margin-right: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 10px;" }
 
-**本期要点：** 搭建专属的全球节点，有手就行！
+**本期要点：** 本期视频解决你所有关于VPS服务器选择和节点搭建的问题！
 
 <div style="margin-top: 25px; text-align: center;">
-  <a href="https://youtu.be/15nfkz7M4Hk" target="_blank" class="md-button md-button--neutral" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; font-size: 0.85rem; border-radius: 20px; text-decoration: none; font-weight: bold; border: 1px solid rgba(0,0,0,0.1); transition: all 0.3s ease;">
+  <a href="https://www.youtube.com/watch?v=8fsZihfmQpg" target="_blank" class="md-button md-button--neutral" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; font-size: 0.85rem; border-radius: 20px; text-decoration: none; font-weight: bold; border: 1px solid rgba(0,0,0,0.1); transition: all 0.3s ease;">
     <svg viewBox="0 0 576 512" style="height: 1.1em; fill: #FF0000; margin: 0; display: block;"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.781 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
     立即观看完整视频
   </a>
@@ -35,7 +35,7 @@ tags:
 ---
 
 ### 🏠 住宅代理与节点资源
-* **住宅代理 (Talor)：** [点击注册获取高质量动态/静态 IP](https://dashboard.talordata.com/reg?inviter_code=xiaov001)
+* **住宅代理 (Talor邀请码：xiaov001)：** [点击注册获取高质量动态/静态 IP](https://dashboard.talordata.com/reg?inviter_code=xiaov001)
 * **住宅代理（Webshare）**：[点击获取-每月不到 6 元](https://www.webshare.io/?referral_code=apnsjeua21if)
 * **自用机场推荐（白月光）:**[点击访问](https://www.sibker.com/register?invite_code=6AbO5kCw)
 
