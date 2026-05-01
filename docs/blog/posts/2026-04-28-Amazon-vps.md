@@ -55,7 +55,7 @@ tags:
 ## 🏅 新手小白建节点实战教程 (附 AWS 6 个月免费指南)
 
 ### ☁️ 第一步：获取云服务器
-* **Amazon AWS 免费注册地址：** [点击跳转官网](https://aws.amazon.com/cn/free/)
+* **Amazon AWS 免费注册地址（中古区）：** [点击跳转官网](https://aws.amazon.com/cn/free/)
 * *注：新用户可享每月 750 小时 EC2 免费时长，持续 6 个月。*
 
 ### 🖥️ 第二步：连接云服务器
