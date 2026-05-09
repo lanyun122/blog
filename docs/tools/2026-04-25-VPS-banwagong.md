@@ -30,7 +30,7 @@ hide:
 **📊 性能实测与参考：**
 
 * **实测表现**：经本地环境实测，该系列节点上传速度可稳定达到 **60Mbps+**，足以支撑高画质直播推流。
-* **详细实测文档**：[点击查看完整实测结果与附图](https://ojpxbqbnx8ot.jp.larksuite.com/wiki/Ij8gwGfNiiySOgkt32ej9UxBpue?base_hp_from=larktab&table=tbl4R9HEfgGHdmX2&view=vew3XiECNc)
+* **详细实测文档**：[点击查看完整实测结果与附图](https://ojpxbqbnx8ot.jp.larksuite.com/wiki/Ij8gwGfNiiySOgkt32ej9UxBpue?from=from_copylink)
 
 
 **💼 核心业务场景：**
