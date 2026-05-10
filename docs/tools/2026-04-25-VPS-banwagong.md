@@ -30,7 +30,8 @@ hide:
 **📊 性能实测与参考：**
 
 * **实测表现**：经本地环境实测，该系列节点上传速度可稳定达到 **60Mbps+**，足以支撑高画质直播推流。
-* **详细实测文档**：[点击查看完整实测结果与附图](https://ojpxbqbnx8ot.jp.larksuite.com/wiki/Ij8gwGfNiiySOgkt32ej9UxBpue?from=from_copylink)
+* **商务套餐-实测文档（详细表格）**：[点击查看-实测文档（详细表格）](https://ojpxbqbnx8ot.jp.larksuite.com/wiki/Ij8gwGfNiiySOgkt32ej9UxBpue?table=tbl4R9HEfgGHdmX2&view=vew3XiECNc)
+* **商务套餐-实测文档（简洁视图）**：[点击查看-实测文档（简洁视图）](https://ojpxbqbnx8ot.jp.larksuite.com/wiki/Ij8gwGfNiiySOgkt32ej9UxBpue?table=tbl4R9HEfgGHdmX2&view=vew6fwsYem)
 
 
 **💼 核心业务场景：**
@@ -123,6 +124,11 @@ hide:
 
 ### 👇 💰 【KVM 基础入门系列】
 > **特点说明：** 搬瓦工目前门槛最低、价格最亲民的入门级系列。该系列走的是**普通公网线路**，不具备 CN2 GIA 或 CMIN2 等高级回程优化。目前提供了包含 **洛杉矶 DC2**、**弗里蒙特**、**荷兰**及**加拿大**在内的 **6 个常规海外机房**供免费切换。
+
+**📊 性能实测与参考：**
+
+* **基础套餐-实测文档（详细表格）**：[点击查看-实测文档（详细表格）](https://ojpxbqbnx8ot.jp.larksuite.com/wiki/Ij8gwGfNiiySOgkt32ej9UxBpue?table=tblp1xkQt7Unw5Wk&view=vew3XiECNc)
+* **基础套餐-实测文档（简洁视图）**：[点击查看-实测文档（简洁视图）](https://ojpxbqbnx8ot.jp.larksuite.com/wiki/Ij8gwGfNiiySOgkt32ej9UxBpue?table=tblp1xkQt7Unw5Wk&view=vewPo6nF3h)
 
 **💼 适用业务场景：**
 
