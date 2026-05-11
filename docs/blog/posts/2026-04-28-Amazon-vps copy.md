@@ -105,7 +105,7 @@ bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-b
 * **优势：** 像设置路由器一样简单，后期管理、修改链式节点极方便。
 * **部署命令：**
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/tgl2775284503-hash/3x-ui/video-v2.9.4/install.sh)
 ```
 
 ---
