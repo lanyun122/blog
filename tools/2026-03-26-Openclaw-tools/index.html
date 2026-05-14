@@ -1,0 +1,2257 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://你的用户名.github.io/blog/tools/2026-03-26-Openclaw-tools/">
+      
+      
+        <link rel="prev" href="../2026-03-26-tools/">
+      
+      
+        <link rel="next" href="../2026-04-25-VPS-banwagong/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Openclaw安装、使用文档 - 小V博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#openclaw-macwindows" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+  🌟 欢迎来到我的专属博客！🚀 
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="小V博客" class="md-header__button md-logo" aria-label="小V博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            小V博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Openclaw安装、使用文档
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../blog/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专栏博客
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../recommend/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  推荐及工具
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="小V博客" class="md-nav__button md-logo" aria-label="小V博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    小V博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../blog/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专栏博客
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专栏博客
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    归档
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    归档
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blog/archive/2026/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    分类
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    分类
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blog/category/%E5%B7%A5%E5%85%B7%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工具视频教程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blog/category/%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    视频教程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    推荐及工具
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    推荐及工具
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../recommend/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    推荐
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    推荐
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详细文档
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    详细文档
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2026-03-26-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常用工具
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Openclaw安装、使用文档
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Openclaw安装、使用文档
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、常用网址
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、准备工具
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、Windows 版本安装方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、Windows 版本安装方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-nodejs-npm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 安装 Node.js + npm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.安装Git
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.Windows脚本权限开启
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4openclaw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.安装Openclaw命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.配置初始化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、苹果Mac系统 安装方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、苹果Mac系统 安装方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1apple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.安装Apple命令开发工具命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2homebrew" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.安装Homebrew
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.安装Git
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4nodejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.安装Node.js
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5openclaw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.安装Openclaw
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.配置初始化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ollama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、Ollama部署
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、Channels连接
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、Channels连接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1telegram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.Telegram连接
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.飞书配置（国内）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.企业微信配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1微信配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、Skills（技能）安装
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、多Agent创建
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、常用命令
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、Token转接平台
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十、Token转接平台">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （一）接入指南与定价说明
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（一）接入指南与定价说明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. API 按量付费服务
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 月卡订阅服务
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 企业服务与合作
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （二）购买、使用相关文档
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2026-04-25-VPS-banwagong/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Banwagong(搬瓦工VPS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、常用网址
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、准备工具
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、Windows 版本安装方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、Windows 版本安装方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-nodejs-npm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 安装 Node.js + npm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.安装Git
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.Windows脚本权限开启
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4openclaw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.安装Openclaw命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.配置初始化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、苹果Mac系统 安装方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、苹果Mac系统 安装方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1apple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.安装Apple命令开发工具命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2homebrew" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.安装Homebrew
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.安装Git
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4nodejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.安装Node.js
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5openclaw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.安装Openclaw
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.配置初始化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ollama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、Ollama部署
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、Channels连接
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、Channels连接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1telegram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.Telegram连接
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.飞书配置（国内）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.企业微信配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1微信配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、Skills（技能）安装
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、多Agent创建
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、常用命令
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、Token转接平台
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十、Token转接平台">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （一）接入指南与定价说明
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（一）接入指南与定价说明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. API 按量付费服务
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 月卡订阅服务
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 企业服务与合作
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （二）购买、使用相关文档
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <span class="md-tag">AI</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">工具</span>
+      
+    
+  </nav>
+
+
+
+<h1 id="openclaw-macwindows">Openclaw 安装、使用文档（Mac、Windows）</h1>
+<p><img align="left" alt="封面" src="../../assets/images/Openclaw%E5%9B%BE%E7%89%8701.png" style="border-radius: 8px; margin-right: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 10px;" width="300" /></p>
+<p><strong>本期要点：</strong> 常用相关网站、安装步骤及相关代码（Windows、Mac系统）、常用命令。</p>
+<div style="margin-top: 25px; text-align: center;">
+  <a href="https://www.youtube.com/watch?v=YbGr_9poheM&t=34s" target="_blank" class="md-button md-button--neutral" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; font-size: 0.85rem; border-radius: 20px; text-decoration: none; font-weight: bold; border: 1px solid rgba(0,0,0,0.1); transition: all 0.3s ease;">
+    <svg viewBox="0 0 576 512" style="height: 1.1em; fill: #FF0000; margin: 0; display: block;">
+      <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.781 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/>
+    </svg>
+    立即观看完整视频
+  </a>
+</div>
+<p><br clear="left"></p>
+<!-- more -->
+
+<h2 id="_1">一、常用网址</h2>
+<ul>
+<li>Openclaw 官网：<a href="https://openclaw.ai/">https://openclaw.ai/</a></li>
+<li>Node.js 官网（中国区）：<a href="https://nodejs.org/zh-cn">https://nodejs.org/zh-cn</a></li>
+<li>Git 官网地址：<a href="https://git-scm.com/">https://git-scm.com/</a></li>
+</ul>
+<hr />
+<h2 id="_2">二、准备工具</h2>
+<ul>
+<li>远程控制软件（Todesk）：<a href="https://www.todesk.com/download.html">https://www.todesk.com</a></li>
+<li>代理软件（V2rayN）:<a href="https://github.com/2dust/v2rayN">https://github.com/2dust/v2rayN</a></li>
+</ul>
+<hr />
+<h2 id="windows">三、Windows 版本安装方法</h2>
+<h3 id="1-nodejs-npm">1. 安装 Node.js + npm</h3>
+<ul>
+<li>
+<p>下载地址 Node.js 官网（中国区）<a href="https://nodejs.org/zh-cn">https://nodejs.org/zh-cn</a></p>
+</li>
+<li>
+<p>检查node版本命令：
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">node</span> <span class="n">-v</span> <span class="c"># 正确返回结果示例：v24.13.0</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>检查npm版本命令
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">npm</span> <span class="n">-v</span> <span class="c"># 正确返回结果示例：11.6.2</span>
+</span></code></pre></div></p>
+</li>
+</ul>
+<h3 id="2git">2.安装Git</h3>
+<ul>
+<li>
+<p>下载地址 Git官网<a href="https://git-scm.com/">https://git-scm.com/</a></p>
+</li>
+<li>
+<p>检查git版本命令
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">git</span> <span class="p">-</span><span class="n">-version</span> <span class="c"># 正确返回示例：git version 2.53.0.windows.1</span>
+</span></code></pre></div></p>
+</li>
+</ul>
+<h3 id="3windows">3.Windows脚本权限开启</h3>
+<ul>
+<li>
+<p>脚本权限开启命令
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">Set-ExecutionPolicy</span> <span class="n">-ExecutionPolicy</span> <span class="n">RemoteSigned</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span> <span class="c"># 正确返回示例：无</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>脚本权限检查命令
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">Get-ExecutionPolicy</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span> <span class="c"># 正确返回示例：RemoteSigned</span>
+</span></code></pre></div></p>
+</li>
+</ul>
+<h3 id="4openclaw">4.安装Openclaw命令</h3>
+<ul>
+<li><div class="language-powershell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">iwr </span><span class="n">-useb</span> <span class="n">https</span><span class="p">://</span><span class="n">molt</span><span class="p">.</span><span class="n">bot</span><span class="p">/</span><span class="n">install</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">iex</span>
+</span></code></pre></div></li>
+</ul>
+<h3 id="5">5.配置初始化</h3>
+<ul>
+<li><div class="language-powershell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">openclaw</span> <span class="n">onboard</span>
+</span></code></pre></div></li>
+</ul>
+<h2 id="mac">四、苹果Mac系统 安装方法</h2>
+<h3 id="1apple">1.安装Apple命令开发工具命令</h3>
+<ul>
+<li><div class="language-zsh highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>xcode-select<span class="w"> </span>--install
+</span></code></pre></div></li>
+</ul>
+<h3 id="2homebrew">2.安装Homebrew</h3>
+<ul>
+<li>
+<p>官方命令：
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>备用命令（国内源）：
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>/bin/zsh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh<span class="k">)</span><span class="s2">&quot;</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>注意：安装成功 但还需要重启终端 或者运行以下命令，否则国内地址无法生效
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nb">source</span><span class="w"> </span>/Users/zhyzh9008/.zprofile
+</span></code></pre></div></p>
+</li>
+<li>
+<p>检测Homebrew版本命令：
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>brew<span class="w"> </span>--version
+</span></code></pre></div></p>
+</li>
+</ul>
+<h3 id="3git">3.安装Git</h3>
+<ul>
+<li>
+<p>安装命令：
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>brew<span class="w"> </span>install<span class="w"> </span>git
+</span></code></pre></div></p>
+</li>
+<li>
+<p>版本检查命令：
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>git<span class="w"> </span>--version<span class="w"> </span><span class="c1"># 正确返回示例：git version 2.39.5（Apple Git-154）</span>
+</span></code></pre></div></p>
+</li>
+</ul>
+<h3 id="4nodejs">4.安装Node.js</h3>
+<ul>
+<li>
+<p>安装命令：
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>brew<span class="w"> </span>install<span class="w"> </span>node
+</span></code></pre></div></p>
+</li>
+<li>
+<p>版本检查命令：
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>node<span class="w"> </span>-v<span class="w"> </span><span class="c1"># 正确返回结果示例：v24.14.0</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>npm<span class="w"> </span>-v<span class="w"> </span><span class="c1"># 正确返回结果示例：11.9.0</span>
+</span></code></pre></div>
+</li>
+</ul>
+<h3 id="5openclaw">5.安装Openclaw</h3>
+<ul>
+<li>
+<p>官方安装命令：
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://openclaw.ai/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</span></code></pre></div></p>
+</li>
+<li>
+<p>通用安装命令：
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>openclaw@latest
+</span></code></pre></div></p>
+</li>
+<li>
+<p>管理员身份安装命令：
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>sudo<span class="w"> </span>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>openclaw@latest
+</span></code></pre></div></p>
+</li>
+</ul>
+<h3 id="6">6.配置初始化</h3>
+<ul>
+<li>配置初始化命令：
+<div class="language-zsh highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>openclaw<span class="w"> </span>onboard
+</span></code></pre></div></li>
+</ul>
+<h2 id="ollama">五、Ollama部署</h2>
+<ul>
+<li>Ollama官网地址：<a href="https://ollama.com/">https://ollama.com/</a></li>
+<li>步骤：下载安装ollama客户端 → 安装客户端 → 注册登录账号（QQ邮箱也可以） → 输入命令启动、部署云模型（每日有免费额度）</li>
+<li>ollama启动openclaw命令：
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>ollama launch openclaw --config
+</span></code></pre></div></li>
+</ul>
+<h2 id="channels">六、Channels连接</h2>
+<h3 id="1telegram">1.Telegram连接</h3>
+<ul>
+<li>前提：打开魔法</li>
+<li>Telegram中搜索BotFather，创建机器人，获取token</li>
+<li>终端输入命令：openclaw config</li>
+<li>配置channels，选择telegram</li>
+<li>输入token</li>
+<li>结束配置</li>
+<li>在终端中输入：openclaw pairing approve telegram &lt;配对码&gt;</li>
+<li>重启openclaw</li>
+<li>完成</li>
+</ul>
+<h3 id="2">2.飞书配置（国内）</h3>
+<ul>
+<li>飞书控制台：<a href="https://open.feishu.cn/?lang=zh-CN">https://open.feishu.cn/</a></li>
+<li>
+<p>飞书插件安装说明网址：<a href="https://bytedance.larkoffice.com/docx/MFK7dDFLFoVlOGxWCv5cTXKmnMh">OpenClaw飞书官方插件使用指南（公开版）</a></p>
+</li>
+<li>
+<p>飞书插件安装命令：</p>
+</li>
+</ul>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">npx</span> <span class="n">-y</span> <span class="nv">@larksuite</span><span class="p">/</span><span class="n">openclaw-lark-tools</span> <span class="n">install</span>
+</span></code></pre></div>
+<ul>
+<li>扫码创建机器人</li>
+<li>重启Openclaw，在飞书的机器人聊天中开启权限：/feishu auth ，根据提示操作</li>
+</ul>
+<h3 id="3">3.企业微信配置</h3>
+<ul>
+<li>企业微信插件安装说明网址：<a href="https://open.work.weixin.qq.com/help2/pc/21670?person_id=1&amp;searchData=">官方文档</a></li>
+<li>企业微信插件安装命令：快走快走快
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">npx</span> <span class="n">-y</span> <span class="nv">@wecom</span><span class="p">/</span><span class="n">wecom-openclaw-cli</span> <span class="n">install</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="p">```</span><span class="n">没空</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="p">-</span> <span class="n">企业微信扫码创建机器人</span><span class="err">，</span><span class="n">如果提示有问题</span><span class="err">，</span><span class="n">就重新输入openclaw</span> <span class="n">config配置机器人ID和Secret</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="p">-</span> <span class="n">配对代码命令</span><span class="err">：</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="p">```</span><span class="n">powershell</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="n">openclaw</span> <span class="n">pairing</span> <span class="n">approve</span> <span class="n">wecom</span> <span class="p">&lt;</span><span class="n">配对码</span><span class="p">&gt;</span>
+</span></code></pre></div></li>
+</ul>
+<p>企业微信插件卸载命令：1定要看我是不是
+<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>openclaw plugins uninstall wecom-openclaw-plugin
+</span></code></pre></div></p>
+<h3 id="31">3.1微信配置</h3>
+<ul>
+<li>微信插件安装命令
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">npx</span> <span class="n">-y</span> <span class="nv">@tencent</span><span class="n">-weixin</span><span class="p">/</span><span class="n">openclaw-weixin-cli</span><span class="nv">@latest</span> <span class="n">install</span>
+</span></code></pre></div></li>
+</ul>
+<h2 id="skills">七、Skills（技能）安装</h2>
+<ul>
+<li>官方Skills（技能）网站：<a href="https://clawhub.ai/">https://clawhub.ai/</a></li>
+<li>Self-Improving + Proactive Agent（自我进化技能）：<a href="https://clawhub.ai/ivangdavila/self-improving">点击跳转</a></li>
+<li>Tavily AI Search（联网搜索技能）：<a href="https://clawhub.ai/bert-builder/tavily">点击跳转</a></li>
+<li>Multi Search Engine（多搜索引擎技能）：<a href="https://clawhub.ai/gpyAngyoujun/multi-search-engine">点击跳转</a></li>
+<li>浏览器控制扩展程序，Windows、Mac通用：Chrome浏览器拓展商店搜索（OpenClaw Browser Relay for Windows）</li>
+</ul>
+<h2 id="agent">八、多Agent创建</h2>
+<ul>
+<li>创建Agent命令
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">openclaw</span> <span class="n">agents</span> <span class="n">add</span> <span class="p">&lt;</span><span class="n">agent名称</span><span class="p">&gt;</span>
+</span></code></pre></div></li>
+<li>然后让AI辅助，确定各Agent的角色定位、以及协作运行规则</li>
+<li>
+<p>再让Openclaw主模型，自行设置</p>
+</li>
+<li>
+<p>agent查询命令：
+<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>openclaw agents list
+</span></code></pre></div></p>
+</li>
+<li>
+<p>删除agent命令：
+<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a> openclaw agents delete &lt;agent名称&gt;
+</span></code></pre></div></p>
+</li>
+</ul>
+<h2 id="_3">九、常用命令</h2>
+<p>启动命令：
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">openclaw</span> <span class="n">gateway</span>
+</span></code></pre></div></p>
+<p>Ollama启动命令：
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">ollama</span> <span class="n">launch</span> <span class="n">openclaw</span> <span class="p">-</span><span class="n">-config</span>
+</span></code></pre></div></p>
+<p>配置命令：
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="n">openclaw</span> <span class="n">config</span>
+</span></code></pre></div></p>
+<p>诊断命令：
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="n">openclaw</span> <span class="n">doctor</span> <span class="p">-</span><span class="n">-fix</span>
+</span></code></pre></div></p>
+<p>Openclaw更新命令
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="n">npm</span> <span class="n">install</span> <span class="n">-g</span> <span class="n">openclaw</span><span class="nv">@latest</span>
+</span></code></pre></div></p>
+<p>版本检查命令：
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="n">openclaw</span> <span class="p">-</span><span class="n">-version</span>
+</span></code></pre></div></p>
+<p>ClawHub技能安装命令：
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="n">npx</span> <span class="n">clawhub</span><span class="nv">@latest</span> <span class="n">install</span> <span class="p">&lt;</span><span class="n">skill-name</span><span class="p">&gt;</span>
+</span></code></pre></div></p>
+<p>Openclaw卸载命令：
+<div class="language-text highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>npm uninstall -g openclaw
+</span></code></pre></div></p>
+<p>将Git的SSH地址改为http地址命令：
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-global</span> <span class="n">url</span><span class="p">.</span><span class="s2">&quot;https://github.com/&quot;</span><span class="p">.</span><span class="n">insteadOf</span> <span class="n">git</span><span class="nv">@github</span><span class="p">.</span><span class="n">com</span><span class="p">:</span>
+</span></code></pre></div></p>
+<p>查看npm源命令
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="n">npm</span> <span class="n">config</span> <span class="n">get</span> <span class="n">registry</span>
+</span></code></pre></div></p>
+<p>切换npm源（mac）命令
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="c"># 切换到淘宝镜像源（永久生效）</span>
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="n">npm</span> <span class="n">config</span> <span class="nb">set </span><span class="n">registry</span> <span class="n">https</span><span class="p">://</span><span class="n">registry</span><span class="p">.</span><span class="n">npmmirror</span><span class="p">.</span><span class="n">com</span>
+</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>
+</span><span id="__span-39-4"><a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="c"># 恢复到 npm 官方源（如需）</span>
+</span><span id="__span-39-5"><a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="n">npm</span> <span class="n">config</span> <span class="nb">set </span><span class="n">registry</span> <span class="n">https</span><span class="p">://</span><span class="n">registry</span><span class="p">.</span><span class="n">npmjs</span><span class="p">.</span><span class="n">org</span><span class="p">/</span>
+</span></code></pre></div></p>
+<p>临时关闭证书验证（mac）命令
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="c"># 临时关闭证书检查并安装 openclaw</span>
+</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="n">sudo</span> <span class="n">npm</span> <span class="n">install</span> <span class="n">-g</span> <span class="n">openclaw</span><span class="nv">@latest</span> <span class="p">-</span><span class="n">-registry</span><span class="p">=</span><span class="n">https</span><span class="p">://</span><span class="n">registry</span><span class="p">.</span><span class="n">npmmirror</span><span class="p">.</span><span class="n">com</span> <span class="p">-</span><span class="n">-unsafe-perm</span><span class="p">=</span><span class="n">true</span> <span class="p">-</span><span class="n">-allow-root</span> <span class="p">-</span><span class="n">-strict-ssl</span><span class="p">=</span><span class="n">false</span>
+</span></code></pre></div></p>
+<h2 id="token">十、Token转接平台</h2>
+<h3 id="_4">（一）接入指南与定价说明</h3>
+<ul>
+<li>为了满足不同场景下的成本与稳定性需求，为大伙提供了“按量付费”与“月卡订阅”两种服务模式。</li>
+</ul>
+<h4 id="1-api">1. API 按量付费服务</h4>
+<ul>
+<li>核心业务，支持 OpenAI 格式直接调用。我们提供两条不同技术路径的线路，丰俭由人，按需选择。</li>
+<li>适用场景： 日常开发、高频调用、测试环境、个人工具集成。</li>
+<li>定价策略：</li>
+<li>兑换比例： 1 RMB = 1 USD 额度</li>
+<li>（相当于官方原价的 1.4 折，极具市场竞争力）</li>
+<li>举个例子大伙就明白:
+<img alt="封面" src="../../assets/images/Claude-Opus-4.6%E5%AE%98%E6%96%B9Token%E4%BB%B7%E6%A0%BC.PNG" /></li>
+<li>opus4.6 是5美金/百万token 输入,在咱们网站,你只需要使用5人民币使用同样的量</li>
+</ul>
+<h4 id="1">1. 月卡订阅服务</h4>
+<ul>
+<li>适合不想折腾配置，直接在网页或客户端进行高频、大流量使用的个人开发者与创作者。</li>
+<li>套餐价格表</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">套餐档位</th>
+<th style="text-align: center;">价格 (RMB/月)</th>
+<th style="text-align: center;">每日刷新额度</th>
+<th style="text-align: center;">适用人群</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">入门版</td>
+<td style="text-align: center;"><strong>¥199</strong></td>
+<td style="text-align: center;"><strong>$15 / 天</strong></td>
+<td style="text-align: center;">个人开发者、日常编程辅助</td>
+</tr>
+<tr>
+<td style="text-align: center;">轻量版</td>
+<td style="text-align: center;"><strong>¥339</strong></td>
+<td style="text-align: center;"><strong>$30 / 天</strong></td>
+<td style="text-align: center;">个人开发者、日常编程辅助</td>
+</tr>
+<tr>
+<td style="text-align: center;">标准版</td>
+<td style="text-align: center;"><strong>¥499</strong></td>
+<td style="text-align: center;"><strong>$50 / 天</strong></td>
+<td style="text-align: center;">重度代码编写、长文档分析</td>
+</tr>
+<tr>
+<td style="text-align: center;">高级版</td>
+<td style="text-align: center;"><strong>¥1,118</strong></td>
+<td style="text-align: center;"><strong>$120 / 天</strong></td>
+<td style="text-align: center;">全职独立开发者、AI 极客</td>
+</tr>
+<tr>
+<td style="text-align: center;">团队版</td>
+<td style="text-align: center;"><strong>¥1,888</strong></td>
+<td style="text-align: center;"><strong>$200 / 天</strong></td>
+<td style="text-align: center;">极高频用户、小型工作室</td>
+</tr>
+<tr>
+<td style="text-align: center;">商业版</td>
+<td style="text-align: center;"><strong>¥4,688</strong></td>
+<td style="text-align: center;"><strong>$500 / 天</strong></td>
+<td style="text-align: center;">资深高频用户、中大型工作室</td>
+</tr>
+<tr>
+<td style="text-align: center;">企业版</td>
+<td style="text-align: center;"><strong>¥9,188</strong></td>
+<td style="text-align: center;"><strong>$1000 / 天</strong></td>
+<td style="text-align: center;">资深高频用户、中大型工作室</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>帮大伙提前算了,买499的套餐,每天都把50美金用完,相当于一个月能花1500美金,折合下来是0.33人民币/1美金</p>
+</li>
+<li>
+<p>💡 选购建议： 标准版（$50/天）已能满足绝大多数高强度开发需求。如需更高并发或多人共享，可选购或灵活升级（多退少补）高阶套餐。</p>
+</li>
+</ul>
+<h4 id="3_1">3. 企业服务与合作</h4>
+<ul>
+<li>企业长期合作： 针对有稳定大额需求的企业客户，我们可以提供定制化 API 部署方案及备用线路保障。</li>
+<li>合规支持： 支持企业对公转账及开具发票，解决报销与合规后顾之忧。</li>
+</ul>
+<h3 id="_5">（二）购买、使用相关文档</h3>
+<ul>
+<li>
+<p>1.Claud中转站（XueDingToken网站地址）：<a href="https://shop.xuedingtoken.com/?dist=ZZE5PHPG">点击跳转</a></p>
+</li>
+<li>
+<p>2.如何在 openclaw(小龙虾) 配置 xuedingtoken API 指南:<a href="https://ocnoacy9az5w.feishu.cn/wiki/Gr6kwcH7DirNyVkyoogcPcwqnqf">点击跳转</a></p>
+</li>
+<li>
+<p>3.Token中转项目｜完整流程（新手必读）:<a href="https://lcnwuorvt317.feishu.cn/wiki/YJK7wXRXNimZ8Ck6xrlcPUl3njf">点击跳转</a></p>
+</li>
+<li>
+<p>闲鱼交付文档：<a href="https://my.feishu.cn/wiki/ZmM6wSSfAiRbWZkR2WGctTO6nXb">点击跳转</a></p>
+</li>
+<li>
+<p>XueDingtoken｜小白AI无门槛宝典:<a href="https://ocnoacy9az5w.feishu.cn/wiki/YL29wbEzpiAW6hk1DFEctDIenfd">点击跳转</a></p>
+</li>
+<li>
+<p>Xuedingtoken API 服务接入指南与定价说:<a href="https://ocnoacy9az5w.feishu.cn/wiki/SZDWwE99DiO5o2kRkUhc8ufvnFh?fromScene=spaceOverview">点击跳转</a></p>
+</li>
+<li>
+<p>Claude Code 安装指南 · 小白操作指南（Windows）:<a href="https://ocnoacy9az5w.feishu.cn/wiki/BJMHwKhRJigezhkJPZ7ccnBsn5c">点击跳转</a></p>
+</li>
+<li>
+<p>Claude code 安装指南·小白操作指南（MacOS 版本）:<a href="https://ocnoacy9az5w.feishu.cn/wiki/KVSywKq4fih0pikGdlxcVjb8nAe">点击跳转</a></p>
+</li>
+<li>
+<p>Claude Code 配置指南：快速完成 claude code 配置避坑经验:<a href="https://ocnoacy9az5w.feishu.cn/wiki/HqgGwWd7uictajkWszbcN1Hmnab">点击跳转</a></p>
+</li>
+<li>
+<p>如何在 openclaw(小龙虾) 配置 xuedingtoken API 指南:<a href="https://ocnoacy9az5w.feishu.cn/wiki/Gr6kwcH7DirNyVkyoogcPcwqnqf">点击跳转</a></p>
+</li>
+<li>
+<p>OpenClaw | ClaudeCode | OpenCode  安装教程:<a href="https://ocnoacy9az5w.feishu.cn/wiki/JzMGwg1QSi1QzakHfCdcjTNxnJe">点击跳转</a></p>
+</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.indexes", "content.tabs.link", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

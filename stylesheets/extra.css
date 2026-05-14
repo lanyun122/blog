@@ -1,0 +1,12 @@
+/* 1. 直接瞄准最外层的横幅盒子，让背景图左右 100% 铺满边缘 */
+.md-banner {
+    background: url('https://picsum.photos/1920/200?random=1') center/cover no-repeat;
+}
+
+/* 2. 让文字居中，并加一点阴影防止背景太亮看不清字 */
+.md-banner__inner {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+}
