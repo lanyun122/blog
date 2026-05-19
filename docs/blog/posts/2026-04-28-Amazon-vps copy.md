@@ -28,23 +28,23 @@ tags:
 ## 💰 核心资源与工具导航
 
 ### 🌍 云服务器（VPS）推荐
-* **性价比-云服务器 (Vmiss)：** [点击获取您的中转服务器](https://app.vmiss.com/aff.php?aff=3992)
+* **性价比-云服务器 (Vmiss)：** [点击获取您的中转服务器](https://app.vmiss.com/aff.php?aff=5292)
 * **均衡款-云服务器 (Jtti)：** [点击获取您的中转服务器（2.5折优惠码：kjxv2026）](https://www.jtti.cc?k=T7KBH7)
-* **高质量（天花板）-海外老牌主机商（Banwagong）** [点击查看详情](https://tgl2775284503-hash.github.io/blog/tools/2026-04-25-VPS-banwagong/)
+* **高质量（天花板）-海外老牌主机商（Banwagong）** [点击查看详情](https://bandwagonhost.com/aff.php?aff=82013)
 
 ---
 
 ### 🏠 住宅代理与节点资源
-* **住宅代理 (Talor邀请码：xiaov001)：** [点击注册获取高质量动态/静态 IP](https://dashboard.talordata.com/reg?inviter_code=xiaov001)
-* **住宅代理（Webshare）**：[点击获取-每月不到 6 元](https://www.webshare.io/?referral_code=apnsjeua21if)
-* **自用机场推荐（白月光）:**[点击访问](https://www.sibker.com/register?invite_code=6AbO5kCw)
+* **住宅代理 (Talor邀请码：as5pidqk)：** [点击注册获取高质量动态/静态 IP](https://dashboard.talordata.com/reg?inviter_code=as5pidqk)
+* **住宅代理（Webshare）**：[点击获取-每月不到 6 元](https://www.webshare.io/?referral_code=lq6qy4n0ui6c)
+* **自用机场推荐（白月光）:**[点击访问](https://www.sibker.com/register?invite_code=VZ2d6rgZ)
 
 ---
 
 ### 🔨 实用工具与交流群
 * **测速工具 (Speedtest)：** [点击前往测速](https://www.speedtest.net/zh-Hans)
 * **IP 纯净度检测 (Ping0)：** [点击查询节点 IP 信息](https://ping0.cc/)
-* **加入小V交流群➡️抽奖：**[https://t.me/xiaovchat](https://t.me/xiaovchat)
+* **加入Chris交流群：**[https://t.me/+BwyeTrhg9NQ5MjVl](https://t.me/+BwyeTrhg9NQ5MjVl)
 * **电脑端连接服务器软件Xshell：**[点击下跳转](https://www.xshell.com/zh/free-for-home-school/)
 * **手机端连接服务器软件名称**：Termius（应用商店搜索下载）
 
