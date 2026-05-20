@@ -4,7 +4,7 @@ hide:
   - toc
 ---
 
-# 🚀 欢迎来到科技小V的知识库
+# 🚀 欢迎来到Chris的知识库
 
 <p align="center" style="font-size: 1.1rem; color: var(--md-typeset-color--muted);">
   <strong>探索 AI 边界 · 分享跨境科技福利 · 实用技术教程</strong>
@@ -22,7 +22,7 @@ hide:
   <div class="md-typeset" style="padding: 24px; border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; background: rgba(255,255,255,0.05); text-align: center; backdrop-filter: blur(10px); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)';" onmouseout="this.style.transform='translateY(0)';" >
     <div style="font-size: 2.5rem; margin-bottom: 15px;">🛠️</div>
     <h3 style="margin-top: 0;">博主推荐</h3>
-    <p style="font-size: 0.85rem; color: var(--md-typeset-color--muted); min-height: 40px;">小V自用的 AI 工具、住宅 IP、网络环境等实用清单。</p>
+    <p style="font-size: 0.85rem; color: var(--md-typeset-color--muted); min-height: 40px;">Chris自用的 AI 工具、住宅 IP、网络环境等实用清单。</p>
     <a href="recommend/" class="md-button" style="border-radius: 20px; width: 80%;">查看工具</a>
   </div>
 
@@ -31,7 +31,7 @@ hide:
     <div style="font-size: 2.5rem; margin-bottom: 15px;">🌐</div>
     <h3 style="margin-top: 0;">关注社区</h3>
     <p style="font-size: 0.85rem; color: var(--md-typeset-color--muted); min-height: 40px;">YouTube 频道同步更新，第一时间获取最新科技动态。</p>
-    <a href="https://www.youtube.com/@%E7%A7%91%E6%8A%80%E5%B0%8FV" target="_blank" class="md-button" style="border-radius: 20px; width: 80%;">订阅 YouTube</a>
+    <a href="http://www.youtube.com/@%E5%8A%A0%E5%AF%86ChrisTalk" target="_blank" class="md-button" style="border-radius: 20px; width: 80%;">订阅 YouTube</a>
   </div>
 </div>
 
@@ -47,7 +47,7 @@ hide:
     </div>
   </div>
 
-  <a href="https://t.me/xiaovjiaoliu" target="_blank" class="md-button" style="border: 2px solid #24A1DE; color: #24A1DE; border-radius: 20px; font-weight: bold; background: transparent; transition: all 0.3s ease;"
+  <a href="https://t.me/+BwyeTrhg9NQ5MjVl" target="_blank" class="md-button" style="border: 2px solid #24A1DE; color: #24A1DE; border-radius: 20px; font-weight: bold; background: transparent; transition: all 0.3s ease;"
      onmouseover="this.style.backgroundColor='#24A1DE'; this.style.color='#ffffff'; this.style.boxShadow='0 0 15px rgba(36,161,222,0.5)';" 
      onmouseout="this.style.backgroundColor='transparent'; this.style.color='#24A1DE'; this.style.boxShadow='none';" >
     立即入群
@@ -57,5 +57,5 @@ hide:
 ---
 
 <p align="center" style="font-size: 0.8rem; color: var(--md-typeset-color--muted); margin-top: 30px;">
-  大家好，我是小V。这里是 YouTube 频道的配套知识库，旨在省去你摸索的时间，直接给最稳方案。
+  大家好，我是Chris。这里是 YouTube 频道的配套知识库，旨在省去你摸索的时间，直接给最稳方案。
 </p>
