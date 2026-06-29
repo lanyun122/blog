@@ -53,6 +53,25 @@ ProxyIP 中转节点
 目标网站
 ```
 延迟高一般只有三个根因：根因典型现象优化方向ProxyIP 失效或质量差大量节点连接失败更换或自建 ProxyIP优选 IP 质量差延迟 1000ms+ 且参差不齐本地测速找最优 IPGFW 干扰或 QoS 限速延迟抖动大、时好时坏ECH、协议切换、自建出口
+### 操作步骤
+
+#### 第一步：修复 ProxyIP（必做，效果最显著）
+
+背景：CF Worker 被 Cloudflare 限制，无法直接访问 Cloudflare 托管的网站，需要 ProxyIP 做中转。ProxyIP 失效是节点大量失败最主要的原因。
+
+进后台 → 设置 → ProxyIP，填入多个备用地址，用换行分隔，失效时自动切换：
+
+```plaintext
+proxyip.cmliussss.net,
+cdn-all.xn--b6gac.eu.org,
+cdn.xn--b6gac.eu.org,
+edgetunnel.anycast.eu.org,
+cdn.anycast.eu.org
+```
+
+验证是否有效：https://check.proxyip.cmliussss.net/
+
+预期效果：配置后，连接失败的节点基本消除。
 
 ### 第二步：用本地测速找最优 IP（核心优化）
 
@@ -63,8 +82,6 @@ edgetunnel 默认随机抽取 CF IP，质量完全靠运气。通过本地测速
 **Windows**
 
 前往 [CloudflareSpeedTest Releases](https://github.com/XIU2/CloudflareSpeedTest/releases) 下载 `cfst_windows_amd64.zip`，解压后得到 `cfst.exe`，在解压目录打开终端运行。
-
-**macOS**
 
 **macOS**
 
