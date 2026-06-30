@@ -120,7 +120,7 @@ echo $http_proxy
 
 用 HTTPing 模式测速
 ```bash
-./cfst -httping -tl 150 -sl 5 -p 15
+cfst.exe -httping -tl 150 -sl 5 -p 15
 ```
 
 | 参数 | 含义 |
