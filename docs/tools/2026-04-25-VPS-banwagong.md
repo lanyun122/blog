@@ -148,8 +148,8 @@ hide:
 | 方案 | CPU | 内存 | 硬盘 | 月流量 | 带宽 | 可选地区(机房) | 价格 | 购买链接 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|
 | KVM<font color="red">(最便宜)</font> | 2核 | 1GB | 20GB | 1000GB | 1Gbps | DC3 CN2、DC8 ZNET 、美国、加拿大、荷兰等9 个机房 | $49.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=44) |
-| KVM | 3核 | 2GB | 40GB | 2000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等9 个机房 | $99.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=45) |
-| KVM | 4核 | 4GB | 80GB | 3000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等9 个机房 | $199.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=46) |
-| KVM | 5核 | 8GB | 160GB | 4000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等9 个机房 | $399.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=47) |
-| KVM | 6核 | 16GB | 320GB | 5000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等9 个机房 | $799.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=48) |
-| KVM | 7核 | 24GB | 480GB | 6000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等9 个机房 | $1199.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=49) |
+| KVM | 3核 | 2GB | 40GB | 2000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等6 个机房 | $99.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=45) |
+| KVM | 4核 | 4GB | 80GB | 3000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等6 个机房 | $199.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=46) |
+| KVM | 5核 | 8GB | 160GB | 4000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等6 个机房 | $399.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=47) |
+| KVM | 6核 | 16GB | 320GB | 5000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等6 个机房 | $799.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=48) |
+| KVM | 7核 | 24GB | 480GB | 6000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等6 个机房 | $1199.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=49) |
