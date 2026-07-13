@@ -37,8 +37,15 @@ plugins:
   - search:
       lang: zh
   - tags
+
+  # 👈 引擎1（保持原样）：管理你原本的“专栏博客”
   - blog:
       pagination_per_page: 5
+
+  # 👈 引擎2（新增）：专门去渲染管理“节点订阅”文件夹，生成独立的时间线列表页
+  - blog:
+      blog_dir: nodes
+      pagination_per_page: 10
 
 markdown_extensions:
   - admonition

@@ -1,0 +1,41 @@
+name: 每日全自动获取节点并发布博客
+
+on:
+  schedule:
+    # 对应北京时间每天下午 13:00 自动触发执行 (UTC 早上 5:00)
+    - cron: '0 5 * * *'
+  workflow_dispatch: # 允许你随时在 GitHub 网页后台按按钮手动运行
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. 拉取当前仓库代码
+        uses: actions/checkout@v3
+
+      - name: 2. 配置 Python 运行环境
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 3. 安装 MkDocs 博客及依赖
+        run: |
+          pip install mkdocs-material
+          pip install pymdown-extensions
+
+      - name: 4. 执行自动生成脚本 (抓节点 + 匹配密码 + 写新文章)
+        run: python scripts/auto_build.py
+
+      - name: 5. 将生成的文章提交存档回 GitHub
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+          git add docs/nodes/posts/*.md
+          git commit -m "🤖 自动更新今日免费节点文章 [$(date +'%Y-%m-%d')]" || echo "今日毫无变动，无需提交"
+          git push
+
+      - name: 6. 编译并推送上线到 GitHub Pages
+        run: mkdocs gh-deploy --force

@@ -35,6 +35,26 @@ hide:
   </div>
 </div>
 
+<!-- 👇👇👇【专属每日免费节点（特别导流区）】完美继承你的磨砂玻璃与动效 👇👇👇 -->
+<div style="margin-bottom: 25px; padding: 22px 24px; border-radius: 15px; background: linear-gradient(90deg, rgba(0,200,83,0.12) 0%, rgba(0,200,83,0.02) 100%); border: 1px solid rgba(0,200,83,0.4); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,200,83,0.08);
+" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0,200,83,0.2)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,200,83,0.08)';" >
+  <div style="display: flex; align-items: center; gap: 15px;">
+    <div style="font-size: 2.2rem;">⚡</div>
+    <div>
+      <h4 style="margin: 0; color: #00c853; font-size: 1.1rem;">今日免费订阅节点专区</h4>
+      <p style="margin: 0; font-size: 0.85rem; color: var(--md-typeset-color--muted);">每日定时全自动更新，凭今日 YouTube 视频密码即可免费解锁</p>
+    </div>
+  </div>
+
+  <a href="nodes/" class="md-button" style="border: 2px solid #00c853; color: #ffffff; background-color: #00c853; border-radius: 20px; font-weight: bold; padding: 6px 24px; transition: all 0.3s ease; box-shadow: 0 0 15px rgba(0,200,83,0.4);"
+     onmouseover="this.style.backgroundColor='transparent'; this.style.color='#00c853'; this.style.boxShadow='0 0 20px rgba(0,200,83,0.6)';" 
+     onmouseout="this.style.backgroundColor='#00c853'; this.style.color='#ffffff'; this.style.boxShadow='0 0 15px rgba(0,200,83,0.4)';" >
+    立即获取 🚀
+  </a>
+</div>
+<!-- 👆👆👆【专属每日免费节点（特别导流区）】👆👆👆 -->
+
 <div style="margin-bottom: 50px; padding: 20px; border-radius: 15px; background: linear-gradient(90deg, rgba(36,161,222,0.1) 0%, rgba(36,161,222,0.02) 100%); border: 1px solid rgba(36,161,222,0.3); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
   /* 🥛 增加磨砂感和浮动特效 (与上方卡片风格统一) */
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(36,161,222,0.05);

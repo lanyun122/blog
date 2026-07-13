@@ -8,13 +8,13 @@ hide:
 # 🌍 云服务器（VPS）厂商推荐：
 >各平台全面的配置信息,可以点击下方的官网连接查看!⬇️
 
-* **性价比-云服务器 (Vmiss)-优惠码：`10%OFF`：** [点击获取您的中转服务器](https://app.vmiss.com/aff.php?aff=3992)
+* **性价比-云服务器 (Vmiss)-优惠码：`10%OFF`：** [点击获取您的中转服务器](https://app.vmiss.com/aff.php?aff=5292)
 --8<-- "includes/videos.md:vmiss"
 
-* **均衡款-云服务器 (Jtti)-2.5折优惠码：`kjxv2026`：** [点击获取您的中转服务器](https://www.jtti.cc?k=T7KBH7)
+* **均衡款-云服务器（jtti） ：** [点击获取您的中转服务器](https://www.jtti.cc?k=KBZNYL)
 --8<-- "includes/videos.md:VPN-JD"
 
-* **高质量（天花板）-海外老牌主机商（Banwagong）** [点击查看详情](https://kjxv.net/tools/2026-04-25-VPS-banwagong/)
+* **高质量（天花板）-海外老牌主机商（Banwagong）** [点击查看详情](https://bandwagonhost.com/aff.php?aff=82013)
 --8<-- "includes/videos.md:BWG-vps"
 ---
 
@@ -25,7 +25,7 @@ hide:
 
 | 厂商名称 | 配置说明 (CPU 硬盘) | 回程线路 | 机房位置 | 优缺点 | 价格 | 购买链接 | 备注 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **搬瓦工 (BWG)**<br>商务套餐 | 2核1GB<br>**<span style="color: red;">2.5Gbps带宽</span>**<br>**<span style="color: red;">1000GB流量/月</span>** | 三网顶级融合<br>CN2 GIA CMIN2 CUP | 美国等15个机房<br>**<span style="color: red;">随时可迁移</span>** | **特点：** 效果最好，极致带宽、顶级线路、老牌口碑<br>**缺点：** 除了门槛高（3个月起步）-基本没缺点 | 49.99美元/季<br>169.99美元/年 | [👉 点击查看详情](https://bwh81.net/aff.php?aff=81595&pid=87) | 首先考虑（预算充足的情况）<br>大带宽、1000GB流量/月、机房可迁移 |
+| **搬瓦工 (BWG)**<br>商务套餐 | 2核1GB<br>**<span style="color: red;">2.5Gbps带宽</span>**<br>**<span style="color: red;">1000GB流量/月</span>** | 三网顶级融合<br>CN2 GIA CMIN2 CUP | 美国等15个机房<br>**<span style="color: red;">随时可迁移</span>** | **特点：** 效果最好，极致带宽、顶级线路、老牌口碑<br>**缺点：** 除了门槛高（3个月起步）-基本没缺点 | 49.99美元/季<br>169.99美元/年 | [👉 点击查看详情](https://bandwagonhost.com/cart.php?a=confproduct&i=1) | 首先考虑（预算充足的情况）<br>大带宽、1000GB流量/月、机房可迁移 |
 
 
 ## 🥈 预算在 50-100元/月（进阶优选，大流量主力）
@@ -33,10 +33,10 @@ hide:
 
 | 厂商名称 | 配置说明 (CPU 硬盘) | 回程线路 | 机房位置 | 优缺点 | 价格 | 购买链接 | 备注 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **JT** | 1核1G内存<br>200Mbps带宽<br>800GB流量/月 | 中国优化 | 日本 | **特点：** 带宽够用、流量多、性价比高<br>**缺点：** 可能晚高峰没 CN2 9929 CMIN2 稳定 | 10.08美元/月<br>40.84美元/半年 | [👉 点击查看详情](https://www.jtti.cc/zh/light_cloud.html?k=T7KBH7) |  |
-| **JT** | 1核1G内存<br>200Mbps带宽<br>800GB流量/月 | 中国优化 | 香港 | **特点：** 带宽够用、流量多、性价比高<br>**缺点：** 可能晚高峰没 CN2 9929 CMIN2 稳定 | 10.39美元/月<br>42.07美元/半年| [👉 点击查看详情](https://www.jtti.cc/zh/light_cloud.html?k=T7KBH7)<br>*(若基础款断货可选进阶款)* |  |
-| **华纳云** | 1核1G内存<br>200Mbps带宽<br>800GB流量/月 | 中国优化 | 日本 | **特点：** 带宽够用、流量多、性价比高<br>**缺点：** 可能晚高峰没 CN2 9929 CMIN2 稳定 | 68.4元/月<br>136.80元/季度 | [👉 点击查看详情](https://www.hncloud.com/light_cloud.html?k=kejixiaov) |  |
-| **华纳云** | 1核1G内存<br>200Mbps带宽<br>800GB流量/月 | 中国优化 | 香港 | **特点：** 带宽够用、流量多、性价比高<br>**缺点：** 可能晚高峰没 CN2 9929 CMIN2 稳定 | 70.4元/月<br>140.80元/季度 | [👉 点击查看详情](https://www.hncloud.com/light_cloud.html?k=kejixiaov) | 长期断货 |
+| **JT** | 1核1G内存<br>200Mbps带宽<br>800GB流量/月 | 中国优化 | 日本 | **特点：** 带宽够用、流量多、性价比高<br>**缺点：** 可能晚高峰没 CN2 9929 CMIN2 稳定 | 10.08美元/月<br>40.84美元/半年 | [👉 点击查看详情](https://www.jtti.cc/zh/light_cloud.html?k=KBZNYL) |  |
+| **JT** | 1核1G内存<br>200Mbps带宽<br>800GB流量/月 | 中国优化 | 香港 | **特点：** 带宽够用、流量多、性价比高<br>**缺点：** 可能晚高峰没 CN2 9929 CMIN2 稳定 | 10.39美元/月<br>42.07美元/半年| [👉 点击查看详情](https://www.jtti.cc/zh/light_cloud.html?k=KBZNYL)<br>*(若基础款断货可选进阶款)* |  |
+| **华纳云** | 1核1G内存<br>200Mbps带宽<br>800GB流量/月 | 中国优化 | 日本 | **特点：** 带宽够用、流量多、性价比高<br>**缺点：** 可能晚高峰没 CN2 9929 CMIN2 稳定 | 68.4元/月<br>136.80元/季度 | [👉 点击查看详情](https://www.hncloud.com/light_cloud.html?k=AJBOVJ) |  |
+| **华纳云** | 1核1G内存<br>200Mbps带宽<br>800GB流量/月 | 中国优化 | 香港 | **特点：** 带宽够用、流量多、性价比高<br>**缺点：** 可能晚高峰没 CN2 9929 CMIN2 稳定 | 70.4元/月<br>140.80元/季度 | [👉 点击查看详情](https://www.hncloud.com/light_cloud.html?k=AJBOVJ) | 长期断货 |
 
 
 ## 🥉 预算在 50元/月 以下（极致性价比 / 个人建站）
