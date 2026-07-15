@@ -54,13 +54,13 @@ hide:
 
 | 方案 | CPU | 内存 | 硬盘 | 月流量 | 带宽 | 可选地区(机房) | 价格 | 购买链接 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| CN2 GIA-E<font color="red">(视频同款)</font> | 2核 | 1GB | 20GB | 1000GB | 2.5Gbps | DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等15 个机房 | $169.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=87) |
-| CN2 GIA-E | 3核 | 2GB | 40GB | 2000GB | 2.5Gbps | DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等15 个机房 | $299.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=88) |
-| CN2 GIA-E | 4核 | 4GB | 80GB | 3000GB | 2.5Gbps | DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等15 个机房 | $549.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=89) |
-| CN2 GIA-E | 6核 | 8GB | 160GB | 5000GB | 5Gbps | DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等15 个机房 | $879.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=90) |
-| CN2 GIA-E | 8核 | 16GB | 320GB | 8000GB | 5Gbps | DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等15 个机房 | $1599.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=91) |
-| CN2 GIA-E | 10核 | 32GB | 640GB | 10000GB | 10Gbps | DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等15 个机房 | $2759.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=92) |
-| CN2 GIA-E | 12核 | 64GB | 1280GB | 12000GB | 10Gbps | DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等15 个机房 | $5499.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=93) |
+| CN2 GIA-E<font color="red">(视频同款)</font> | 2核 | 1GB | 20GB | 1000GB | 2.5Gbps | DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等15 个机房 | $169.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=87) |
+| CN2 GIA-E | 3核 | 2GB | 40GB | 2000GB | 2.5Gbps | DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等15 个机房 | $299.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=88) |
+| CN2 GIA-E | 4核 | 4GB | 80GB | 3000GB | 2.5Gbps | DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等15 个机房 | $549.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=89) |
+| CN2 GIA-E | 6核 | 8GB | 160GB | 5000GB | 5Gbps | DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等15 个机房 | $879.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=90) |
+| CN2 GIA-E | 8核 | 16GB | 320GB | 8000GB | 5Gbps | DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等15 个机房 | $1599.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=91) |
+| CN2 GIA-E | 10核 | 32GB | 640GB | 10000GB | 10Gbps | DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等15 个机房 | $2759.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=92) |
+| CN2 GIA-E | 12核 | 64GB | 1280GB | 12000GB | 10Gbps | DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等15 个机房 | $5499.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=93) |
 
 ---
 
@@ -77,13 +77,13 @@ hide:
 
 | 方案 | CPU | 内存 | 硬盘 | 月流量 | 带宽 | 可选地区(机房) | 价格 | 购买链接 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| DUBAI | 2核 | 1GB | 20GB | 500GB | 1Gbps | 迪拜、DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等14 个机房 | $169.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=114) |
-| DUBAI | 3核 | 2GB | 40GB | 1000GB | 1Gbps | 迪拜、DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等14 个机房 | $299.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=115) |
-| DUBAI | 4核 | 4GB | 80GB | 2000GB | 1Gbps | 迪拜、DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等14 个机房 | $549.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=116) |
-| DUBAI | 6核 | 8GB | 160GB | 3000GB | 1Gbps | 迪拜、DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等14 个机房 | $879.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=117) |
-| DUBAI | 8核 | 16GB | 320GB | 4000GB | 1Gbps | 迪拜、DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等14 个机房 | $1599.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=118) |
-| DUBAI | 10核 | 32GB | 640GB | 5000GB | 1Gbps | 迪拜、DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等14 个机房 | $2759.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=119) |
-| DUBAI | 12核 | 64GB | 1280GB | 6000GB | 1Gbps | 迪拜、DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等14 个机房 | $5399.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=120) |
+| DUBAI | 2核 | 1GB | 20GB | 500GB | 1Gbps | 迪拜、DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等14 个机房 | $169.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=114) |
+| DUBAI | 3核 | 2GB | 40GB | 1000GB | 1Gbps | 迪拜、DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等14 个机房 | $299.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=115) |
+| DUBAI | 4核 | 4GB | 80GB | 2000GB | 1Gbps | 迪拜、DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等14 个机房 | $549.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=116) |
+| DUBAI | 6核 | 8GB | 160GB | 3000GB | 1Gbps | 迪拜、DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等14 个机房 | $879.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=117) |
+| DUBAI | 8核 | 16GB | 320GB | 4000GB | 1Gbps | 迪拜、DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等14 个机房 | $1599.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=118) |
+| DUBAI | 10核 | 32GB | 640GB | 5000GB | 1Gbps | 迪拜、DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等14 个机房 | $2759.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=119) |
+| DUBAI | 12核 | 64GB | 1280GB | 6000GB | 1Gbps | 迪拜、DC6 CN2 GIA-E、DC9 CN2 GIA、日本软银、美国、加拿大、荷兰等14 个机房 | $5399.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=120) |
 
 ---
 
@@ -101,24 +101,24 @@ hide:
 
 | 方案 | CPU | 内存 | 硬盘 | 月流量 | 带宽 | 可选地区(机房) | 价格 | 购买链接 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| HK CN2 GIA<font color="red">(延迟最低)</font> | 2核 | 2GB | 40GB | 500GB | 1Gbps | 中国香港CN2 GIA、日本东京CN2 GIA | $899.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=95) |
-| HK CN2 GIA | 4核 | 4GB | 80GB | 1000GB | 1Gbps | 中国香港CN2 GIA、日本东京CN2 GIA | $1559.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=96) |
-| HK CN2 GIA | 6核 | 8GB | 160GB | 2000GB | 1Gbps | 中国香港CN2 GIA、日本东京CN2 GIA | $2999.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=97) |
-| HK CN2 GIA | 8核 | 16GB | 320GB | 4000GB | 1Gbps | 中国香港CN2 GIA、日本东京CN2 GIA | $5899.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=98) |
-| HK CN2 GIA | 10核 | 32GB | 640GB | 6000GB | 1Gbps | 中国香港CN2 GIA、日本东京CN2 GIA | $9989.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=122) |
-| HK CN2 GIA | 12核 | 64GB | 1280GB | 8000GB | 1Gbps | 中国香港CN2 GIA、日本东京CN2 GIA | $18989.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=124) |
-| TOKYO CN2 GIA | 2核 | 2GB | 40GB | 500GB | 1.2Gbps | 日本东京CN2 GIA | $899.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=108) |
-| TOKYO CN2 GIA | 4核 | 4GB | 80GB | 1000GB | 1.2Gbps | 日本东京CN2 GIA | $1559.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=109) |
-| TOKYO CN2 GIA | 6核 | 8GB | 160GB | 2000GB | 1.2Gbps | 日本东京CN2 GIA | $2999.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=110) |
-| TOKYO CN2 GIA | 8核 | 16GB | 320GB | 4000GB | 1.2Gbps | 日本东京CN2 GIA | $5899.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=111) |
-| TOKYO CN2 GIA | 10核 | 32GB | 640GB | 6000GB | 1.2Gbps | 日本东京CN2 GIA | $9989.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=123) |
-| TOKYO CN2 GIA | 12核 | 64GB | 1280GB | 8000GB | 1.2Gbps | 日本东京CN2 GIA | $18989.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=125) |
-| OSAKA CN2 GIA | 2核 | 2GB | 40GB | 500GB | 1.5Gbps | 日本大阪CN2 GIA | $499.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=134) |
-| OSAKA CN2 GIA | 4核 | 4GB | 80GB | 1000GB | 1.5Gbps | 日本大阪CN2 GIA | $869.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=135) |
-| OSAKA CN2 GIA | 6核 | 8GB | 160GB | 2000GB | 1.5Gbps | 日本大阪CN2 GIA | $1665.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=136) |
-| OSAKA CN2 GIA | 8核 | 16GB | 320GB | 4000GB | 1.5Gbps | 日本大阪CN2 GIA | $3199.00/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=137) |
-| OSAKA CN2 GIA | 10核 | 32GB | 640GB | 6000GB | 1.5Gbps | 日本大阪CN2 GIA | $5549.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=138) |
-| OSAKA CN2 GIA | 12核 | 64GB | 1280GB | 8000GB | 1.5Gbps | 日本大阪CN2 GIA | $10559.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=139) |
+| HK CN2 GIA<font color="red">(延迟最低)</font> | 2核 | 2GB | 40GB | 500GB | 1Gbps | 中国香港CN2 GIA、日本东京CN2 GIA | $899.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=95) |
+| HK CN2 GIA | 4核 | 4GB | 80GB | 1000GB | 1Gbps | 中国香港CN2 GIA、日本东京CN2 GIA | $1559.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=96) |
+| HK CN2 GIA | 6核 | 8GB | 160GB | 2000GB | 1Gbps | 中国香港CN2 GIA、日本东京CN2 GIA | $2999.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=97) |
+| HK CN2 GIA | 8核 | 16GB | 320GB | 4000GB | 1Gbps | 中国香港CN2 GIA、日本东京CN2 GIA | $5899.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=98) |
+| HK CN2 GIA | 10核 | 32GB | 640GB | 6000GB | 1Gbps | 中国香港CN2 GIA、日本东京CN2 GIA | $9989.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=122) |
+| HK CN2 GIA | 12核 | 64GB | 1280GB | 8000GB | 1Gbps | 中国香港CN2 GIA、日本东京CN2 GIA | $18989.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=124) |
+| TOKYO CN2 GIA | 2核 | 2GB | 40GB | 500GB | 1.2Gbps | 日本东京CN2 GIA | $899.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=108) |
+| TOKYO CN2 GIA | 4核 | 4GB | 80GB | 1000GB | 1.2Gbps | 日本东京CN2 GIA | $1559.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=109) |
+| TOKYO CN2 GIA | 6核 | 8GB | 160GB | 2000GB | 1.2Gbps | 日本东京CN2 GIA | $2999.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=110) |
+| TOKYO CN2 GIA | 8核 | 16GB | 320GB | 4000GB | 1.2Gbps | 日本东京CN2 GIA | $5899.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=111) |
+| TOKYO CN2 GIA | 10核 | 32GB | 640GB | 6000GB | 1.2Gbps | 日本东京CN2 GIA | $9989.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=123) |
+| TOKYO CN2 GIA | 12核 | 64GB | 1280GB | 8000GB | 1.2Gbps | 日本东京CN2 GIA | $18989.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=125) |
+| OSAKA CN2 GIA | 2核 | 2GB | 40GB | 500GB | 1.5Gbps | 日本大阪CN2 GIA | $499.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=134) |
+| OSAKA CN2 GIA | 4核 | 4GB | 80GB | 1000GB | 1.5Gbps | 日本大阪CN2 GIA | $869.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=135) |
+| OSAKA CN2 GIA | 6核 | 8GB | 160GB | 2000GB | 1.5Gbps | 日本大阪CN2 GIA | $1665.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=136) |
+| OSAKA CN2 GIA | 8核 | 16GB | 320GB | 4000GB | 1.5Gbps | 日本大阪CN2 GIA | $3199.00/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=137) |
+| OSAKA CN2 GIA | 10核 | 32GB | 640GB | 6000GB | 1.5Gbps | 日本大阪CN2 GIA | $5549.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=138) |
+| OSAKA CN2 GIA | 12核 | 64GB | 1280GB | 8000GB | 1.5Gbps | 日本大阪CN2 GIA | $10559.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=139) |
 
 ---
 
@@ -147,9 +147,9 @@ hide:
 
 | 方案 | CPU | 内存 | 硬盘 | 月流量 | 带宽 | 可选地区(机房) | 价格 | 购买链接 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| KVM<font color="red">(最便宜)</font> | 2核 | 1GB | 20GB | 1000GB | 1Gbps | DC3 CN2、DC8 ZNET 、美国、加拿大、荷兰等9 个机房 | $49.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=44) |
-| KVM | 3核 | 2GB | 40GB | 2000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等6 个机房 | $99.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=45) |
-| KVM | 4核 | 4GB | 80GB | 3000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等6 个机房 | $199.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=46) |
-| KVM | 5核 | 8GB | 160GB | 4000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等6 个机房 | $399.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=47) |
-| KVM | 6核 | 16GB | 320GB | 5000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等6 个机房 | $799.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=48) |
-| KVM | 7核 | 24GB | 480GB | 6000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等6 个机房 | $1199.99/年 | [立即购买](https://bwh81.net/aff.php?aff=81595&pid=49) |
+| KVM<font color="red">(最便宜)</font> | 2核 | 1GB | 20GB | 1000GB | 1Gbps | DC3 CN2、DC8 ZNET 、美国、加拿大、荷兰等9 个机房 | $49.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=44) |
+| KVM | 3核 | 2GB | 40GB | 2000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等6 个机房 | $99.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=45) |
+| KVM | 4核 | 4GB | 80GB | 3000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等6 个机房 | $199.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=46) |
+| KVM | 5核 | 8GB | 160GB | 4000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等6 个机房 | $399.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=47) |
+| KVM | 6核 | 16GB | 320GB | 5000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等6 个机房 | $799.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=48) |
+| KVM | 7核 | 24GB | 480GB | 6000GB | 1Gbps | DC3 CN2、DC8 ZNET、美国、加拿大、荷兰等6 个机房 | $1199.99/年 | [立即购买](https://bwh81.net/aff.php?aff=82013&pid=49) |

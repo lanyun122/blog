@@ -45,9 +45,9 @@ hide:
   * **其他场景：** 全球万事达线下刷卡、ATM 取现 (需邮寄实体卡)
 * **🎬 开卡视频教程：** 
 --8<-- "includes/videos.md:bybit_gljy"
-* **🔗 官方申请通道：** [立即申请  ↗](https://partner.bybit.com/b/XIAOV001)
+* **🔗 官方申请通道：** [立即申请  ↗](https://partner.bybit.com/b/148332)
 
-(邀请码：`4ORD8O3`，福利-首月消费超过100USDT，可获得10USDT空投奖励)
+(邀请码：`148332`，福利-首月消费超过100USDT，可获得10USDT空投奖励)
 
 ---
 
@@ -64,9 +64,9 @@ hide:
   * **其他场景：** 全球万事达线下刷卡、ATM 取现 (需邮寄实体卡)
 * **🎬 开卡视频教程：**
 --8<-- "includes/videos.md:Bybitcard"
-* **🔗 官方申请通道：** [立即申请  ↗](https://partner.bybit.com/b/XIAOV001)
+* **🔗 官方申请通道：** [立即申请  ↗](https://partner.bybit.com/b/148332)
 
-(邀请码：`4ORD8O3`，福利-首月消费超过100USDT，可获得10USDT空投奖励)
+(邀请码：`148332`，福利-首月消费超过100USDT，可获得10USDT空投奖励)
 
 ---
 

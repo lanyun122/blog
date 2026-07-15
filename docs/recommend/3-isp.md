@@ -29,10 +29,10 @@ hide:
 
 | 代理平台 | 核心特点与站长避坑提示 | 优惠码 | 跳转链接 |
 | :--- | :--- | :--- | :--- |
-| <span style="white-space: nowrap;">🍠 Webshare</span> | **价格极低**<br>**注意：** 有概率分配到机房 IP，需手动刷新替换筛选。目前群友反馈本平台仅**美国IP**质量还行,如需**其他地区IP**,请考虑其他平台。[没有国际虚拟卡的可以查看教程][虚拟卡推荐表] | - | [🔗 点击获取 (每月不到 6 元)](https://www.webshare.io/?referral_code=apnsjeua21if) |
+| <span style="white-space: nowrap;">🍠 Webshare</span> | **价格极低**<br>**注意：** 有概率分配到机房 IP，需手动刷新替换筛选。目前群友反馈本平台仅**美国IP**质量还行,如需**其他地区IP**,请考虑其他平台。[没有国际虚拟卡的可以查看教程][虚拟卡推荐表] | - | [🔗 点击获取 (每月不到 6 元)](https://www.webshare.io/?referral_code=lq6qy4n0ui6c) |
 | <span style="white-space: nowrap;">📦 MIYAIP</span> | **自带中转节点（可以直连）** | `V88D` | [🔗 点击跳转][miyaip] |
 | <span style="white-space: nowrap;">📲 985 Proxy</span> | 常规住宅代理，适合作为备选方案。 | `XIAOV007` | [🔗 点击跳转][985Proxy] |
-| <span style="white-space: nowrap;">🏠 Talor</span> | 注册时填写专属邀请码可获取相关优惠。 | `xiaov001` | [🔗 点击跳转](https://dashboard.talordata.com/reg?inviter_code=xiaov001) |
+| <span style="white-space: nowrap;">🏠 Talor</span> | 注册时填写专属邀请码可获取相关优惠。 | `as5pidqk` | [🔗 点击跳转](https://dashboard.talordata.com/reg?inviter_code=as5pidqk) |
 | <span style="white-space: nowrap;">☁️ Kookeey</span> | 常见的静态 / 动态 ISP 代理平台，覆盖较广。 | - | [🔗 点击跳转](https://www.kookeey.com/?aff=86916142) |
 
 
