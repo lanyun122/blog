@@ -10,7 +10,7 @@ tags:
 
 # 🎁 [【2026神卡推荐】免翻墙直连 ChatGPT/Gemini 的香港漫游神卡 vs 月付 $0.3 零成本免写卡器保号卡！] 
 
-![封面图](../../assets/images/2026-07-18-16.png){ width="300" align=left style="border-radius: 8px; margin-right: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 10px;" }
+![封面图](../../assets/images/copy.png){ width="300" align=left style="border-radius: 8px; margin-right: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 10px;" }
 
 **本期要点：** [这里简述视频的核心价值，吸引读者往下看]。本教程手把手带你通过验证，建议收藏！
 
