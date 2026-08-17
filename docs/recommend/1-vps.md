@@ -25,7 +25,7 @@ hide:
 
 | 厂商名称 | 配置说明 (CPU 硬盘) | 回程线路 | 机房位置 | 优缺点 | 价格 | 购买链接 | 备注 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **搬瓦工 (BWG)**<br>商务套餐 | 2核1GB<br>**<span style="color: red;">2.5Gbps带宽</span>**<br>**<span style="color: red;">1000GB流量/月</span>** | 三网顶级融合<br>CN2 GIA CMIN2 CUP | 美国等15个机房<br>**<span style="color: red;">随时可迁移</span>** | **特点：** 效果最好，极致带宽、顶级线路、老牌口碑<br>**缺点：** 除了门槛高（3个月起步）-基本没缺点 | 49.99美元/季<br>169.99美元/年 | [👉 点击查看详情](https://bandwagonhost.com/cart.php?a=confproduct&i=1) | 首先考虑（预算充足的情况）<br>大带宽、1000GB流量/月、机房可迁移 |
+| **搬瓦工 (BWG)**<br>商务套餐 | 2核1GB<br>**<span style="color: red;">2.5Gbps带宽</span>**<br>**<span style="color: red;">1000GB流量/月</span>** | 三网顶级融合<br>CN2 GIA CMIN2 CUP | 美国等15个机房<br>**<span style="color: red;">随时可迁移</span>** | **特点：** 效果最好，极致带宽、顶级线路、老牌口碑<br>**缺点：** 除了门槛高（3个月起步）-基本没缺点 | 49.99美元/季<br>169.99美元/年 | [👉 点击查看详情](https://bandwagonhost.com/aff.php?aff=82013&pid=87) | 首先考虑（预算充足的情况）<br>大带宽、1000GB流量/月、机房可迁移 |
 
 
 ## 🥈 预算在 50-100元/月（进阶优选，大流量主力）
