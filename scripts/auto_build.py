@@ -1,9 +1,25 @@
-import os
+import base64
+import concurrent.futures
+import hashlib
+import html
+import ipaddress
 import json
-import urllib.request
-import urllib.error
+import os
 import re
+import socket
+import statistics
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+import uuid
+from dataclasses import dataclass, field
 from datetime import datetime
+
+try:
+    import yaml
+except ImportError:  # 本地只运行脚本、尚未安装 MkDocs 依赖时仍可处理 URI/Base64 源
+    yaml = None
 
 # ==========================================
 # 1. 节点原料大厂 (十万百万级池子同时抓取)
@@ -23,7 +39,54 @@ NODE_SOURCES = [
 
 POSTS_DIR = "docs/nodes/posts"
 PASSWORD_FILE = "scripts/passwords.json"
-MAX_NODES = 150  # 升级为150个精选节点
+MAX_NODES = 40
+MIN_NODES = 10
+MAX_SOURCE_BYTES = 8 * 1024 * 1024
+MAX_NODES_PER_SOURCE = 180
+MAX_PROBE_CANDIDATES = 600
+FETCH_WORKERS = 6
+PROBE_WORKERS = 48
+PROBE_TIMEOUT_SECONDS = 3.0
+PROBE_ATTEMPTS = 2
+
+URI_SCHEMES = ("vmess", "vless", "trojan", "ss", "hysteria2", "hy2")
+TCP_SCHEMES = {"vmess", "vless", "trojan", "ss"}
+URI_PATTERN = re.compile(
+    rf"(?i)(?:{'|'.join(URI_SCHEMES)})://[^\s<>\"']+"
+)
+TRUTHY_VALUES = {"1", "true", "yes", "on"}
+LEGACY_SS_CIPHERS = {
+    "aes-128-cfb", "aes-192-cfb", "aes-256-cfb", "aes-128-ctr",
+    "aes-192-ctr", "aes-256-ctr", "rc4-md5", "chacha20", "salsa20",
+}
+
+
+@dataclass
+class FetchResult:
+    index: int
+    source_url: str
+    content: str = ""
+    used_url: str = ""
+    errors: list[str] = field(default_factory=list)
+
+
+@dataclass
+class NodeCandidate:
+    uri: str
+    scheme: str
+    host: str
+    port: int
+    identity: str
+    signature: str
+    sources: set[str] = field(default_factory=set)
+    successful_probes: int = 0
+    latency_ms: float = float("inf")
+    resolved_ip: str = ""
+    probe_error: str = ""
+
+    @property
+    def dedupe_key(self):
+        return self.scheme, self.host.lower(), self.port, self.identity, self.signature
 
 def get_today_password(date_str):
     """读取当天密码，如果没预设，默认用 MMDD"""
@@ -33,66 +96,554 @@ def get_today_password(date_str):
             return pwd_dict.get(date_str, date_str[5:].replace("-", ""))
     return date_str[5:].replace("-", "")
 
-def fetch_from_url(url):
-    """带超时和备用代理的下载程序"""
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
-    
-    # 尝试直连，如果失败或被墙，自动尝试使用 CDN 镜像网关转接
-    urls_to_try = [url]
-    if "raw.githubusercontent.com" in url:
-        urls_to_try.append(url.replace("https://raw.githubusercontent.com/", "https://ghproxy.net/https://raw.githubusercontent.com/"))
-        urls_to_try.append(url.replace("https://raw.githubusercontent.com/", "https://fastly.jsdelivr.net/gh/"))
+def _decode_base64_bytes(value):
+    value = re.sub(r"\s+", "", value)
+    if not value:
+        raise ValueError("empty base64 value")
+    value += "=" * (-len(value) % 4)
+    return base64.urlsafe_b64decode(value.encode("ascii"))
 
-    for u in urls_to_try:
+
+def _decode_base64_text(value):
+    return _decode_base64_bytes(value).decode("utf-8-sig")
+
+
+def _format_host(host):
+    return f"[{host}]" if ":" in host and not host.startswith("[") else host
+
+
+def _github_raw_fallbacks(url):
+    """生成 raw.githubusercontent.com 的可用备用地址。"""
+    urls = [url]
+    parsed = urllib.parse.urlsplit(url)
+    if parsed.hostname != "raw.githubusercontent.com":
+        return urls
+
+    parts = parsed.path.lstrip("/").split("/")
+    if len(parts) >= 4:
+        owner, repo, ref = parts[:3]
+        file_path = "/".join(parts[3:])
+        jsdelivr = (
+            "https://fastly.jsdelivr.net/gh/"
+            f"{urllib.parse.quote(owner)}/{urllib.parse.quote(repo)}@"
+            f"{urllib.parse.quote(ref)}/{urllib.parse.quote(file_path, safe='/')}"
+        )
+        urls.append(jsdelivr)
+    urls.append(f"https://ghproxy.net/{url}")
+    return urls
+
+
+def fetch_from_url(index, url):
+    """限量下载单个来源；直连失败后尝试正确格式的 GitHub CDN 地址。"""
+    headers = {
+        "User-Agent": "Mozilla/5.0 (compatible; ChrisTalkNodeBuilder/2.0)",
+        "Accept": "text/plain, application/yaml, */*",
+        "Accept-Encoding": "identity",
+    }
+    result = FetchResult(index=index, source_url=url)
+
+    for candidate_url in _github_raw_fallbacks(url):
+        for attempt in range(2):
+            try:
+                req = urllib.request.Request(candidate_url, headers=headers)
+                with urllib.request.urlopen(req, timeout=12) as response:
+                    payload = response.read(MAX_SOURCE_BYTES + 1)
+                if len(payload) > MAX_SOURCE_BYTES:
+                    raise ValueError(f"响应超过 {MAX_SOURCE_BYTES // 1024 // 1024} MiB 限制")
+                if not payload.strip():
+                    raise ValueError("响应为空")
+                try:
+                    result.content = payload.decode("utf-8-sig")
+                except UnicodeDecodeError:
+                    result.content = payload.decode("utf-8", errors="replace")
+                result.used_url = candidate_url
+                return result
+            except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError, ValueError) as exc:
+                result.errors.append(f"{candidate_url}: {type(exc).__name__}: {str(exc)[:160]}")
+                if attempt == 0:
+                    time.sleep(0.25)
+    return result
+
+
+def _transport_query(proxy):
+    params = {}
+    network = str(proxy.get("network") or "tcp").lower()
+    params["type"] = network
+
+    server_name = proxy.get("servername") or proxy.get("sni")
+    if server_name:
+        params["sni"] = str(server_name)
+    if proxy.get("client-fingerprint"):
+        params["fp"] = str(proxy["client-fingerprint"])
+    if proxy.get("flow"):
+        params["flow"] = str(proxy["flow"])
+
+    reality = proxy.get("reality-opts") or {}
+    if reality:
+        params["security"] = "reality"
+        if reality.get("public-key"):
+            params["pbk"] = str(reality["public-key"])
+        if reality.get("short-id"):
+            params["sid"] = str(reality["short-id"])
+    elif proxy.get("tls"):
+        params["security"] = "tls"
+    else:
+        params["security"] = "none"
+
+    if proxy.get("skip-cert-verify"):
+        params["insecure"] = "1"
+
+    if network == "ws":
+        ws_opts = proxy.get("ws-opts") or {}
+        if ws_opts.get("path"):
+            params["path"] = str(ws_opts["path"])
+        headers = ws_opts.get("headers") or {}
+        host_header = headers.get("Host") or headers.get("host")
+        if host_header:
+            params["host"] = str(host_header)
+    elif network == "grpc":
+        grpc_opts = proxy.get("grpc-opts") or {}
+        service_name = grpc_opts.get("grpc-service-name") or grpc_opts.get("service-name")
+        if service_name:
+            params["serviceName"] = str(service_name)
+    elif network == "http":
+        http_opts = proxy.get("http-opts") or {}
+        if http_opts.get("path"):
+            path_value = http_opts["path"]
+            params["path"] = str(path_value[0] if isinstance(path_value, list) else path_value)
+
+    return params
+
+
+def _clash_proxy_to_uri(proxy):
+    """把常见 Clash 节点安全转换为分享 URI；未知或依赖插件的类型直接跳过。"""
+    if not isinstance(proxy, dict):
+        return None
+    scheme = str(proxy.get("type") or "").lower()
+    server = str(proxy.get("server") or "").strip()
+    name = str(proxy.get("name") or scheme or "node")
+    try:
+        port = int(proxy.get("port"))
+    except (TypeError, ValueError):
+        return None
+    if not server or not (1 <= port <= 65535):
+        return None
+
+    endpoint = f"{_format_host(server)}:{port}"
+    fragment = urllib.parse.quote(name, safe="")
+
+    if scheme == "vmess":
+        ws_opts = proxy.get("ws-opts") or {}
+        grpc_opts = proxy.get("grpc-opts") or {}
+        headers = ws_opts.get("headers") or {}
+        config = {
+            "v": "2",
+            "ps": name,
+            "add": server,
+            "port": str(port),
+            "id": str(proxy.get("uuid") or ""),
+            "aid": str(proxy.get("alterId") or 0),
+            "scy": str(proxy.get("cipher") or "auto"),
+            "net": str(proxy.get("network") or "tcp"),
+            "type": "none",
+            "host": str(headers.get("Host") or headers.get("host") or ""),
+            "path": str(
+                ws_opts.get("path")
+                or grpc_opts.get("grpc-service-name")
+                or grpc_opts.get("service-name")
+                or ""
+            ),
+            "tls": "tls" if proxy.get("tls") else "",
+            "sni": str(proxy.get("servername") or proxy.get("sni") or ""),
+            "fp": str(proxy.get("client-fingerprint") or ""),
+            "allowInsecure": "1" if proxy.get("skip-cert-verify") else "0",
+        }
+        encoded = base64.b64encode(
+            json.dumps(config, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+        ).decode("ascii")
+        return f"vmess://{encoded}"
+
+    if scheme == "vless":
+        user_id = str(proxy.get("uuid") or "").strip()
+        params = {"encryption": "none", **_transport_query(proxy)}
+        query = urllib.parse.urlencode(params, quote_via=urllib.parse.quote)
+        return f"vless://{urllib.parse.quote(user_id, safe='')}@{endpoint}?{query}#{fragment}"
+
+    if scheme == "trojan":
+        password = str(proxy.get("password") or "")
+        params = _transport_query(proxy)
+        query = urllib.parse.urlencode(params, quote_via=urllib.parse.quote)
+        return f"trojan://{urllib.parse.quote(password, safe='')}@{endpoint}?{query}#{fragment}"
+
+    if scheme == "ss" and not proxy.get("plugin"):
+        method = str(proxy.get("cipher") or "")
+        password = str(proxy.get("password") or "")
+        user_info = base64.urlsafe_b64encode(f"{method}:{password}".encode("utf-8")).decode("ascii").rstrip("=")
+        return f"ss://{user_info}@{endpoint}#{fragment}"
+
+    if scheme in {"hysteria2", "hy2"}:
+        password = str(proxy.get("password") or proxy.get("auth") or "")
+        params = {}
+        if proxy.get("sni"):
+            params["sni"] = str(proxy["sni"])
+        if proxy.get("skip-cert-verify"):
+            params["insecure"] = "1"
+        query = urllib.parse.urlencode(params, quote_via=urllib.parse.quote)
+        suffix = f"?{query}" if query else ""
+        return f"hysteria2://{urllib.parse.quote(password, safe='')}@{endpoint}{suffix}#{fragment}"
+
+    return None
+
+
+def extract_node_uris(content):
+    """同时识别明文分享链接、整体 Base64 订阅和 Clash YAML。"""
+    found = [match.group(0).rstrip(",;") for match in URI_PATTERN.finditer(content)]
+
+    compact = re.sub(r"\s+", "", content.strip())
+    if not found and len(compact) >= 32 and re.fullmatch(r"[A-Za-z0-9_+/=-]+", compact):
         try:
-            req = urllib.request.Request(u, headers=headers)
-            with urllib.request.urlopen(req, timeout=10) as response:
-                return response.read().decode('utf-8', errors='ignore')
-        except Exception:
+            decoded = _decode_base64_text(compact)
+            if len(decoded.encode("utf-8")) <= MAX_SOURCE_BYTES:
+                found.extend(match.group(0).rstrip(",;") for match in URI_PATTERN.finditer(decoded))
+        except (ValueError, UnicodeDecodeError, UnicodeEncodeError):
+            pass
+
+    if yaml is not None and re.search(r"(?m)^proxies\s*:\s*$", content):
+        try:
+            document = yaml.safe_load(content)
+            proxies = document.get("proxies", []) if isinstance(document, dict) else []
+            for proxy in proxies:
+                uri = _clash_proxy_to_uri(proxy)
+                if uri:
+                    found.append(uri)
+        except yaml.YAMLError as exc:
+            print(f"    ⚠️ Clash YAML 解析失败: {str(exc).splitlines()[0][:160]}")
+
+    # 保留上游顺序，同时去掉同一来源中的逐字重复项。
+    return list(dict.fromkeys(found))
+
+
+def _valid_public_host(host):
+    if not host or len(host) > 253 or re.search(r"[\s<>\x00-\x1f]", host):
+        return False
+    normalized = host.rstrip(".").lower()
+    if normalized == "localhost" or normalized.endswith(".local"):
+        return False
+    try:
+        return ipaddress.ip_address(normalized).is_global
+    except ValueError:
+        try:
+            normalized.encode("idna")
+        except UnicodeError:
+            return False
+        return "." in normalized and all(normalized.split("."))
+
+
+def _query_dict(query):
+    return {
+        key.lower(): value
+        for key, value in urllib.parse.parse_qsl(query, keep_blank_values=True)
+    }
+
+
+def _contains_insecure_flag(values):
+    return any(
+        values.get(key, "").strip().lower() in TRUTHY_VALUES
+        for key in ("insecure", "allowinsecure", "skip-cert-verify")
+    )
+
+
+def _parse_ss_uri(uri):
+    main = uri[5:].split("#", 1)[0]
+    main, _, query = main.partition("?")
+    if "plugin=" in query.lower():
+        return None
+
+    try:
+        if "@" in main:
+            user_part, endpoint = main.rsplit("@", 1)
+            try:
+                credentials = _decode_base64_text(user_part)
+            except (ValueError, UnicodeDecodeError, UnicodeEncodeError):
+                credentials = urllib.parse.unquote(user_part)
+        else:
+            decoded = _decode_base64_text(main)
+            credentials, endpoint = decoded.rsplit("@", 1)
+
+        if ":" not in credentials:
+            return None
+        method, password = credentials.split(":", 1)
+        endpoint_parts = urllib.parse.urlsplit(f"//{endpoint}")
+        host = endpoint_parts.hostname or ""
+        port = endpoint_parts.port
+    except (ValueError, UnicodeDecodeError, UnicodeEncodeError):
+        return None
+
+    method = method.lower().strip()
+    if (
+        not password
+        or method in LEGACY_SS_CIPHERS
+        or not port
+        or not (1 <= port <= 65535)
+        or not _valid_public_host(host)
+    ):
+        return None
+    signature = json.dumps({"method": method, "query": _query_dict(query)}, sort_keys=True)
+    return NodeCandidate(uri, "ss", host, port, f"{method}:{password}", signature)
+
+
+def parse_node_uri(uri):
+    """解析并执行结构、安全性校验；不信任节点备注和上游标签。"""
+    uri = uri.strip()
+    scheme = uri.split(":", 1)[0].lower()
+    if scheme == "ss":
+        return _parse_ss_uri(uri)
+
+    if scheme == "vmess":
+        try:
+            payload = uri[len("vmess://"):].split("#", 1)[0]
+            config = json.loads(_decode_base64_text(payload))
+            host = str(config.get("add") or "").strip()
+            port = int(config.get("port"))
+            user_id = str(config.get("id") or "").strip()
+            uuid.UUID(user_id)
+        except (ValueError, TypeError, json.JSONDecodeError, UnicodeDecodeError, UnicodeEncodeError):
+            return None
+        if not _valid_public_host(host) or not (1 <= port <= 65535):
+            return None
+        if str(config.get("allowInsecure", "")).lower() in TRUTHY_VALUES:
+            return None
+        normalized = {key: value for key, value in config.items() if key != "ps"}
+        signature = json.dumps(normalized, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        return NodeCandidate(uri, scheme, host, port, user_id, signature)
+
+    if scheme not in {"vless", "trojan", "hysteria2", "hy2"}:
+        return None
+    try:
+        parsed = urllib.parse.urlsplit(uri)
+        host = parsed.hostname or ""
+        port = parsed.port
+    except ValueError:
+        return None
+    if not port or not (1 <= port <= 65535) or not _valid_public_host(host):
+        return None
+
+    query = _query_dict(parsed.query)
+    if _contains_insecure_flag(query):
+        return None
+
+    if scheme == "vless":
+        identity = urllib.parse.unquote(parsed.username or "")
+        try:
+            uuid.UUID(identity)
+        except ValueError:
+            return None
+        security = query.get("security", "none").lower()
+        if query.get("pbk") and security != "reality":
+            return None
+        if security == "reality" and (not query.get("pbk") or not query.get("sni")):
+            return None
+    elif scheme == "trojan":
+        identity = urllib.parse.unquote(parsed.username or "")
+        if not identity:
+            return None
+    else:
+        identity = urllib.parse.unquote(parsed.username or "")
+        if parsed.password:
+            identity += f":{urllib.parse.unquote(parsed.password)}"
+        if not identity:
+            return None
+
+    signature = urllib.parse.urlencode(sorted(query.items()), quote_via=urllib.parse.quote)
+    return NodeCandidate(uri, scheme, host, port, identity, signature)
+
+
+def _resolve_public_endpoints(host, port):
+    results = socket.getaddrinfo(host, port, type=socket.SOCK_STREAM)
+    endpoints = []
+    seen = set()
+    for family, socktype, proto, _, sockaddr in results:
+        ip_text = sockaddr[0].split("%", 1)[0]
+        ip_value = ipaddress.ip_address(ip_text)
+        # 任何私网/环回/保留地址都拒绝，避免不可信来源借测速探测运行器内网。
+        if not ip_value.is_global:
+            return []
+        key = family, sockaddr
+        if key not in seen:
+            seen.add(key)
+            endpoints.append((family, socktype, proto, sockaddr, ip_text))
+    return endpoints
+
+
+def probe_candidate(candidate):
+    if candidate.scheme not in TCP_SCHEMES:
+        candidate.probe_error = "该协议需要真实客户端进行 UDP/协议级检测"
+        return candidate
+
+    latencies = []
+    last_error = "连接失败"
+    try:
+        endpoints = _resolve_public_endpoints(candidate.host, candidate.port)
+        if not endpoints:
+            candidate.probe_error = "DNS 返回了非公网地址"
+            return candidate
+    except (OSError, ValueError) as exc:
+        candidate.probe_error = f"DNS 失败: {type(exc).__name__}"
+        return candidate
+
+    for _ in range(PROBE_ATTEMPTS):
+        connected = False
+        for family, socktype, proto, sockaddr, ip_text in endpoints:
+            started = time.perf_counter()
+            try:
+                with socket.socket(family, socktype, proto) as sock:
+                    sock.settimeout(PROBE_TIMEOUT_SECONDS)
+                    sock.connect(sockaddr)
+                latencies.append((time.perf_counter() - started) * 1000)
+                candidate.resolved_ip = ip_text
+                connected = True
+                break
+            except OSError as exc:
+                last_error = type(exc).__name__
+        if not connected:
             continue
-    return ""
+
+    candidate.successful_probes = len(latencies)
+    if latencies:
+        candidate.latency_ms = statistics.median(latencies)
+    else:
+        candidate.probe_error = last_error
+    return candidate
+
+
+def _stable_tiebreaker(candidate):
+    return hashlib.sha256(candidate.uri.encode("utf-8")).hexdigest()
+
+
+def _network_bucket(candidate):
+    if not candidate.resolved_ip:
+        return candidate.host.lower()
+    ip_value = ipaddress.ip_address(candidate.resolved_ip)
+    prefix = 24 if ip_value.version == 4 else 48
+    return str(ipaddress.ip_network(f"{ip_value}/{prefix}", strict=False))
+
+
+def _select_diverse_nodes(candidates):
+    ordered = sorted(
+        candidates,
+        key=lambda item: (
+            -item.successful_probes,
+            item.latency_ms,
+            -len(item.sources),
+            _stable_tiebreaker(item),
+        ),
+    )
+    selected = []
+    host_counts = {}
+    network_counts = {}
+    scheme_counts = {}
+    scheme_limit = max(8, MAX_NODES // 2)
+
+    for enforce_scheme_limit in (True, False):
+        for candidate in ordered:
+            if candidate in selected:
+                continue
+            host_key = candidate.host.lower()
+            network_key = _network_bucket(candidate)
+            if host_counts.get(host_key, 0) >= 2 or network_counts.get(network_key, 0) >= 3:
+                continue
+            if enforce_scheme_limit and scheme_counts.get(candidate.scheme, 0) >= scheme_limit:
+                continue
+            selected.append(candidate)
+            host_counts[host_key] = host_counts.get(host_key, 0) + 1
+            network_counts[network_key] = network_counts.get(network_key, 0) + 1
+            scheme_counts[candidate.scheme] = scheme_counts.get(candidate.scheme, 0) + 1
+            if len(selected) >= MAX_NODES:
+                return selected
+    return selected
+
 
 def fetch_and_clean_nodes():
-    """去十大源进货并智能过滤"""
-    print("⏳ 正在派出八爪鱼爬虫，前往全球十大节点源疯狂进货...")
-    all_raw_lines = []
-    
-    for idx, url in enumerate(NODE_SOURCES, 1):
-        print(f"  └─ [{idx}/{len(NODE_SOURCES)}] 正在抓取: {url.split('/')[3]} ...")
-        content = fetch_from_url(url)
-        if content:
-            all_raw_lines.extend(content.strip().split('\n'))
-            
-    print(f"📦 累计抓取原始数据 {len(all_raw_lines)} 条，正在清洗过滤去重...")
-    
-    # 过滤出纯正的节点协议，去重
-    valid_nodes = set()
-    valid_prefixes = ('vmess://', 'vless://', 'trojan://', 'ss://', 'ssr://', 'hysteria2://', 'hy2://')
-    
-    for line in all_raw_lines:
-        line = line.strip()
-        # 1. 必须是合法协议开头
-        if any(line.lower().startswith(proto) for proto in valid_prefixes):
-            # 2. 简单过滤明显的死节点、广告节点或本地环回节点
-            if "127.0.0.1" in line or "localhost" in line or len(line) < 25:
+    """抓取、解码、严格解析、规范去重，并进行基础公网 TCP 连通性预筛选。"""
+    print(f"⏳ 正在并发抓取 {len(NODE_SOURCES)} 个公开节点源...")
+    with concurrent.futures.ThreadPoolExecutor(max_workers=FETCH_WORKERS) as executor:
+        futures = [
+            executor.submit(fetch_from_url, index, url)
+            for index, url in enumerate(NODE_SOURCES)
+        ]
+        fetch_results = [future.result() for future in concurrent.futures.as_completed(futures)]
+    fetch_results.sort(key=lambda item: item.index)
+
+    parsed_by_key = {}
+    extracted_total = 0
+    successful_sources = 0
+
+    for result in fetch_results:
+        source_name = urllib.parse.urlsplit(result.source_url).path.strip("/").split("/")[0]
+        if not result.content:
+            last_error = result.errors[-1] if result.errors else "未知错误"
+            print(f"  ❌ {source_name}: 抓取失败；{last_error}")
+            continue
+        successful_sources += 1
+        uris = extract_node_uris(result.content)
+        extracted_total += len(uris)
+        print(
+            f"  ✅ {source_name}: 提取 {len(uris)} 条"
+            + ("（经备用地址）" if result.used_url != result.source_url else "")
+        )
+
+        for uri in uris[:MAX_NODES_PER_SOURCE]:
+            candidate = parse_node_uri(uri)
+            if not candidate:
                 continue
-            valid_nodes.add(line)
-            
-    sorted_nodes = list(valid_nodes)
-    print(f"💎 清洗完毕！共获得优质精选节点 {len(sorted_nodes)} 个！")
-    
-    # 截取前 MAX_NODES 个，排成文本
-    if not sorted_nodes:
-        return "vless://error-fetching-nodes@127.0.0.1:443#请确认你的网络是否畅通后重试"
-    return "\n".join(sorted_nodes[:MAX_NODES])
+            existing = parsed_by_key.get(candidate.dedupe_key)
+            if existing:
+                existing.sources.add(result.source_url)
+            else:
+                candidate.sources.add(result.source_url)
+                parsed_by_key[candidate.dedupe_key] = candidate
+
+    if successful_sources == 0:
+        raise RuntimeError("所有节点源均抓取失败，已停止发布，避免生成错误文章")
+
+    candidates = list(parsed_by_key.values())
+    candidates.sort(key=lambda item: (-len(item.sources), _stable_tiebreaker(item)))
+    candidates = candidates[:MAX_PROBE_CANDIDATES]
+    print(
+        f"📦 共提取 {extracted_total} 条；严格解析和规范去重后 "
+        f"{len(parsed_by_key)} 条，本次最多检测 {len(candidates)} 条。"
+    )
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=PROBE_WORKERS) as executor:
+        checked = list(executor.map(probe_candidate, candidates))
+
+    stable = [item for item in checked if item.successful_probes == PROBE_ATTEMPTS]
+    intermittent = [item for item in checked if 0 < item.successful_probes < PROBE_ATTEMPTS]
+    probe_pool = stable if len(stable) >= MIN_NODES else stable + intermittent
+    selected = _select_diverse_nodes(probe_pool)
+
+    print(
+        f"🔎 TCP 预检：稳定通过 {len(stable)} 条，间歇通过 {len(intermittent)} 条；"
+        f"按延迟和网络段去重后选出 {len(selected)} 条。"
+    )
+    if len(selected) < MIN_NODES:
+        raise RuntimeError(
+            f"仅有 {len(selected)} 条节点通过最低标准（要求至少 {MIN_NODES} 条），"
+            "已停止发布并保留上一期文章"
+        )
+    return "\n".join(item.uri for item in selected)
 
 def generate_markdown():
     now = datetime.now()
     today_str = now.strftime("%Y-%m-%d")
     today_cn = now.strftime("%Y年%m月%d日")
     
-    password = get_today_password(today_str)
+    password = str(get_today_password(today_str))
     nodes_text = fetch_and_clean_nodes()
+    # 节点来自不受信任的第三方，必须转义后才能嵌入 textarea，避免闭合标签注入脚本。
+    nodes_html = html.escape(nodes_text, quote=False)
+    # 使用 JSON 字符串字面量，避免密码中的引号或反斜杠破坏 JavaScript。
+    password_js = json.dumps(password, ensure_ascii=False)
     
     # 确保保存文章的路径存在
     os.makedirs(POSTS_DIR, exist_ok=True)
@@ -104,11 +655,11 @@ categories:
   - 免费节点
 ---
 
-# 【免费节点】{today_cn}精选高速翻墙节点分享 | 4K秒开 | 每日更新密码解锁
+# 【免费节点】{today_cn}自动预筛选节点分享 | 每日更新密码解锁
 
 > **⚠️ 使用须知与重要提醒：**
 > 为防止爬虫批量抓取、保障真正粉丝的节点使用体验与速度，本站**不提供长期订阅链接**。
-> 所有免费节点均为**独立单节点（时效 24~48 小时）**，每日定时更替。请务必观看**今日 YouTube 视频**获取专属解密密码！
+> 所有免费节点均为**独立单节点**，已经过格式、安全性与基础端口连通性预筛选，但仍可能随时失效。请务必观看**今日 YouTube 视频**获取专属查看口令！
 
 <!-- more -->
 
@@ -230,8 +781,8 @@ categories:
 
 <div id="lock-screen" style="margin-top: 25px; padding: 30px; background: linear-gradient(145deg, #181818, #222222); text-align: center; border-radius: 12px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
   <div style="font-size: 3rem; margin-bottom: 10px;">🔒</div>
-  <h3 style="color: #ffffff; margin-top: 0;">今日免费节点已加密保护</h3>
-  <p style="color: #aaa; margin-bottom: 20px; font-size: 0.9rem;">输入今日 YouTube 视频中的专属密码即可解锁全部优质高带宽节点：</p>
+  <h3 style="color: #ffffff; margin-top: 0;">今日免费节点口令验证</h3>
+  <p style="color: #aaa; margin-bottom: 20px; font-size: 0.9rem;">输入今日 YouTube 视频中的专属口令，即可查看经过自动预筛选的节点：</p>
   
   <div style="display: flex; justify-content: center; gap: 10px; max-width: 350px; margin: 0 auto;">
     <input type="password" id="node-pwd" placeholder="请输入今日视频密码" style="flex: 1; padding: 12px 16px; border-radius: 6px; border: 1px solid #555; background: #000; color: #fff; font-size: 1rem; text-align: center; outline: none;">
@@ -248,13 +799,13 @@ categories:
   
   <p style="color: #888; font-size: 0.8rem; margin-bottom: 10px;">💡 操作提示：点击上方蓝色按钮复制全部内容，然后打开客户端按 <kbd>Ctrl</kbd> + <kbd>V</kbd>（手机端点击从剪贴板添加）即可！</p>
 
-  <textarea id="node-list" readonly style="width: 100%; height: 280px; background: #000000; color: #00e676; padding: 15px; border-radius: 6px; border: 1px solid #333; font-family: monospace; font-size: 0.85rem; line-height: 1.5; resize: vertical; outline: none;">{nodes_text}</textarea>
+  <textarea id="node-list" readonly style="width: 100%; height: 280px; background: #000000; color: #00e676; padding: 15px; border-radius: 6px; border: 1px solid #333; font-family: monospace; font-size: 0.85rem; line-height: 1.5; resize: vertical; outline: none;">{nodes_html}</textarea>
 </div>
 
 <script>
 function checkPwd() {{
   var inputPwd = document.getElementById('node-pwd').value.trim();
-  var correctPwd = '{password}'; 
+  var correctPwd = {password_js};
   
   if(inputPwd === correctPwd) {{
     document.getElementById('secret-nodes').style.display = 'block';

@@ -10,3 +10,28 @@
     font-weight: bold;
     text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
 }
+
+/* 3. 浅色模式提高文字对比度；深色模式保持 Material 默认配色 */
+[data-md-color-scheme="default"] {
+    --md-default-fg-color: #222222;
+    --md-default-fg-color--light: #444444;
+    --md-default-fg-color--lighter: #666666;
+}
+
+/* 正文颜色 */
+[data-md-color-scheme="default"] .md-typeset {
+    color: #2b2b2b;
+}
+
+/* 文章大标题 */
+[data-md-color-scheme="default"] .md-typeset h1 {
+    color: #1f1f1f;
+    font-weight: 600;
+}
+
+/* 二、三级标题 */
+[data-md-color-scheme="default"] .md-typeset h2,
+[data-md-color-scheme="default"] .md-typeset h3 {
+    color: #292929;
+    font-weight: 600;
+}
