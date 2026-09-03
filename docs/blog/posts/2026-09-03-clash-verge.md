@@ -1,5 +1,5 @@
 ---
-date: 2026-09-03
+date: 2026-09-02
 categories:
   - 工具视频教程
 slug: clash-verge-rev
@@ -25,7 +25,23 @@ tags:
 <br clear="left">
 <!-- more -->
 
+## ⬇️ Clash Verge Rev 官方下载
 
+[点击前往 GitHub Releases 下载最新版](https://github.com/clash-verge-rev/clash-verge-rev/releases/latest)
+
+## ⬇️ v2rayN 与 Shadowrocket 官方下载
+
+- **v2rayN：**[GitHub Releases 下载最新版](https://github.com/2dust/v2rayN/releases/latest)
+- **Shadowrocket：**[Apple App Store 官方下载](https://apps.apple.com/us/app/shadowrocket/id932747118)
+
+### Windows 用户如何选择
+
+- 普通 Intel、AMD 电脑：下载名称带有 `x64-setup.exe` 的安装包；
+- Windows ARM 设备：下载名称带有 `arm64-setup.exe` 的安装包；
+- 只有遇到 WebView2 缺失或软件界面无法打开时，才选择带有 `fix_webview2` 的版本；
+- 当前版本已经不再支持 Windows 7，建议使用 Windows 10 或 Windows 11。
+
+> 请认准官方仓库 `clash-verge-rev/clash-verge-rev`，避免从来历不明的网站下载安装包。
 
 
 ## 一、导入订阅链接
