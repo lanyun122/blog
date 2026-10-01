@@ -11,17 +11,15 @@ tags:
 
 # 🎁 v2rayN 分流规则集完整搭建教程
 
-![封面图](../../assets/images/photomode_01082023_035351.jpg){ width="300" align=left style="border-radius: 8px; margin-right: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 10px;" }
+![封面图](../../assets/images/photomode_01082023_035351.jpg){ style="display:block; width:900px; max-width:100%; height:auto; margin:24px auto 14px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.16);" }
 
-<div style="margin-top: 25px; text-align: center;">
+<div style="margin: 0 0 25px; text-align: center;">
   <a href="[YouTube链接]" target="_blank" class="md-button md-button--neutral" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; font-size: 0.85rem; border-radius: 20px; text-decoration: none; font-weight: bold; border: 1px solid rgba(0,0,0,0.1); transition: all 0.3s ease;">
-    <svg viewBox="0 0 576 512" style="height: 1.1em; fill: #FF0000; margin: 0; display: block;"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.781 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    <svg viewBox="0 0 576 512" style="height: 1.1em; fill: #FF0000; margin: 0; display: block;"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C91.712 448 288 448s196.288 0 238.879-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zM232 336.5v-161l142.7 80.5L232 336.5z"></path></svg>
     立即观看完整视频
   </a>
 </div>
 
-<br clear="left">
-<!-- more -->
 ---
 
 **本期要点：** 从零搭建一套适合长期使用的 v2rayN 分流规则集，让局域网和国内流量直连，广告域名直接阻断，ChatGPT、Gemini 与流媒体统一使用美国住宅出口，交易所固定使用单独的香港节点，其余境外流量则交给当前代理节点。
@@ -34,13 +32,17 @@ tags:
 
 ## 🔗 本期相关服务推荐
 
-### 🚀 视频同款良心云机场
+### ⚡ 极速Cloud 机场推荐
 
-博主折腾互联网和各类网络工具多年，这款是我实际体验过的同类型机场中，目前价格最低的一档，同时节点速度表现也相当不错，比较适合预算有限、流量需求较大的用户。
+这是我少有见到的精品线路机场。据商家线路说明，提供电信 **CN2 GIA**、联通 **AS9929/10099**、移动 **CMIN2** 等优化线路，在我的使用环境中整体表现不错。
+
+它的套餐覆盖年付、季付、月付和新人体验套餐，价格也比较实惠。中秋活动期间还有 **8.8 折优惠**，具体优惠码为：`zqth`，适用套餐和有效期请以商家公告及结算页面为准。
 
 邀请码：`zwTTkkF7`
 
-[点击查看视频同款机场](https://xn--9kqz23b19z.com/#/register?code=zwTTkkF7)
+👉 **[点击注册极速Cloud](https://191.101.132.80/#/register?code=yMetD7Ux)**
+
+
 
 ### 💻 搬瓦工 VPS 推荐
 
