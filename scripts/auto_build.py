@@ -669,8 +669,8 @@ categories:
 
 如果你厌倦了每天寻找免费节点、忍受不稳定和限速，强烈推荐使用以下博主长期精选的高速 VPS 与优质专线。无论是自己搭建节点还是直接用机场，均支持 4K/8K 秒开：
 
-* **【白月光专线机场】：** 极速稳定的精选专线，全节点解锁 ChatGPT 与流媒体。
-  [👉 点击前往注册试用](https://www.sibker.com/register?invite_code=AL2a9oZV)
+* **【极速cloud机场】：** 极速稳定的顶级优化线路，全节点解锁 ChatGPT 与流媒体。
+  [👉 点击前往注册试用](https://191.101.132.80/#/register?code=yMetD7Ux)
 * **【搬瓦工 BandwagonHost】：** 传家宝级高端 VPS，极其适合自建稳定不翻车的强力翻墙节点！
   [👉 点击这里直达抢购](https://bandwagonhost.com/aff.php?aff=82013)
 * **【华纳云 HNCloud】：** 高性价比免备案云服务器，延迟稳如泰山。结账输入优惠码 `10%OFF` 立享 **9 折**。
