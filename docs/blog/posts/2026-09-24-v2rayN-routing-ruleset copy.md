@@ -11,7 +11,7 @@ tags:
 
 # 🎁 v2rayN 分流规则集完整搭建教程
 
-![封面图](../../assets/images/photomode_01082023_035351.jpg){ style="display:block; width:900px; max-width:100%; height:auto; margin:24px auto 14px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.16);" }
+![封面图](../../assets/images/2026-09-24-1.png){ style="display:block; width:900px; max-width:100%; height:auto; margin:24px auto 14px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.16);" }
 
 <div style="margin: 0 0 25px; text-align: center;">
   <a href="[https://youtu.be/FxMdpwg5tNk?si=iSx3muaX5gT7vtkQ]" target="_blank" class="md-button md-button--neutral" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 24px; font-size: 0.85rem; border-radius: 20px; text-decoration: none; font-weight: bold; border: 1px solid rgba(0,0,0,0.1); transition: all 0.3s ease;">
