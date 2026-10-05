@@ -32,6 +32,11 @@ tags:
 
 - **v2rayN：** [GitHub Releases 下载最新版](https://github.com/2dust/v2rayN/releases/latest)
 
+## 🔍 IP 质量检测工具
+
+- 👉 **[Ping0 IP 检测](https://ping0.cc/)**
+- 👉 **[IPIPAI IP 检测](https://ipipai.com/index-zh.html)**
+
 ## 🔗 本期相关服务推荐
 
 ### 🏳️ 静态住宅 IP
