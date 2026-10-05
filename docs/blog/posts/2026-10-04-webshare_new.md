@@ -9,7 +9,7 @@ tags:
   - 分流规则
 ---
 
-# 🎁 v2rayN 分流规则集完整搭建教程
+# 🎁 Webshare 静态住宅代理配置教程：带宽选择、前置代理与 IP 检测
 
 ![封面图](../../assets/images/photomode_01082023_035351.jpg){ style="display:block; width:900px; max-width:100%; height:auto; margin:24px auto 14px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.16);" }
 
