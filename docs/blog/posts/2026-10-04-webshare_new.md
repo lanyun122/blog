@@ -62,7 +62,22 @@ tags:
 
 [点击查看搬瓦工 VPS](https://bandwagonhost.com/aff.php?aff=82013)
 
+## 💳 国际支付方式
 
+### 🌐 国际虚拟卡
+
+- **Bybit U 卡申请教程：**
+
+  [▶ Bybit U卡（台湾）](https://partner.bybit.com/b/148332)  
+  [▶ Bybit U卡（哈萨克斯坦）](https://partner.bybit.com/b/148332)
+
+### 🏦 实体银行卡
+
+- **招商银行万事达人民币普卡（实体借记卡）：**
+
+  [▶ 前往招商银行官方渠道申请](https://market.cmbchina.com/MPage/online/240909170402139/wsdsjk/index.html)
+
+  > 打开招商银行 App，搜索“万事达普卡”，按照页面提示提交申请。
 
 ---
 
