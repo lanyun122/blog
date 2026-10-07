@@ -27,16 +27,18 @@ except ImportError:  # 本地只运行脚本、尚未安装 MkDocs 依赖时仍�
 # 1. 节点原料大厂 (十万百万级池子同时抓取)
 # ==========================================
 NODE_SOURCES = [
+    "https://735754647.github.io/Free-Nodes/v2ray-raw.txt",
+    "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt",
+    "https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt",
+    "https://raw.githubusercontent.com/trikiman/vlessfilter/main/subs/all.txt",
     "https://raw.githubusercontent.com/anaer/Sub/main/clash.yaml",
     "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub",
     "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt",
-    "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt",
-    "https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt",
     "https://raw.githubusercontent.com/mrdevmohamed/v2ray-configs/main/Sub1.txt",
     "https://raw.githubusercontent.com/MustafaBaqer/VestraNet-Nodes/main/protocols/vless.txt",
     "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vless.txt",
-    "https://raw.githubusercontent.com/trikiman/vlessfilter/main/subs/all.txt",
 ]
+SOURCE_PRIORITY = {source_url: index for index, source_url in enumerate(NODE_SOURCES)}
 
 POSTS_DIR = "docs/nodes/posts"
 PASSWORD_FILE = "scripts/passwords.json"
@@ -51,8 +53,8 @@ PROBE_ATTEMPTS = 2
 MIN_VERIFIED_NODES = 2
 MAX_PROBE_RESPONSE_BYTES = 128 * 1024
 PROBE_TARGETS = (
-    ("www.cloudflare.com", 80, "/cdn-cgi/trace"),
-    ("example.com", 80, "/"),
+    ("www.cloudflare.com", 80, "/cdn-cgi/trace", (b"fl=", b"ip=", b"colo=")),
+    ("example.com", 80, "/", (b"Example Domain",)),
 )
 
 URI_SCHEMES = ("vmess", "vless", "trojan", "ss", "hysteria2", "hy2")
@@ -518,7 +520,7 @@ def _websocket_frame(payload, opcode=0x2):
     return header + mask + masked
 
 
-def _read_websocket_payload(sock):
+def _read_websocket_payload(sock, expected_markers):
     payloads = []
     total = 0
     while total < MAX_PROBE_RESPONSE_BYTES:
@@ -536,7 +538,7 @@ def _read_websocket_payload(sock):
         if mask:
             payload = bytes(value ^ mask[index % 4] for index, value in enumerate(payload))
         if opcode == 0x8:
-            raise ConnectionError("WebSocket 已关闭")
+            break
         if opcode == 0x9:
             sock.sendall(_websocket_frame(payload, opcode=0xA))
             continue
@@ -544,9 +546,9 @@ def _read_websocket_payload(sock):
             payloads.append(payload)
             total += len(payload)
             combined = b"".join(payloads)
-            if b"HTTP/" in combined:
+            if b"HTTP/" in combined and all(marker in combined for marker in expected_markers):
                 return combined
-    raise ValueError("未收到有效的代理响应")
+    return b"".join(payloads)
 
 
 def _probe_settings(candidate):
@@ -656,9 +658,9 @@ def _proxy_request(candidate, target_host, target_port, target_path):
     return request_header + http_request
 
 
-def _read_proxy_response(sock, websocket):
+def _read_proxy_response(sock, websocket, expected_markers):
     if websocket:
-        data = _read_websocket_payload(sock)
+        data = _read_websocket_payload(sock, expected_markers)
     else:
         chunks = []
         total = 0
@@ -668,21 +670,26 @@ def _read_proxy_response(sock, websocket):
                 break
             chunks.append(chunk)
             total += len(chunk)
-            if b"HTTP/" in b"".join(chunks):
+            combined = b"".join(chunks)
+            if b"HTTP/" in combined and all(marker in combined for marker in expected_markers):
                 break
         data = b"".join(chunks)
     if b"HTTP/" not in data:
         raise ConnectionError("代理未返回 HTTP 响应")
+    if not all(marker in data for marker in expected_markers):
+        raise ConnectionError("仅收到伪装站或回落页响应，代理转发未成功")
+    return data
 
 
 def _probe_proxy_once(candidate, target):
     network, use_tls, server_name, ws_host, ws_path = _probe_settings(candidate)
+    target_host, target_port, target_path, expected_markers = target
     started = time.perf_counter()
     sock = _open_probe_socket(candidate, network, use_tls, server_name, ws_host, ws_path)
     try:
-        payload = _proxy_request(candidate, *target)
+        payload = _proxy_request(candidate, target_host, target_port, target_path)
         sock.sendall(_websocket_frame(payload) if network == "ws" else payload)
-        _read_proxy_response(sock, websocket=network == "ws")
+        _read_proxy_response(sock, websocket=network == "ws", expected_markers=expected_markers)
         return (time.perf_counter() - started) * 1000
     finally:
         sock.close()
@@ -811,11 +818,19 @@ def fetch_and_clean_nodes():
         except (NotImplementedError, ValueError):
             continue
         candidates.append(candidate)
-    candidates.sort(key=lambda item: (-len(item.sources), _stable_tiebreaker(item)))
+    probeable_total = len(candidates)
+    candidates.sort(
+        key=lambda item: (
+            min(SOURCE_PRIORITY.get(source, len(SOURCE_PRIORITY)) for source in item.sources),
+            -len(item.sources),
+            _stable_tiebreaker(item),
+        )
+    )
     candidates = candidates[:MAX_PROBE_CANDIDATES]
     print(
         f"📦 共提取 {extracted_total} 条；严格解析和规范去重后 "
-        f"{len(parsed_by_key)} 条，其中 {len(candidates)} 条可做端到端检测。"
+        f"{len(parsed_by_key)} 条，其中 {probeable_total} 条可做端到端检测，"
+        f"本次按来源优先级检测 {len(candidates)} 条。"
     )
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=PROBE_WORKERS) as executor:
