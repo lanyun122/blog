@@ -7,7 +7,9 @@ import json
 import os
 import re
 import socket
+import ssl
 import statistics
+import struct
 import time
 import urllib.error
 import urllib.parse
@@ -25,32 +27,35 @@ except ImportError:  # 本地只运行脚本、尚未安装 MkDocs 依赖时仍�
 # 1. 节点原料大厂 (十万百万级池子同时抓取)
 # ==========================================
 NODE_SOURCES = [
-    "https://raw.githubusercontent.com/XHAO05/freevpn/main/all.txt",
-    "https://raw.githubusercontent.com/tbbatbb/Proxy/master/dist/v2ray.config.txt",
     "https://raw.githubusercontent.com/anaer/Sub/main/clash.yaml",
     "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub",
-    "https://raw.githubusercontent.com/aiboboxx/v2rayfree/main/v2",
     "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt",
-    "https://raw.githubusercontent.com/vfreefly/vfreefly/main/sub",
-    "https://raw.githubusercontent.com/mfuu/v2ray/master/v2ray",
-    "https://raw.githubusercontent.com/yokingma/clash_node/master/all.txt",
-    "https://raw.githubusercontent.com/Jetyu/V2Ray-Subscribe/master/V2Ray.txt"
+    "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt",
+    "https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt",
+    "https://raw.githubusercontent.com/mrdevmohamed/v2ray-configs/main/Sub1.txt",
+    "https://raw.githubusercontent.com/MustafaBaqer/VestraNet-Nodes/main/protocols/vless.txt",
+    "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vless.txt",
+    "https://raw.githubusercontent.com/trikiman/vlessfilter/main/subs/all.txt",
 ]
 
 POSTS_DIR = "docs/nodes/posts"
 PASSWORD_FILE = "scripts/passwords.json"
 MAX_NODES = 40
-MIN_NODES = 10
 MAX_SOURCE_BYTES = 8 * 1024 * 1024
-MAX_NODES_PER_SOURCE = 180
+MAX_NODES_PER_SOURCE = 600
 MAX_PROBE_CANDIDATES = 600
 FETCH_WORKERS = 6
 PROBE_WORKERS = 48
-PROBE_TIMEOUT_SECONDS = 3.0
+PROBE_TIMEOUT_SECONDS = 6.0
 PROBE_ATTEMPTS = 2
+MIN_VERIFIED_NODES = 2
+MAX_PROBE_RESPONSE_BYTES = 128 * 1024
+PROBE_TARGETS = (
+    ("www.cloudflare.com", 80, "/cdn-cgi/trace"),
+    ("example.com", 80, "/"),
+)
 
 URI_SCHEMES = ("vmess", "vless", "trojan", "ss", "hysteria2", "hy2")
-TCP_SCHEMES = {"vmess", "vless", "trojan", "ss"}
 URI_PATTERN = re.compile(
     rf"(?i)(?:{'|'.join(URI_SCHEMES)})://[^\s<>\"']+"
 )
@@ -475,38 +480,230 @@ def _resolve_public_endpoints(host, port):
     return endpoints
 
 
+def _recv_exact(sock, size):
+    chunks = []
+    remaining = size
+    while remaining:
+        chunk = sock.recv(remaining)
+        if not chunk:
+            raise ConnectionError("连接提前关闭")
+        chunks.append(chunk)
+        remaining -= len(chunk)
+    return b"".join(chunks)
+
+
+def _recv_until(sock, marker, limit=64 * 1024):
+    data = bytearray()
+    while marker not in data:
+        chunk = sock.recv(min(4096, limit - len(data)))
+        if not chunk:
+            raise ConnectionError("连接提前关闭")
+        data.extend(chunk)
+        if len(data) >= limit:
+            raise ValueError("响应头过大")
+    return bytes(data)
+
+
+def _websocket_frame(payload, opcode=0x2):
+    """客户端 WebSocket 帧必须带掩码。"""
+    mask = os.urandom(4)
+    length = len(payload)
+    if length < 126:
+        header = bytes((0x80 | opcode, 0x80 | length))
+    elif length <= 0xFFFF:
+        header = bytes((0x80 | opcode, 0x80 | 126)) + struct.pack("!H", length)
+    else:
+        header = bytes((0x80 | opcode, 0x80 | 127)) + struct.pack("!Q", length)
+    masked = bytes(value ^ mask[index % 4] for index, value in enumerate(payload))
+    return header + mask + masked
+
+
+def _read_websocket_payload(sock):
+    payloads = []
+    total = 0
+    while total < MAX_PROBE_RESPONSE_BYTES:
+        first, second = _recv_exact(sock, 2)
+        opcode = first & 0x0F
+        length = second & 0x7F
+        if length == 126:
+            length = struct.unpack("!H", _recv_exact(sock, 2))[0]
+        elif length == 127:
+            length = struct.unpack("!Q", _recv_exact(sock, 8))[0]
+        if length > MAX_PROBE_RESPONSE_BYTES - total:
+            raise ValueError("WebSocket 响应过大")
+        mask = _recv_exact(sock, 4) if second & 0x80 else b""
+        payload = _recv_exact(sock, length)
+        if mask:
+            payload = bytes(value ^ mask[index % 4] for index, value in enumerate(payload))
+        if opcode == 0x8:
+            raise ConnectionError("WebSocket 已关闭")
+        if opcode == 0x9:
+            sock.sendall(_websocket_frame(payload, opcode=0xA))
+            continue
+        if opcode in {0x0, 0x1, 0x2}:
+            payloads.append(payload)
+            total += len(payload)
+            combined = b"".join(payloads)
+            if b"HTTP/" in combined:
+                return combined
+    raise ValueError("未收到有效的代理响应")
+
+
+def _probe_settings(candidate):
+    if candidate.scheme not in {"vless", "trojan"}:
+        raise NotImplementedError("当前无法对该协议做无客户端端到端检测")
+
+    parsed = urllib.parse.urlsplit(candidate.uri)
+    query = _query_dict(parsed.query)
+    network = query.get("type", "tcp").lower()
+    if network not in {"tcp", "ws"}:
+        raise NotImplementedError(f"暂不支持 {network} 传输的端到端检测")
+    if query.get("flow"):
+        raise NotImplementedError("暂不支持 XTLS flow 的端到端检测")
+
+    default_security = "tls" if candidate.scheme == "trojan" else "none"
+    security = query.get("security", default_security).lower()
+    if security == "reality":
+        raise NotImplementedError("REALITY 必须由完整客户端检测")
+    if security not in {"none", "tls"}:
+        raise NotImplementedError(f"暂不支持 {security} 安全层")
+
+    ws_host = (query.get("host") or query.get("sni") or candidate.host).split(",", 1)[0].strip()
+    server_name = (query.get("sni") or ws_host or candidate.host).strip()
+    ws_path = query.get("path") or "/"
+    if not ws_path.startswith("/"):
+        ws_path = f"/{ws_path}"
+    return network, security == "tls", server_name, ws_host, ws_path
+
+
+def _open_probe_socket(candidate, network, use_tls, server_name, ws_host, ws_path):
+    endpoints = _resolve_public_endpoints(candidate.host, candidate.port)
+    if not endpoints:
+        raise OSError("DNS 返回了非公网地址")
+
+    last_error = OSError("连接失败")
+    for family, socktype, proto, sockaddr, ip_text in endpoints:
+        sock = None
+        try:
+            sock = socket.socket(family, socktype, proto)
+            sock.settimeout(PROBE_TIMEOUT_SECONDS)
+            sock.connect(sockaddr)
+            candidate.resolved_ip = ip_text
+
+            if use_tls:
+                context = ssl.create_default_context()
+                if network == "ws":
+                    context.set_alpn_protocols(["http/1.1"])
+                sock = context.wrap_socket(sock, server_hostname=server_name)
+                sock.settimeout(PROBE_TIMEOUT_SECONDS)
+
+            if network == "ws":
+                key = base64.b64encode(os.urandom(16)).decode("ascii")
+                request = (
+                    f"GET {ws_path} HTTP/1.1\r\n"
+                    f"Host: {ws_host}\r\n"
+                    "Upgrade: websocket\r\n"
+                    "Connection: Upgrade\r\n"
+                    f"Sec-WebSocket-Key: {key}\r\n"
+                    "Sec-WebSocket-Version: 13\r\n"
+                    "User-Agent: Mozilla/5.0\r\n\r\n"
+                ).encode("ascii")
+                sock.sendall(request)
+                response = _recv_until(sock, b"\r\n\r\n")
+                header_block = response.split(b"\r\n\r\n", 1)[0]
+                status_line = header_block.split(b"\r\n", 1)[0]
+                expected_accept = base64.b64encode(
+                    hashlib.sha1((key + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11").encode("ascii")).digest()
+                ).decode("ascii")
+                headers = {}
+                for line in header_block.split(b"\r\n")[1:]:
+                    name, separator, value = line.partition(b":")
+                    if separator:
+                        headers[name.decode("latin-1").strip().lower()] = value.decode("latin-1").strip()
+                if b" 101 " not in status_line or headers.get("sec-websocket-accept") != expected_accept:
+                    raise ConnectionError("WebSocket 握手失败")
+            return sock
+        except (OSError, ValueError, ssl.SSLError) as exc:
+            last_error = exc
+            if sock is not None:
+                try:
+                    sock.close()
+                except OSError:
+                    pass
+    raise last_error
+
+
+def _proxy_request(candidate, target_host, target_port, target_path):
+    target = target_host.encode("idna")
+    if len(target) > 255:
+        raise ValueError("探测域名过长")
+    domain_address = b"\x03" + bytes((len(target),)) + target
+    port = struct.pack("!H", target_port)
+    http_request = (
+        f"GET {target_path} HTTP/1.1\r\n"
+        f"Host: {target_host}\r\n"
+        "Connection: close\r\n"
+        "User-Agent: node-health-check/1.0\r\n\r\n"
+    ).encode("ascii")
+
+    if candidate.scheme == "vless":
+        # VLESS 的目标顺序是 command + port + address type + address。
+        request_header = b"\x00" + uuid.UUID(candidate.identity).bytes + b"\x00\x01" + port + domain_address
+    else:
+        # Trojan 沿用 SOCKS5 的 command + address type + address + port 顺序。
+        password_hash = hashlib.sha224(candidate.identity.encode("utf-8")).hexdigest().encode("ascii")
+        request_header = password_hash + b"\r\n\x01" + domain_address + port + b"\r\n"
+    return request_header + http_request
+
+
+def _read_proxy_response(sock, websocket):
+    if websocket:
+        data = _read_websocket_payload(sock)
+    else:
+        chunks = []
+        total = 0
+        while total < MAX_PROBE_RESPONSE_BYTES:
+            chunk = sock.recv(min(8192, MAX_PROBE_RESPONSE_BYTES - total))
+            if not chunk:
+                break
+            chunks.append(chunk)
+            total += len(chunk)
+            if b"HTTP/" in b"".join(chunks):
+                break
+        data = b"".join(chunks)
+    if b"HTTP/" not in data:
+        raise ConnectionError("代理未返回 HTTP 响应")
+
+
+def _probe_proxy_once(candidate, target):
+    network, use_tls, server_name, ws_host, ws_path = _probe_settings(candidate)
+    started = time.perf_counter()
+    sock = _open_probe_socket(candidate, network, use_tls, server_name, ws_host, ws_path)
+    try:
+        payload = _proxy_request(candidate, *target)
+        sock.sendall(_websocket_frame(payload) if network == "ws" else payload)
+        _read_proxy_response(sock, websocket=network == "ws")
+        return (time.perf_counter() - started) * 1000
+    finally:
+        sock.close()
+
+
 def probe_candidate(candidate):
-    if candidate.scheme not in TCP_SCHEMES:
-        candidate.probe_error = "该协议需要真实客户端进行 UDP/协议级检测"
+    """通过节点本身访问公共站点；成功才算可用，不再把“端口开放”当作节点可用。"""
+    try:
+        _probe_settings(candidate)
+    except (NotImplementedError, ValueError) as exc:
+        candidate.probe_error = str(exc)
         return candidate
 
     latencies = []
-    last_error = "连接失败"
-    try:
-        endpoints = _resolve_public_endpoints(candidate.host, candidate.port)
-        if not endpoints:
-            candidate.probe_error = "DNS 返回了非公网地址"
-            return candidate
-    except (OSError, ValueError) as exc:
-        candidate.probe_error = f"DNS 失败: {type(exc).__name__}"
-        return candidate
-
-    for _ in range(PROBE_ATTEMPTS):
-        connected = False
-        for family, socktype, proto, sockaddr, ip_text in endpoints:
-            started = time.perf_counter()
-            try:
-                with socket.socket(family, socktype, proto) as sock:
-                    sock.settimeout(PROBE_TIMEOUT_SECONDS)
-                    sock.connect(sockaddr)
-                latencies.append((time.perf_counter() - started) * 1000)
-                candidate.resolved_ip = ip_text
-                connected = True
-                break
-            except OSError as exc:
-                last_error = type(exc).__name__
-        if not connected:
-            continue
+    last_error = "端到端连接失败"
+    for attempt in range(PROBE_ATTEMPTS):
+        target = PROBE_TARGETS[attempt % len(PROBE_TARGETS)]
+        try:
+            latencies.append(_probe_proxy_once(candidate, target))
+        except (OSError, ValueError, ssl.SSLError, TimeoutError) as exc:
+            last_error = f"{type(exc).__name__}: {str(exc)[:100]}"
 
     candidate.successful_probes = len(latencies)
     if latencies:
@@ -564,7 +761,7 @@ def _select_diverse_nodes(candidates):
 
 
 def fetch_and_clean_nodes():
-    """抓取、解码、严格解析、规范去重，并进行基础公网 TCP 连通性预筛选。"""
+    """抓取、解码、严格解析、去重，并进行真实代理出站检测。"""
     print(f"⏳ 正在并发抓取 {len(NODE_SOURCES)} 个公开节点源...")
     with concurrent.futures.ThreadPoolExecutor(max_workers=FETCH_WORKERS) as executor:
         futures = [
@@ -606,12 +803,19 @@ def fetch_and_clean_nodes():
     if successful_sources == 0:
         raise RuntimeError("所有节点源均抓取失败，已停止发布，避免生成错误文章")
 
-    candidates = list(parsed_by_key.values())
+    all_candidates = list(parsed_by_key.values())
+    candidates = []
+    for candidate in all_candidates:
+        try:
+            _probe_settings(candidate)
+        except (NotImplementedError, ValueError):
+            continue
+        candidates.append(candidate)
     candidates.sort(key=lambda item: (-len(item.sources), _stable_tiebreaker(item)))
     candidates = candidates[:MAX_PROBE_CANDIDATES]
     print(
         f"📦 共提取 {extracted_total} 条；严格解析和规范去重后 "
-        f"{len(parsed_by_key)} 条，本次最多检测 {len(candidates)} 条。"
+        f"{len(parsed_by_key)} 条，其中 {len(candidates)} 条可做端到端检测。"
     )
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=PROBE_WORKERS) as executor:
@@ -619,16 +823,15 @@ def fetch_and_clean_nodes():
 
     stable = [item for item in checked if item.successful_probes == PROBE_ATTEMPTS]
     intermittent = [item for item in checked if 0 < item.successful_probes < PROBE_ATTEMPTS]
-    probe_pool = stable if len(stable) >= MIN_NODES else stable + intermittent
-    selected = _select_diverse_nodes(probe_pool)
+    selected = _select_diverse_nodes(stable + intermittent)
 
     print(
-        f"🔎 TCP 预检：稳定通过 {len(stable)} 条，间歇通过 {len(intermittent)} 条；"
+        f"🔎 真实代理出站检测：稳定通过 {len(stable)} 条，单次通过 {len(intermittent)} 条；"
         f"按延迟和网络段去重后选出 {len(selected)} 条。"
     )
-    if len(selected) < MIN_NODES:
+    if len(selected) < MIN_VERIFIED_NODES:
         raise RuntimeError(
-            f"仅有 {len(selected)} 条节点通过最低标准（要求至少 {MIN_NODES} 条），"
+            f"仅有 {len(selected)} 条节点通过真实代理检测（要求至少 {MIN_VERIFIED_NODES} 条），"
             "已停止发布并保留上一期文章"
         )
     return "\n".join(item.uri for item in selected)
