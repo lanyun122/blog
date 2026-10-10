@@ -1,0 +1,1709 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://lanyun122.github.io/blog/blog/2026/09/24/v2rayn-routing-ruleset/">
+      
+      
+        <link rel="prev" href="../../12/muban/">
+      
+      
+        <link rel="next" href="../../../10/04/v2rayn-routing-ruleset/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>🎁 v2rayN 分流规则集完整搭建教程 - Chris的博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#v2rayn" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+  🌟 欢迎来到我的专属博客！🚀 
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../../.." title="Chris的博客" class="md-header__button md-logo" aria-label="Chris的博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Chris的博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🎁 v2rayN 分流规则集完整搭建教程
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专栏博客
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../recommend/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  推荐及工具
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="Chris的博客" class="md-nav__button md-logo" aria-label="Chris的博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Chris的博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专栏博客
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专栏博客
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    归档
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    归档
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2026/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    分类
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    分类
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/%E5%B7%A5%E5%85%B7%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工具视频教程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    视频教程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    推荐及工具
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    推荐及工具
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../../recommend/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    推荐
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    推荐
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../../tools/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详细文档
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    详细文档
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../tools/2026-03-26-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常用工具
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../tools/2026-03-26-Openclaw-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Openclaw安装、使用文档
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../tools/2026-04-25-VPS-banwagong/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Banwagong(搬瓦工VPS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#v2rayn_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⬇️ v2rayN 客户端官方下载
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔗 本期相关服务推荐
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔗 本期相关服务推荐">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚡ 极速Cloud 机场推荐
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💻 搬瓦工 VPS 推荐
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏳️ 静态住宅 IP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🆓 免费导入本期分流规则
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📌 本期教程要实现什么效果？
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    回到主页
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    元数据
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2026-09-24 00:00:00+00:00" class="md-ellipsis">2026年9月24日</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            分类于
+                            
+                              <a href="../../../../category/%E5%B7%A5%E5%85%B7%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B/">工具视频教程</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              需要 5 分钟阅读时间
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <span class="md-tag">Xray</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">v2rayN</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">分流规则</span>
+      
+    
+  </nav>
+
+
+
+<h1 id="v2rayn">🎁 v2rayN 分流规则集完整搭建教程</h1>
+<p><img alt="封面图" src="../../../../../assets/images/2026-09-24-1.png" style="display:block; width:900px; max-width:100%; height:auto; margin:24px auto 14px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.16);" /></p>
+<div style="margin: 0 0 25px; text-align: center;">
+  <a href="[https://youtu.be/FxMdpwg5tNk?si=iSx3muaX5gT7vtkQ]" target="_blank" class="md-button md-button--neutral" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 24px; font-size: 0.85rem; border-radius: 20px; text-decoration: none; font-weight: bold; border: 1px solid rgba(0,0,0,0.1); transition: all 0.3s ease;">
+    <span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 1.4em; height: 1em; background-color: #ff0000; border-radius: 0.3em; flex: 0 0 auto;">
+      <span style="display: block; width: 0; height: 0; margin-left: 0.08em; border-top: 0.27em solid transparent; border-bottom: 0.27em solid transparent; border-left: 0.44em solid #ffffff;"></span>
+    </span>
+    <span>立即观看完整视频</span>
+  </a>
+</div>
+
+<hr />
+<p><strong>本期要点：</strong> 从零搭建一套适合长期使用的 v2rayN 分流规则集，让局域网和国内流量直连，广告域名直接阻断，ChatGPT、Gemini 与流媒体统一使用美国住宅出口，交易所固定使用单独的香港节点，其余境外流量则交给当前代理节点。</p>
+<!-- more -->
+
+<h2 id="v2rayn_1">⬇️ v2rayN 客户端官方下载</h2>
+<ul>
+<li><strong>v2rayN：</strong> <a href="https://github.com/2dust/v2rayN/releases/latest">GitHub Releases 下载最新版</a></li>
+</ul>
+<h2 id="_1">🔗 本期相关服务推荐</h2>
+<h3 id="cloud">⚡ 极速Cloud 机场推荐</h3>
+<p>这是我少有见到的精品线路机场。据商家线路说明，提供电信 <strong>CN2 GIA</strong>、联通 <strong>AS9929/10099</strong>、移动 <strong>CMIN2</strong> 等优化线路，在我的使用环境中整体表现不错。</p>
+<p>它的套餐覆盖年付、季付、月付和新人体验套餐，价格也比较实惠。中秋活动期间还有 <strong>8.8 折优惠</strong>，具体优惠码为：<code>zqth</code>，适用套餐和有效期请以商家公告及结算页面为准。</p>
+<p>邀请码：<code>zwTTkkF7</code></p>
+<p>👉 <strong><a href="https://191.101.132.80/#/register?code=yMetD7Ux">点击注册极速Cloud</a></strong></p>
+<h3 id="vps">💻 搬瓦工 VPS 推荐</h3>
+<p>如果你更倾向于自己搭建节点，希望拥有独立服务器和更高的配置自由度，也可以选择搬瓦工 VPS。</p>
+<p><a href="https://bandwagonhost.com/aff.php?aff=82013">点击查看搬瓦工 VPS</a></p>
+<h3 id="ip">🏳️ 静态住宅 IP</h3>
+<ul>
+<li>👉 <strong>本期视频同款静态 IP（Webshare）：</strong> <a href="https://www.webshare.io/?referral_code=lq6qy4n0ui6c">点击跳转</a></li>
+</ul>
+<blockquote>
+<p>部分服务链接可能包含推广信息。是否购买请根据自己的实际需求决定，使用网络代理工具时也请遵守所在地法律法规及相关服务条款。</p>
+</blockquote>
+<hr />
+<h2 id="_2">🆓 免费导入本期分流规则</h2>
+<p>本期使用的 v2rayN 分流规则集已经免费开源到 GitHub，项目主页提供规则地址及导入说明：</p>
+<p>👉 <strong><a href="https://github.com/lanyun122/v2rayN-Smart-Routing">点击进入 v2rayN Smart Routing 项目</a></strong></p>
+<p>进入项目后复制规则地址，在 v2rayN 的路由设置中通过订阅 URL 导入即可。</p>
+<blockquote>
+<p>⭐ 这套规则可以直接免费使用，点亮 Star 并不是使用条件。如果项目确实帮助到了你，我想真诚地邀请你为项目点亮一个 <strong>Star</strong>。我希望参与 Codex 后续面向 GitHub 创作者的相关活动，你的支持对我非常重要；我也会继续免费维护和分享实用内容，期待和大家互相帮助、共同成长。</p>
+</blockquote>
+<hr />
+<h2 id="_3">📌 本期教程要实现什么效果？</h2>
+<p>这期教程不是简单地让 v2rayN“能够联网”，而是搭建一套结构清晰、便于维护的分流规则集。</p>
+<p>最终效果如下：</p>
+<ul>
+<li>路由器、打印机、NAS 等局域网设备保持直连</li>
+<li>常见广告和跟踪域名直接阻断</li>
+<li>ChatGPT 与 Gemini 使用美国策略组，并通过固定的美国住宅 IP 出口访问</li>
+<li>YouTube、Netflix、Disney+、HBO、Prime Video、Spotify、Twitch 等流媒体使用同一个美国策略组</li>
+<li>交易所固定使用一个稳定的香港节点，避免出口 IP 频繁变化</li>
+<li>国内域名和国内 IP 自动直连</li>
+<li>其他没有命中特殊规则的流量，交给当前活动代理节点</li>
+</ul>
+<p>整套流量路径可以简单理解为：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>局域网设备                 → direct
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>广告域名                   → block
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>ChatGPT / Gemini           → 美国策略组 → 美国住宅落地
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>YouTube / Netflix 等流媒体 → 美国策略组 → 美国住宅落地
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>交易所                     → 固定香港节点
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>国内网站和国内 IP          → direct
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>其他未分类流量             → proxy（当前活动节点）
+</span></code></pre></div>
+<p>本文以 v2rayN 7.x 为基础演示。不同小版本的按钮名称和界面位置可能略有差异，但规则的匹配逻辑基本相同。</p>
+<hr />
+<h1 id="_4">第一部分：先理解规则的基本逻辑</h1>
+<h2 id="outboundtag">一、<code>outboundTag</code> 是什么？</h2>
+<p><code>outboundTag</code> 决定一条规则命中以后，流量应该从哪里出去。</p>
+<h3 id="direct"><code>direct</code>：直连</h3>
+<p>不经过代理节点，直接使用本地网络访问，适合国内网站、路由器后台、打印机、NAS 和其他局域网设备。</p>
+<h3 id="proxy"><code>proxy</code>：当前代理</h3>
+<p>交给 v2rayN 主界面当前选中的活动节点，适合作为最后的兜底出口。切换主界面的活动节点以后，命中 <code>proxy</code> 的普通流量也会随之切换。</p>
+<h3 id="block"><code>block</code>：阻断</h3>
+<p>直接拒绝对应请求，适合广告、跟踪域名以及明确不希望访问的目标。</p>
+<p>需要注意，<code>block</code> 只能阻断相应网络请求，不能像浏览器广告扩展一样自动清理网页里的广告框、空白区域和弹窗。</p>
+<h3 id="_5">指定节点或策略组</h3>
+<p>除了 <code>direct</code>、<code>proxy</code> 和 <code>block</code>，还可以点击“选择配置”，把流量交给某个固定节点或策略组。</p>
+<p>本教程会使用：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>美国策略组   → ChatGPT、Gemini、流媒体
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>固定香港节点 → 交易所
+</span></code></pre></div>
+<hr />
+<h2 id="geosite-geoip">二、Geosite 和 GeoIP 有什么区别？</h2>
+<p>Geosite 按照域名分类，例如：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>geosite:cn
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>geosite:private
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>geosite:openai
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>geosite:category-ads-all
+</span></code></pre></div>
+<p>GeoIP 按照目标 IP 分类，例如：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>geoip:cn
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>geoip:private
+</span></code></pre></div>
+<p>两者并不重复。例如打印机既可能通过 <code>printer.local</code> 访问，也可能直接通过 <code>192.168.1.100</code> 访问，因此局域网规则需要同时覆盖域名和 IP。</p>
+<p>在 v2rayN 的同一个规则编辑窗口中，可以同时填写 Domain 和 IP。保存时 v2rayN 会生成对应的域名规则和 IP 规则，不需要在界面上手动拆成两条。</p>
+<hr />
+<h2 id="_6">三、创建新的规则集</h2>
+<ol>
+<li>打开 v2rayN 的“设置”。</li>
+<li>进入“路由设置”。</li>
+<li>新建一份规则集，或者复制一份现有规则集后再修改。</li>
+<li>建议命名为：</li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>V4-完整智能分流
+</span></code></pre></div>
+<ol>
+<li>如果使用 Xray Core，将顶部“域名解析策略”设置为：</li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>IPIfNonMatch
+</span></code></pre></div>
+<p>它表示域名规则没有匹配时，再把域名解析为 IP，继续尝试 <code>geoip:cn</code> 等 IP 规则。</p>
+<p>不要删除自带的默认规则集，出现问题时可以快速恢复。</p>
+<hr />
+<h2 id="_7">四、规则顺序为什么重要？</h2>
+<p>v2rayN 会从上到下检查规则，命中第一条符合条件的规则后就停止继续匹配。</p>
+<p>本教程最终采用下面的顺序：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">排序</th>
+<th>规则</th>
+<th>出站方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td>局域网直连</td>
+<td><code>direct</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>UDP 443 阻断（可选）</td>
+<td><code>block</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td>广告过滤</td>
+<td><code>block</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td>GPT</td>
+<td>美国策略组</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td>Gemini</td>
+<td>美国策略组</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td>流媒体</td>
+<td>美国策略组</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td>交易所</td>
+<td>固定香港节点</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td>国内直连</td>
+<td><code>direct</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td>最终代理</td>
+<td><code>proxy</code></td>
+</tr>
+</tbody>
+</table>
+<p>核心原则是：局域网优先保护，特殊服务使用指定出口，国内流量保持直连，最终代理必须放在最后。</p>
+<hr />
+<h1 id="_8">第二部分：准备专用出口</h1>
+<h2 id="_9">五、准备美国策略组和住宅落地</h2>
+<p>ChatGPT、Gemini 和流媒体共用一个美国策略组，不需要创建三个重复的策略组。</p>
+<p>推荐路径是：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>应用程序
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  → 美国策略组自动选择一个可用的美国入口节点
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>  → 固定美国住宅落地节点
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>  → 目标网站
+</span></code></pre></div>
+<h3 id="1">1. 准备住宅落地节点</h3>
+<p>先确保美国住宅代理已经作为可选择的配置存在，并设置一个唯一且容易识别的别名：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>美国住宅落地
+</span></code></pre></div>
+<h3 id="2">2. 为美国入口节点设置落地代理</h3>
+<p>在用于 AI 和流媒体的订阅分组或配置分组中，将“落地代理别名”设置为：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>美国住宅落地
+</span></code></pre></div>
+<p>不同版本的 v2rayN 入口位置可能略有差异。如果看不到“落地代理别名”，请先确认当前 Core 和节点协议支持代理链。</p>
+<h3 id="3">3. 创建美国策略组</h3>
+<p>进入策略组设置后添加：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>别名：美国策略组
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>策略类型：最稳定 或 最低延迟
+</span></code></pre></div>
+<p>通过订阅别名或正则表达式筛选美国入口节点，例如：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>美国
+</span></code></pre></div>
+<p>“最低延迟”切换更积极；“最稳定”更适合希望减少入口变化的用户。无论选择哪个美国入口，最终都应通过固定的美国住宅落地访问目标网站。</p>
+<blockquote>
+<p>仅把普通美国机房节点放进策略组，并不会自动变成住宅 IP。必须正确配置住宅落地，最终出口才会显示为住宅 IP。</p>
+</blockquote>
+<hr />
+<h2 id="_10">六、准备固定香港交易所节点</h2>
+<p>交易所不建议使用会自动切换出口的最低延迟策略组。</p>
+<p>频繁更换 IP、运营商或地区，可能触发异地登录提醒、二次验证、临时限制登录或交易、提现安全审核，以及 API IP 白名单失效。</p>
+<p>因此建议选择一个长期稳定、出口位置一致的香港节点，并设置清晰别名：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>香港交易所专用
+</span></code></pre></div>
+<p>后面的交易所规则直接选择这个固定节点，而不是会自动切换的香港策略组。</p>
+<blockquote>
+<p>固定节点只能减少出口变化，不能保证不会触发平台风控。登录、交易和提现前仍应核对出口 IP，并遵守交易所服务条款和当地规定。</p>
+</blockquote>
+<hr />
+<h1 id="_11">第三部分：按照顺序逐条添加规则</h1>
+<p>除了特别说明的字段，其余 <code>port</code>、<code>protocol</code>、<code>inboundTag</code>、<code>network</code>、IP 和进程栏均保持空白。</p>
+<h2 id="1_1">七、规则 1：局域网直连</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>别名：局域网直连
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>outboundTag：direct
+</span></code></pre></div>
+<p>Domain：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>geosite:private,domain:local,domain:lan
+</span></code></pre></div>
+<p>IP 或 IP CIDR：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>geoip:private,224.0.0.0/4,255.255.255.255/32,ff00::/8
+</span></code></pre></div>
+<p>这一个界面规则即可覆盖局域网域名、私有 IP、广播和组播流量，避免路由器、打印机、NAS 和设备发现请求绕到代理服务器。</p>
+<hr />
+<h2 id="2udp-443">八、规则 2：UDP 443 阻断（可选）</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>别名：UDP 443阻断
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>outboundTag：block
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>port：443
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>network：udp
+</span></code></pre></div>
+<p>浏览器可能通过 UDP 443 使用 QUIC/HTTP/3。阻断后，浏览器通常会回退到 TCP 443，更容易按照普通代理规则处理。</p>
+<p>这条规则不是所有用户都必须开启：</p>
+<ul>
+<li>普通系统代理以及常见 TCP、VLESS、VMess、Trojan 场景，可以先保持开启。</li>
+<li>如果开启 TUN，并且需要 QUIC、Hysteria2、TUIC 或其他 UDP 功能，应关闭后对比测试。</li>
+<li>如果语音、视频、游戏或网页出现异常，也可以先临时关闭它排查。</li>
+</ul>
+<p>如果决定启用，就应放在局域网直连之后、其他互联网规则之前；否则前面的流媒体域名规则可能会先命中，使 UDP 443 阻断失去作用。</p>
+<hr />
+<h2 id="3_1">九、规则 3：广告过滤</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>别名：广告过滤
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>outboundTag：block
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>Domain：geosite:category-ads-all
+</span></code></pre></div>
+<p>这条规则主要用于阻断独立广告域名和跟踪域名。如果广告与网页正文共用一个域名，或者网站自己提供广告内容，单靠 v2rayN 无法精确删除广告元素。想清理网页中的广告框、空白区域和弹窗，仍建议搭配浏览器广告拦截扩展。</p>
+<hr />
+<h2 id="4gpt">十、规则 4：GPT 使用美国策略组</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>别名：GPT
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>outboundTag：选择配置 → 美国策略组
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>Domain：geosite:openai
+</span></code></pre></div>
+<p>不要把 <code>outboundTag</code> 误选成某个普通美国直连节点，否则它不会经过住宅落地。</p>
+<hr />
+<h2 id="5gemini">十一、规则 5：Gemini 使用美国策略组</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>别名：Gemini
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>outboundTag：选择配置 → 美国策略组
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>Domain：geosite:google-gemini
+</span></code></pre></div>
+<p>GPT 和 Gemini 虽然共用美国策略组，但保留两条独立规则更便于以后分别修改、暂停和排查。</p>
+<hr />
+<h2 id="6">十二、规则 6：流媒体使用美国策略组</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>别名：流媒体
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>outboundTag：选择配置 → 美国策略组
+</span></code></pre></div>
+<p>Domain：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>geosite:youtube,geosite:netflix,geosite:disney,geosite:hbo,geosite:primevideo,geosite:spotify,geosite:twitch
+</span></code></pre></div>
+<p>输入框会把这些内容显示成一整段并自动换行，这是正常现象。只要使用英文逗号 <code>,</code> 分隔即可，不要改成中文逗号。</p>
+<p>这条规则已经包含 YouTube，因此不需要再创建单独的“YouTube 专用”策略组和路由规则。</p>
+<hr />
+<h2 id="7">十三、规则 7：交易所固定使用香港节点</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>别名：交易所
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>outboundTag：选择配置 → 香港交易所专用
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>Domain：geosite:category-cryptocurrency
+</span></code></pre></div>
+<p><code>geosite:category-cryptocurrency</code> 是较宽泛的加密货币服务分类，除了交易所，也可能包含行情、钱包和其他相关网站。</p>
+<p>如果只希望少数交易所走香港节点，可以改为手动填写对应域名，例如：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>domain:example-exchange.com,domain:example-exchange-cdn.com
+</span></code></pre></div>
+<p>不要为交易所选择自动切换的最低延迟策略组。固定香港节点能够尽量保持出口地区和 IP 稳定，降低因频繁变动触发安全验证的概率。</p>
+<hr />
+<h2 id="8">十四、规则 8：国内直连</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>别名：国内直连
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>outboundTag：direct
+</span></code></pre></div>
+<p>Domain：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>geosite:cn
+</span></code></pre></div>
+<p>IP 或 IP CIDR：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>geoip:cn
+</span></code></pre></div>
+<p>域名和 IP 可以填写在同一个界面规则中，不需要拆成“国内域名直连”和“国内 IP 直连”两条。</p>
+<p>由于 GPT、Gemini、流媒体和交易所都排在国内直连前面，即使某些服务使用了特殊 CDN，也会优先尝试命中相应的专用规则。</p>
+<hr />
+<h2 id="9">十五、规则 9：最终代理</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>别名：最终代理
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>outboundTag：proxy
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>network：tcp,udp
+</span></code></pre></div>
+<p>Domain、IP、端口、协议、<code>inboundTag</code> 和进程全部留空。</p>
+<p>“最终代理”是一条兜底规则：前面所有规则都没有命中时，剩余流量统一交给 v2rayN 主界面当前选中的活动节点。</p>
+<p>例如 X、GitHub 或其他未单独分类的境外网站，通常会落到这条规则。它必须放在整个列表的最后，否则会提前接管流量，导致后面的规则失效。</p>
+<hr />
+<h2 id="_12">十六、最终规则顺序核对</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>1. 局域网直连     → direct
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>2. UDP 443阻断    → block（可选）
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>3. 广告过滤       → block
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>4. GPT            → 美国策略组
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>5. Gemini         → 美国策略组
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>6. 流媒体         → 美国策略组
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>7. 交易所         → 固定香港节点
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>8. 国内直连       → direct
+</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>9. 最终代理       → proxy
+</span></code></pre></div>
+<hr />
+<h1 id="_13">第四部分：应用并验证分流结果</h1>
+<h2 id="_14">十七、启用规则集</h2>
+<ol>
+<li>保存内层规则和外层规则集。</li>
+<li>返回 v2rayN 主界面。</li>
+<li>将当前路由规则切换为 <code>V4-完整智能分流</code>。</li>
+<li>重启 v2rayN 服务。</li>
+<li>重新开启系统代理；只有确实需要全局接管时再使用 TUN。</li>
+</ol>
+<p>普通系统代理只接管遵循 Windows 系统代理设置的软件。TUN 会接管更多 TCP 和 UDP 流量，但也更容易与游戏加速器、其他 VPN 和虚拟网卡发生冲突。</p>
+<hr />
+<h2 id="_15">十八、最简单的出口验证方法</h2>
+<p>仅看到网站能够打开，并不能证明它使用了正确出口。可以通过临时添加 IP 查询网站的方法验证。</p>
+<h3 id="_16">验证美国住宅出口</h3>
+<ol>
+<li>在主界面选中一个非美国节点，例如日本节点。</li>
+<li>临时在 GPT 规则的 Domain 末尾添加：</li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>domain:ipinfo.io
+</span></code></pre></div>
+<ol>
+<li>打开 <code>https://ipinfo.io</code>。</li>
+<li>页面应显示美国住宅出口，而不是主界面当前选择的日本节点。</li>
+<li>验证后删除 <code>domain:ipinfo.io</code>，避免以后查询出口时造成误判。</li>
+</ol>
+<h3 id="_17">验证固定香港交易所出口</h3>
+<ol>
+<li>临时在交易所规则的 Domain 末尾添加：</li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>domain:ip.sb
+</span></code></pre></div>
+<ol>
+<li>打开 <code>https://ip.sb</code>。</li>
+<li>页面应显示固定香港节点的出口 IP。</li>
+<li>多次重启服务并复查，出口 IP 应保持一致。</li>
+<li>验证后删除临时测试域名。</li>
+</ol>
+<p>访问另一个没有加入特殊规则的 IP 查询网站时，结果应显示主界面当前活动节点的出口，这说明“最终代理”正在生效。</p>
+<hr />
+<h2 id="_18">十九、通过日志检查匹配结果</h2>
+<table>
+<thead>
+<tr>
+<th>测试目标</th>
+<th>预期出口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>路由器、打印机、NAS</td>
+<td><code>direct</code></td>
+</tr>
+<tr>
+<td>广告测试域名</td>
+<td><code>block</code></td>
+</tr>
+<tr>
+<td>ChatGPT</td>
+<td>美国策略组</td>
+</tr>
+<tr>
+<td>Gemini</td>
+<td>美国策略组</td>
+</tr>
+<tr>
+<td>YouTube、Netflix 等</td>
+<td>美国策略组</td>
+</tr>
+<tr>
+<td>交易所</td>
+<td>固定香港节点</td>
+</tr>
+<tr>
+<td>国内网站</td>
+<td><code>direct</code></td>
+</tr>
+<tr>
+<td>普通境外网站</td>
+<td><code>proxy</code></td>
+</tr>
+</tbody>
+</table>
+<p>如果日志出现 <code>non existing outTag</code>、<code>existing tag</code> 等错误，通常说明规则引用的节点或策略组别名不存在、重复或已被修改。</p>
+<hr />
+<h1 id="_19">第五部分：常见问题</h1>
+<h2 id="1-gpt-ip">1. GPT 或流媒体仍然显示机房 IP</h2>
+<p>这通常说明规则虽然选择了美国入口节点，但代理链没有正确连接到美国住宅落地。</p>
+<p>重点检查：</p>
+<ul>
+<li><code>outboundTag</code> 是否选择了“美国策略组”</li>
+<li>美国入口节点所在分组是否设置了正确的“落地代理别名”</li>
+<li>住宅落地节点别名是否唯一且仍然存在</li>
+<li>住宅代理是否能够独立连接</li>
+</ul>
+<h2 id="2-ip">2. 交易所出口 IP 会变化</h2>
+<p>检查交易所规则是否误选了策略组、负载均衡组或会自动切换的配置。</p>
+<p>交易所规则应直接指向一个固定香港节点。节点发生故障时，建议先手动确认新节点的地区和出口 IP，再修改规则，不要让程序在多个出口之间自动跳转。</p>
+<h2 id="3_2">3. 国内网站仍然走代理</h2>
+<p>可能原因包括：</p>
+<ul>
+<li>“最终代理”排在国内直连之前</li>
+<li>顶部域名解析策略没有设置为 <code>IPIfNonMatch</code></li>
+<li>网站使用了未收录的境外 CDN</li>
+<li>当前请求没有经过这套 v2rayN 规则</li>
+<li>Geosite 或 GeoIP 数据无法读取</li>
+</ul>
+<p>可以先查看日志，再决定是否需要手动补充具体域名。</p>
+<h2 id="4">4. 广告过滤后网站打不开</h2>
+<p>可以暂时关闭“广告过滤”进行对比，查看日志中的被阻断域名，再为误伤的正常域名单独创建一条更靠前的 <code>direct</code> 或指定代理规则。</p>
+<h2 id="5">5. 网页仍显示广告框或弹窗</h2>
+<p>v2rayN 只负责阻断网络请求，不负责修改网页布局。如果广告内容与正文共用域名，或者广告框已经写在网页 HTML 中，路由规则无法把它从页面上删除，需要配合浏览器广告拦截扩展处理。</p>
+<h2 id="6_1">6. 与游戏加速器发生冲突</h2>
+<p>普通“系统代理”模式下，大多数游戏不会经过 v2rayN，通常可以与游戏加速器共存。</p>
+<p>如果同时开启 v2rayN TUN 和游戏加速器，两者可能争抢路由或虚拟网卡，导致重复代理、延迟升高、掉线或语音异常。最简单的处理方式是：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>v2rayN：保持系统代理开启
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>v2rayN TUN：关闭
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>游戏流量：交给游戏加速器
+</span></code></pre></div>
+<h2 id="7_1">7. 修改规则后没有变化</h2>
+<p>依次检查：</p>
+<ol>
+<li>是否保存了内层规则和外层规则集。</li>
+<li>主界面是否选中了正确的规则集。</li>
+<li>是否重启了 v2rayN 服务。</li>
+<li>浏览器是否仍然复用了旧连接。</li>
+<li>规则引用的节点和策略组别名是否存在。</li>
+<li>日志中是否存在 Geosite、GeoIP 或 Core 配置错误。</li>
+</ol>
+<hr />
+<h2 id="_20">📚 官方参考文档</h2>
+<ul>
+<li><a href="https://github.com/2dust/v2rayN">v2rayN GitHub 项目</a></li>
+<li><a href="https://github.com/2dust/v2rayN/wiki">v2rayN 官方 Wiki</a></li>
+<li><a href="https://github.com/2dust/v2rayN/wiki/Description-of-custom-routing-rules">v2rayN 自定义路由规则说明</a></li>
+<li><a href="https://github.com/2dust/v2rayN/wiki/Description-of-proxy-chain">v2rayN 代理链说明</a></li>
+<li><a href="https://xtls.github.io/config/routing.html">Xray 路由规则说明</a></li>
+<li><a href="https://github.com/v2fly/domain-list-community">Domain List Community</a></li>
+<li><a href="https://github.com/v2fly/geoip">GeoIP for V2Ray</a></li>
+</ul>
+<hr />
+<h2 id="_21">✅ 总结</h2>
+<p>这套规则的重点不是数量多，而是职责清晰：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>局域网流量优先直连
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>广告域名直接阻断
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>AI 和流媒体共用美国策略组及住宅落地
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>交易所固定使用单独香港节点
+</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>国内流量保持直连
+</span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>其余流量由最终代理兜底
+</span></code></pre></div>
+<p>配置完成后，应当通过日志和临时 IP 查询规则分别验证每一种出口。尤其是交易所，不要把“延迟最低”等同于“最适合长期使用”，出口稳定性通常比自动切换更重要。</p>
+<h2 id="_22">⚠️ 免责声明</h2>
+<p>本文内容仅供技术交流，请遵守当地法律法规及相关服务条款。涉及账户、交易和资金安全时，请自行核对节点出口、平台政策与风险。</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tabs", "navigation.top", "navigation.indexes", "content.tabs.link", "content.code.copy", "content.code.annotate"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

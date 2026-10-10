@@ -1,0 +1,1791 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://lanyun122.github.io/blog/blog/2026/10/04/v2rayn-routing-ruleset/">
+      
+      
+        <link rel="prev" href="../../../09/24/v2rayn-routing-ruleset/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>🎁 Webshare 静态住宅代理配置教程：带宽选择、前置代理与 IP 检测 - Chris的博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#webshare-ip" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+  🌟 欢迎来到我的专属博客！🚀 
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../../.." title="Chris的博客" class="md-header__button md-logo" aria-label="Chris的博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Chris的博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🎁 Webshare 静态住宅代理配置教程：带宽选择、前置代理与 IP 检测
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专栏博客
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../recommend/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  推荐及工具
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="Chris的博客" class="md-nav__button md-logo" aria-label="Chris的博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Chris的博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专栏博客
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专栏博客
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    归档
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    归档
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2026/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    分类
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    分类
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/%E5%B7%A5%E5%85%B7%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工具视频教程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    视频教程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    推荐及工具
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    推荐及工具
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../../recommend/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    推荐
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    推荐
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../../tools/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详细文档
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    详细文档
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../tools/2026-03-26-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常用工具
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../tools/2026-03-26-Openclaw-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Openclaw安装、使用文档
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../tools/2026-04-25-VPS-banwagong/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Banwagong(搬瓦工VPS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#v2rayn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⬇️ v2rayN 客户端官方下载
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔍 IP 质量检测工具
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔗 本期相关服务推荐
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔗 本期相关服务推荐">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ip_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏳️ 静态住宅 IP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚡ 极速Cloud 机场推荐
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💻 搬瓦工 VPS 推荐
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💳 国际支付方式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💳 国际支付方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌐 国际虚拟卡
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏦 实体银行卡
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🆓 免费导入分流规则
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ip_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么需要静态住宅 IP？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#webshare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、注册 Webshare 账号
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#webshare_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、Webshare 套餐选项怎么选择？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、Webshare 套餐选项怎么选择？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 独家性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 带宽
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 代理数量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. IP 所在地区
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 定期自动更换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 手动更换次数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 高 IP 信誉
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、完成付款并获取代理信息
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#webshare-v2rayn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、将 Webshare 接入 v2rayN
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、将 Webshare 接入 v2rayN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 创建新的分组
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-socks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 添加 SOCKS 配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 设置前置代理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#webshare-ip_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、检测并刷新 Webshare IP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ 免责声明
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    回到主页
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    元数据
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2026-10-04 00:00:00+00:00" class="md-ellipsis">2026年10月4日</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            分类于
+                            
+                              <a href="../../../../category/%E5%B7%A5%E5%85%B7%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B/">工具视频教程</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              需要 3 分钟阅读时间
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <span class="md-tag">Xray</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">v2rayN</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">分流规则</span>
+      
+    
+  </nav>
+
+
+
+<h1 id="webshare-ip">🎁 Webshare 静态住宅代理配置教程：带宽选择、前置代理与 IP 检测</h1>
+<p><img alt="封面图" src="../../../../../assets/images/2026-10-04-1.jpg" style="display:block; width:900px; max-width:100%; height:auto; margin:24px auto 14px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.16);" /></p>
+<div style="margin: 0 0 25px; text-align: center;">
+  <a href="[https://youtu.be/LdflraxfvEs?si=1IonJihvRj5nDh2N]" target="_blank" class="md-button md-button--neutral" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 24px; font-size: 0.85rem; border-radius: 20px; text-decoration: none; font-weight: bold; border: 1px solid rgba(0,0,0,0.1); transition: all 0.3s ease;">
+    <span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 1.4em; height: 1em; background-color: #ff0000; border-radius: 0.3em; flex: 0 0 auto;">
+      <span style="display: block; width: 0; height: 0; margin-left: 0.08em; border-top: 0.27em solid transparent; border-bottom: 0.27em solid transparent; border-left: 0.44em solid #ffffff;"></span>
+    </span>
+    <span>立即观看完整视频</span>
+  </a>
+</div>
+
+<hr />
+<p><strong>本期要点：</strong> 从零搭建一套适合长期使用的 v2rayN 分流规则集，让局域网和国内流量直连，广告域名直接阻断，ChatGPT、Gemini 与流媒体统一使用美国住宅出口，交易所固定使用单独的香港节点，其余境外流量则交给当前代理节点。</p>
+<!-- more -->
+
+<h2 id="v2rayn">⬇️ v2rayN 客户端官方下载</h2>
+<ul>
+<li><strong>v2rayN：</strong> <a href="https://github.com/2dust/v2rayN/releases/latest">GitHub Releases 下载最新版</a></li>
+</ul>
+<h2 id="ip">🔍 IP 质量检测工具</h2>
+<ul>
+<li>👉 <strong><a href="https://ping0.cc/">Ping0 IP 检测</a></strong></li>
+<li>👉 <strong><a href="https://ipipai.com/index-zh.html">IPIPAI IP 检测</a></strong></li>
+</ul>
+<h2 id="_1">🔗 本期相关服务推荐</h2>
+<h3 id="ip_1">🏳️ 静态住宅 IP</h3>
+<ul>
+<li>👉 <strong>本期视频同款静态 IP（Webshare）：</strong> <a href="https://www.webshare.io/?referral_code=lq6qy4n0ui6c">点击跳转</a></li>
+</ul>
+<h3 id="cloud">⚡ 极速Cloud 机场推荐</h3>
+<p>这是我少有见到的精品线路机场。据商家线路说明，提供电信 <strong>CN2 GIA</strong>、联通 <strong>AS9929/10099</strong>、移动 <strong>CMIN2</strong> 等优化线路，在我的使用环境中整体表现不错。</p>
+<p>它的套餐覆盖年付、季付、月付和新人体验套餐，价格也比较实惠。中秋活动期间还有 <strong>8.8 折优惠</strong>，具体优惠码为：<code>zqth</code>，适用套餐和有效期请以商家公告及结算页面为准。</p>
+<p>邀请码：<code>zwTTkkF7</code></p>
+<p>👉 <strong><a href="https://191.101.132.80/#/register?code=yMetD7Ux">点击注册极速Cloud</a></strong></p>
+<h3 id="vps">💻 搬瓦工 VPS 推荐</h3>
+<p>如果你更倾向于自己搭建节点，希望拥有独立服务器和更高的配置自由度，也可以选择搬瓦工 VPS。</p>
+<p><a href="https://bandwagonhost.com/aff.php?aff=82013">点击查看搬瓦工 VPS</a></p>
+<h2 id="_2">💳 国际支付方式</h2>
+<h3 id="_3">🌐 国际虚拟卡</h3>
+<ul>
+<li><strong>Bybit U 卡申请教程：</strong></li>
+</ul>
+<p><a href="https://partner.bybit.com/b/148332">▶ Bybit U卡（台湾）</a><br />
+<a href="https://partner.bybit.com/b/148332">▶ Bybit U卡（哈萨克斯坦）</a></p>
+<h3 id="_4">🏦 实体银行卡</h3>
+<ul>
+<li><strong>招商银行万事达人民币普卡（实体借记卡）：</strong></li>
+</ul>
+<p><a href="https://market.cmbchina.com/MPage/online/240909170402139/wsdsjk/index.html">▶ 前往招商银行官方渠道申请</a></p>
+<blockquote>
+<p>打开招商银行 App，搜索“万事达普卡”，按照页面提示提交申请。</p>
+</blockquote>
+<hr />
+<h2 id="_5">🆓 免费导入分流规则</h2>
+<p>v2rayN 分流规则集已经免费开源到 GitHub，项目主页提供规则地址及导入说明：</p>
+<p>👉 <strong><a href="https://github.com/lanyun122/v2rayN-Smart-Routing">点击进入 v2rayN Smart Routing 项目</a></strong></p>
+<p>进入项目后复制规则地址，在 v2rayN 的路由设置中通过订阅 URL 导入即可。</p>
+<blockquote>
+<p>⭐ 这套规则可以直接免费使用，点亮 Star 并不是使用条件。如果项目确实帮助到了你，我想真诚地邀请你为项目点亮一个 <strong>Star</strong>。我希望参与 Codex 后续面向 GitHub 创作者的相关活动，你的支持对我非常重要；我也会继续免费维护和分享实用内容，期待和大家互相帮助、共同成长。</p>
+</blockquote>
+<hr />
+<h2 id="ip_2">为什么需要静态住宅 IP？</h2>
+<p>你有没有遇到过这种情况？</p>
+<p>明明昨天 ChatGPT 还能正常使用，今天打开却又要求验证；刚登录 Gemini，过一会儿地区就发生了变化；有时甚至会提示异常活动、可疑登录或者访问被拒绝。</p>
+<p>这些问题不一定全部来自账号本身，也可能与代理出口有关。</p>
+<p>普通代理节点的出口 IP 可能频繁变化，今天显示在美国，明天就跳到了日本；有些 IP 还会被大量用户同时使用，只要其中部分用户存在滥用行为，整个 IP 的信誉都有可能受到影响。</p>
+<p>常见表现包括：</p>
+<ul>
+<li>频繁出现验证码或真人验证</li>
+<li>登录状态突然失效，需要重新登录</li>
+<li>收到异常登录或可疑活动提醒</li>
+<li>ChatGPT、Gemini 等服务的地区识别发生变化</li>
+<li>网站提示当前地区不可用</li>
+<li>IP 被识别为机房、代理或托管网络</li>
+<li>公共 IP 请求量过大，触发频率限制</li>
+<li>IP、DNS、浏览器时区之间存在明显冲突</li>
+<li>严重时，账号功能可能被临时限制</li>
+</ul>
+<p>需要说明的是，静态住宅 IP 并不能保证账号永远不会触发验证，更不能保证账号不会被封禁。平台的风控通常还会综合账号行为、设备环境、付款信息等多种因素。</p>
+<p>它的主要作用，是让我们的出口 IP 和地区保持相对稳定，减少频繁切换网络环境带来的额外验证。</p>
+<p>本期将从零开始配置一个 Webshare 静态住宅 IP，包括套餐选项、购买建议、v2rayN 接入方法，以及后续的 IP 质量检测与刷新。</p>
+<hr />
+<h2 id="webshare">一、注册 Webshare 账号</h2>
+<p>首先通过上方提供的 Webshare 注册链接进入官方网站，然后创建一个账号并完成登录。</p>
+<blockquote>
+<p>如果本站提供的是推广链接，通过该链接注册可能会给本站带来一定支持。是否购买请根据自己的实际需求决定。</p>
+</blockquote>
+<p>进入后台后，在左侧菜单中找到 <strong>Static</strong>，这里就是静态住宅代理的订阅入口。</p>
+<p>如果不习惯英文界面，可以使用浏览器自带的网页翻译功能，或者点击页面右上角的翻译选项，将页面翻译成中文。</p>
+<!-- 在这里插入 Webshare 后台 Static 入口截图 -->
+
+<p>由于我的账号之前已经订阅过相关服务，因此这里需要点击 <strong>Upgrade</strong>，重新进入套餐配置页面。新用户看到的按钮名称可能略有不同，按照实际页面显示操作即可。</p>
+<hr />
+<h2 id="webshare_1">二、Webshare 套餐选项怎么选择？</h2>
+<p>Webshare 的订阅页面包含独家性、带宽、代理数量、地区、IP 更换次数以及专业功能等选项。</p>
+<p>下面分别介绍这些选项的作用，以及适合普通个人用户的配置。</p>
+<h3 id="1">1. 独家性</h3>
+<p>独家性决定了一个 IP 大约会有多少用户共同使用。</p>
+<p>对于 ChatGPT、Gemini 以及普通网页访问，我通常选择第二档，也就是：</p>
+<blockquote>
+<p><strong>1–2 人共享</strong></p>
+</blockquote>
+<p>这个档位在价格和使用体验之间相对均衡，对于大多数个人用户已经足够。</p>
+<p>如果业务对网络环境要求较高，或者明确需要完全独占的出口，再考虑更高级别的独享套餐。</p>
+<!-- 在这里插入独家性选项截图 -->
+
+<h3 id="2">2. 带宽</h3>
+<p>带宽可以根据实际用途简单分成两类。</p>
+<table>
+<thead>
+<tr>
+<th>使用场景</th>
+<th style="text-align: right;">建议带宽</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主要使用 ChatGPT、Gemini 等文字类服务，偶尔浏览网页</td>
+<td style="text-align: right;">250GB</td>
+</tr>
+<tr>
+<td>长期作为主要上网出口、观看视频或者多设备使用</td>
+<td style="text-align: right;">1000GB</td>
+</tr>
+</tbody>
+</table>
+<p>如果平时流量不大，只希望通过固定住宅 IP 减少出口频繁变化带来的额外验证，那么选择 <strong>250GB</strong> 通常就够用了，成本也相对较低。</p>
+<p>如果准备长期把住宅 IP 作为主要上网出口，或者需要观看视频、下载文件以及多设备使用，就更建议选择 <strong>1000GB</strong>。</p>
+<p>需要注意，视频播放和大文件下载会快速消耗流量。具体应该选择多少带宽，仍然要根据自己的使用习惯决定。</p>
+<h3 id="3">3. 代理数量</h3>
+<p>在页面右下角的自定义数量框中输入：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>1
+</span></code></pre></div>
+<p>如果只是给个人设备配置一个固定出口，购买一个代理即可，没有必要一次购买多个。</p>
+<h3 id="4-ip">4. IP 所在地区</h3>
+<p>本次演示选择美国。</p>
+<p>根据我现阶段的实际测试，美国和英国的 IP 整体表现相对更稳定，因此可以优先从这两个地区中选择。</p>
+<p>不过，代理服务商的 IP 资源会不断变化，不同时间分配到的 IP 质量也可能不同，最终仍然需要通过实际检测和使用体验来判断。</p>
+<!-- 在这里插入地区选择截图 -->
+
+<h3 id="5">5. 定期自动更换</h3>
+<p>这里不选择定期自动更换。</p>
+<p>我们购买静态住宅 IP 的目的，就是让账号长期使用相对固定的出口。如果开启自动更换，IP 会按照设定周期发生变化，与我们的使用目标并不一致。</p>
+<h3 id="6">6. 手动更换次数</h3>
+<p>手动更换次数可以先选择 <strong>50 次</strong>。</p>
+<p>这样做的主要目的，是在首次分配到的 IP 质量不理想时，能够继续更换并重新检测。</p>
+<p>例如出现以下情况时，就可以考虑刷新 IP：</p>
+<ul>
+<li>多个数据库都将 IP 识别为机房或托管网络</li>
+<li>IP 的风险记录明显偏高</li>
+<li>地理位置与购买地区严重不符</li>
+<li>频繁出现验证码或访问拒绝</li>
+<li>目标服务无法正常访问</li>
+<li>延迟、丢包或连接稳定性无法接受</li>
+</ul>
+<p>有些用户会将多个数据库同时识别为住宅或 ISP 网络的结果称为“双 ISP”。不过，“双 ISP”并不是统一的官方质量标准，不能只凭一个标签判断 IP 是否可用。</p>
+<p>更稳妥的判断方式，是综合检查：</p>
+<ul>
+<li>IP 类型</li>
+<li>ASN 与运营商</li>
+<li>地理位置</li>
+<li>风险记录</li>
+<li>DNS 与 WebRTC 泄漏</li>
+<li>目标服务的实际可用性</li>
+</ul>
+<p>因此，刷新次数的作用不是盲目“刷分”，而是给我们留下筛选更合适 IP 的机会。</p>
+<h3 id="7-ip">7. 高 IP 信誉</h3>
+<p>在其他专业功能中，我主要推荐考虑：</p>
+<blockquote>
+<p><strong>高 IP 信誉</strong></p>
+</blockquote>
+<p>这项功能可以提高分配到信誉较好 IP 的概率，从而减少遇到高风险或存在大量不良记录 IP 的可能性。</p>
+<p>但它并不代表 IP 一定没有历史记录，也不能保证所有平台都不会触发验证。</p>
+<p>如果选择高 IP 信誉，可以把额外购买的手动刷新次数调整为 <strong>10 次左右</strong>。高信誉筛选与手动刷新在用途上存在一定重合，没有必要同时购买过多次数。</p>
+<p>最终可以参考下面两种配置：</p>
+<table>
+<thead>
+<tr>
+<th>配置思路</th>
+<th style="text-align: right;">高 IP 信誉</th>
+<th style="text-align: right;">手动刷新次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>依靠刷新次数自行筛选</td>
+<td style="text-align: right;">不选择</td>
+<td style="text-align: right;">50 次</td>
+</tr>
+<tr>
+<td>优先提高初始 IP 信誉</td>
+<td style="text-align: right;">选择</td>
+<td style="text-align: right;">10 次左右</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_6">三、完成付款并获取代理信息</h2>
+<p>确认套餐配置和价格后，就可以进入付款页面。</p>
+<p>Webshare 的具体付款方式可能会调整，请以结账页面当前显示的选项为准。大家可以使用自己合法持有，并且受到平台支持的国际支付方式。</p>
+<p>如果需要相关教程，可以观看我的这期视频，了解 Bybit 台区虚拟卡的注册与使用方法；也可以根据自身情况，申请招商银行等机构发行的万事达卡。</p>
+<blockquote>
+<p>使用银行卡或虚拟卡之前，请自行确认相关服务在所在地区的可用性、实名要求、费用以及平台规则。</p>
+</blockquote>
+<!-- 在这里插入虚拟卡教程链接或视频卡片 -->
+
+<p>订阅完成后，Webshare 后台会显示当前代理的连接信息，通常包括：</p>
+<ul>
+<li>IP 地址</li>
+<li>端口号</li>
+<li>用户名</li>
+<li>密码</li>
+</ul>
+<!-- 在这里插入代理信息页面截图 -->
+
+<p>这些信息相当于代理服务器的登录凭据，请不要直接分享给其他人。</p>
+<p>录制视频或截图时，也要记得遮挡真实的 IP、用户名和密码，避免代理被他人盗用。</p>
+<hr />
+<h2 id="webshare-v2rayn">四、将 Webshare 接入 v2rayN</h2>
+<p>获取代理信息后，回到 v2rayN。</p>
+<h3 id="1_1">1. 创建新的分组</h3>
+<p>首先创建一个新的分组，方便单独管理静态住宅代理。</p>
+<p>可以根据用途命名，例如：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Webshare 静态住宅
+</span></code></pre></div>
+<h3 id="2-socks">2. 添加 SOCKS 配置</h3>
+<p>点击左上角的配置选项，然后选择添加 <strong>SOCKS</strong> 协议。</p>
+<p>将 Webshare 后台提供的信息依次填入：</p>
+<table>
+<thead>
+<tr>
+<th>v2rayN 配置项</th>
+<th>Webshare 信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>地址</td>
+<td>IP 地址或服务器地址</td>
+</tr>
+<tr>
+<td>端口</td>
+<td>代理端口号</td>
+</tr>
+<tr>
+<td>用户名</td>
+<td>Webshare 用户名</td>
+</tr>
+<tr>
+<td>密码</td>
+<td>Webshare 密码</td>
+</tr>
+</tbody>
+</table>
+<!-- 在这里插入 v2rayN SOCKS 配置截图 -->
+
+<p>确认信息填写无误后保存配置。</p>
+<p>如果无法连接，优先检查以下内容：</p>
+<ul>
+<li>IP 地址是否填写正确</li>
+<li>端口号是否完整</li>
+<li>用户名和密码是否存在多余空格</li>
+<li>当前网络能否连接 Webshare</li>
+<li>Webshare 订阅是否仍处于有效状态</li>
+</ul>
+<h3 id="3_1">3. 设置前置代理</h3>
+<p>接下来点击刚刚添加的 SOCKS 配置，并选择右上角的编辑按钮。</p>
+<p>在前置代理一栏中，选择一个能够正常连接的美国节点或者美国策略集。</p>
+<p>完成后的连接关系大致如下：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>本地设备
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  ↓
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>美国节点或美国策略集
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  ↓
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>Webshare 静态住宅代理
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  ↓
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>目标网站
+</span></code></pre></div>
+<p>这样设置后，前面的节点负责连接 Webshare，而最终对外显示的出口应该是 Webshare 提供的静态住宅 IP。</p>
+<p>保存配置并重新建立连接，我们的住宅出口就基本配置完成了。</p>
+<p>不过，能够连接并不代表这个 IP 的质量一定合格。下一步还需要检查真实出口、IP 类型、地理位置、风险记录，以及是否存在 DNS 或 WebRTC 泄漏。</p>
+<hr />
+<h2 id="webshare-ip_1">五、检测并刷新 Webshare IP</h2>
+<blockquote>
+<p>本节将在实际操作并记录检测结果后补充。</p>
+</blockquote>
+<p>接下来将重点检查：</p>
+<ul>
+<li>Webshare 出口是否真正生效</li>
+<li>IPv4 与 IPv6 是否使用了不同出口</li>
+<li>IP 是否被识别为住宅或 ISP 网络</li>
+<li>ASN 和运营商信息是否合理</li>
+<li>IP 定位是否与购买地区一致</li>
+<li>DNS、WebRTC 是否泄漏原始网络</li>
+<li>IP 是否存在明显的不良历史记录</li>
+<li>ChatGPT、Gemini 等目标服务能否稳定使用</li>
+<li>什么情况下值得消耗刷新次数</li>
+<li>刷新后如何在 v2rayN 中更新配置</li>
+</ul>
+<hr />
+<h2 id="_7">总结</h2>
+<p>整个配置过程可以概括为三个步骤：</p>
+<ol>
+<li>根据实际用量选择合适的 Webshare 套餐。</li>
+<li>将 Webshare SOCKS 代理接入 v2rayN，并设置前置代理。</li>
+<li>检测真实出口和 IP 质量，不合格时再使用手动刷新次数。</li>
+</ol>
+<p>静态住宅 IP 的核心价值，是让网络出口和地区保持相对稳定，而不是提供所谓“永不风控”的保证。</p>
+<p>除了 IP 本身，平台通常还会综合浏览器指纹、系统时区、语言、设备环境、账号行为以及付款信息进行判断。因此，配置完成后不要急着直接使用，先完成一次全面检测，再决定是否保留当前 IP。</p>
+<h2 id="_8">⚠️ 免责声明</h2>
+<p>本文内容仅供技术交流，请遵守当地法律法规及相关服务条款。涉及账户、交易和资金安全时，请自行核对节点出口、平台政策与风险。</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tabs", "navigation.top", "navigation.indexes", "content.tabs.link", "content.code.copy", "content.code.annotate"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
