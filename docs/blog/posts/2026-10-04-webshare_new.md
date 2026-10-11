@@ -35,6 +35,8 @@ tags:
 ## 🔍 IP 质量检测工具
 
 - 👉 **[Ping0 IP 检测](https://ping0.cc/)**
+- 👉 **[ip.net IP 检测](https://ip.net.coffee/)**
+- 👉 **[ipok.io IP 检测](https://ipok.io/)**
 - 👉 **[IPIPAI IP 检测](https://ipipai.com/index-zh.html)**
 
 ## 🔗 本期相关服务推荐

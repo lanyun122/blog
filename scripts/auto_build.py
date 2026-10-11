@@ -24,11 +24,19 @@ except ImportError:  # 本地只运行脚本、尚未安装 MkDocs 依赖时仍�
     yaml = None
 
 # ==========================================
-# 1. 节点原料大厂 (十万百万级池子同时抓取)
+# 1. 节点来源
 # ==========================================
+# 前面的来源本身就做了真实代理转发检测或持续测速，优先给它们更多复检名额。
+# 后面的来源只作为补充池；无论上游如何标注，最终仍必须通过本脚本的端到端检测。
 NODE_SOURCES = [
+    "https://raw.githubusercontent.com/nostalume/FreeNodes/main/nodes/v2ray.txt",
     "https://735754647.github.io/Free-Nodes/v2ray-raw.txt",
+    "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/stable/v2ray-base64-0001.txt",
+    "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/stable/v2ray-base64-0002.txt",
     "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt",
+    "https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/v.txt",
+    "https://raw.githubusercontent.com/dongchengjie/airport/refs/heads/main/subs/merged/tested_within.yaml",
+    "https://raw.githubusercontent.com/freenodess/freenodess/main/nodes/v2ray-base64.txt",
     "https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/best.txt",
     "https://raw.githubusercontent.com/trikiman/vlessfilter/main/subs/all.txt",
     "https://raw.githubusercontent.com/anaer/Sub/main/clash.yaml",
@@ -38,22 +46,26 @@ NODE_SOURCES = [
     "https://raw.githubusercontent.com/MustafaBaqer/VestraNet-Nodes/main/protocols/vless.txt",
     "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vless.txt",
 ]
+PREFERRED_SOURCES = frozenset(NODE_SOURCES[:7])
 SOURCE_PRIORITY = {source_url: index for index, source_url in enumerate(NODE_SOURCES)}
 
 POSTS_DIR = "docs/nodes/posts"
 PASSWORD_FILE = "scripts/passwords.json"
-MAX_NODES = 40
+MAX_NODES = 12
 MAX_SOURCE_BYTES = 8 * 1024 * 1024
 MAX_NODES_PER_SOURCE = 600
 MAX_PROBE_CANDIDATES = 600
+PREFERRED_SOURCE_PROBE_QUOTA = 65
+FALLBACK_SOURCE_PROBE_QUOTA = 15
 FETCH_WORKERS = 6
 PROBE_WORKERS = 48
 PROBE_TIMEOUT_SECONDS = 6.0
-PROBE_ATTEMPTS = 2
-MIN_VERIFIED_NODES = 2
+PROBE_ATTEMPTS = 3
+MIN_VERIFIED_NODES = 3
 MAX_PROBE_RESPONSE_BYTES = 128 * 1024
 PROBE_TARGETS = (
     ("www.cloudflare.com", 80, "/cdn-cgi/trace", (b"fl=", b"ip=", b"colo=")),
+    ("www.gstatic.com", 80, "/generate_204", (b"204 No Content",)),
     ("example.com", 80, "/", (b"Example Domain",)),
 )
 
@@ -146,6 +158,7 @@ def fetch_from_url(index, url):
         "User-Agent": "Mozilla/5.0 (compatible; ChrisTalkNodeBuilder/2.0)",
         "Accept": "text/plain, application/yaml, */*",
         "Accept-Encoding": "identity",
+        "Cache-Control": "no-cache",
     }
     result = FetchResult(index=index, source_url=url)
 
@@ -732,13 +745,81 @@ def _network_bucket(candidate):
     return str(ipaddress.ip_network(f"{ip_value}/{prefix}", strict=False))
 
 
+def _source_label(url):
+    parsed = urllib.parse.urlsplit(url)
+    if parsed.hostname == "raw.githubusercontent.com":
+        parts = parsed.path.strip("/").split("/")
+        if len(parts) >= 2:
+            return f"{parts[0]}/{parts[1]}"
+    return parsed.hostname or url
+
+
+def _build_probe_queue(candidates):
+    """按来源配额构建检测队列，避免大源按顺序挤占全部测速名额。"""
+    source_buckets = {source: [] for source in NODE_SOURCES}
+    for candidate in candidates:
+        for source in candidate.sources:
+            if source in source_buckets:
+                source_buckets[source].append(candidate)
+
+    for bucket in source_buckets.values():
+        bucket.sort(key=lambda item: (-len(item.sources), _stable_tiebreaker(item)))
+
+    selected = []
+    selected_keys = set()
+    contributions = {}
+    for source in NODE_SOURCES:
+        quota = (
+            PREFERRED_SOURCE_PROBE_QUOTA
+            if source in PREFERRED_SOURCES
+            else FALLBACK_SOURCE_PROBE_QUOTA
+        )
+        added = 0
+        for candidate in source_buckets[source]:
+            if candidate.dedupe_key in selected_keys:
+                continue
+            selected.append(candidate)
+            selected_keys.add(candidate.dedupe_key)
+            added += 1
+            if added >= quota or len(selected) >= MAX_PROBE_CANDIDATES:
+                break
+        contributions[source] = added
+        if len(selected) >= MAX_PROBE_CANDIDATES:
+            return selected, contributions
+
+    # 某些小源不足配额时，用高质量来源的剩余候选补满，但不重复节点。
+    remainder = sorted(
+        candidates,
+        key=lambda item: (
+            -sum(source in PREFERRED_SOURCES for source in item.sources),
+            min(SOURCE_PRIORITY.get(source, len(SOURCE_PRIORITY)) for source in item.sources),
+            -len(item.sources),
+            _stable_tiebreaker(item),
+        ),
+    )
+    for candidate in remainder:
+        if candidate.dedupe_key in selected_keys:
+            continue
+        selected.append(candidate)
+        selected_keys.add(candidate.dedupe_key)
+        primary_source = min(
+            candidate.sources,
+            key=lambda source: SOURCE_PRIORITY.get(source, len(SOURCE_PRIORITY)),
+        )
+        contributions[primary_source] = contributions.get(primary_source, 0) + 1
+        if len(selected) >= MAX_PROBE_CANDIDATES:
+            break
+    return selected, contributions
+
+
 def _select_diverse_nodes(candidates):
     ordered = sorted(
         candidates,
         key=lambda item: (
             -item.successful_probes,
-            item.latency_ms,
+            -sum(source in PREFERRED_SOURCES for source in item.sources),
             -len(item.sources),
+            item.latency_ms,
             _stable_tiebreaker(item),
         ),
     )
@@ -754,7 +835,7 @@ def _select_diverse_nodes(candidates):
                 continue
             host_key = candidate.host.lower()
             network_key = _network_bucket(candidate)
-            if host_counts.get(host_key, 0) >= 2 or network_counts.get(network_key, 0) >= 3:
+            if host_counts.get(host_key, 0) >= 1 or network_counts.get(network_key, 0) >= 2:
                 continue
             if enforce_scheme_limit and scheme_counts.get(candidate.scheme, 0) >= scheme_limit:
                 continue
@@ -819,30 +900,30 @@ def fetch_and_clean_nodes():
             continue
         candidates.append(candidate)
     probeable_total = len(candidates)
-    candidates.sort(
-        key=lambda item: (
-            min(SOURCE_PRIORITY.get(source, len(SOURCE_PRIORITY)) for source in item.sources),
-            -len(item.sources),
-            _stable_tiebreaker(item),
-        )
+    candidates, source_contributions = _build_probe_queue(candidates)
+    source_mix = ", ".join(
+        f"{_source_label(source)}:{count}"
+        for source, count in source_contributions.items()
+        if count
     )
-    candidates = candidates[:MAX_PROBE_CANDIDATES]
     print(
         f"📦 共提取 {extracted_total} 条；严格解析和规范去重后 "
         f"{len(parsed_by_key)} 条，其中 {probeable_total} 条可做端到端检测，"
-        f"本次按来源优先级检测 {len(candidates)} 条。"
+        f"本次按来源配额公平抽取 {len(candidates)} 条。"
     )
+    print(f"🧭 检测队列来源分布：{source_mix}")
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=PROBE_WORKERS) as executor:
         checked = list(executor.map(probe_candidate, candidates))
 
     stable = [item for item in checked if item.successful_probes == PROBE_ATTEMPTS]
     intermittent = [item for item in checked if 0 < item.successful_probes < PROBE_ATTEMPTS]
-    selected = _select_diverse_nodes(stable + intermittent)
+    selected = _select_diverse_nodes(stable)
 
     print(
-        f"🔎 真实代理出站检测：稳定通过 {len(stable)} 条，单次通过 {len(intermittent)} 条；"
-        f"按延迟和网络段去重后选出 {len(selected)} 条。"
+        f"🔎 真实代理出站检测：三目标全部通过 {len(stable)} 条，"
+        f"未满三次而淘汰 {len(intermittent)} 条；"
+        f"按延迟、主机和网络段去重后发布 {len(selected)} 条。"
     )
     if len(selected) < MIN_VERIFIED_NODES:
         raise RuntimeError(
@@ -877,7 +958,7 @@ categories:
 
 > **⚠️ 使用须知与重要提醒：**
 > 为防止爬虫批量抓取、保障真正粉丝的节点使用体验与速度，本站**不提供长期订阅链接**。
-> 所有免费节点均为**独立单节点**，已经过格式、安全性与基础端口连通性预筛选，但仍可能随时失效。请务必观看**今日 YouTube 视频**获取专属查看口令！
+> 所有免费节点均为**独立单节点**，已经过格式、安全性与三站点真实代理出站筛选，但仍可能因地区网络差异或上游变动而失效。请务必观看**今日 YouTube 视频**获取专属查看口令！
 
 <!-- more -->
 
