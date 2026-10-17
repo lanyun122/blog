@@ -15,12 +15,20 @@ tags:
 
 **本期要点：** [本期从订阅链接导入和节点选择开始，讲解规则、全局、直连模式以及系统代理与 TUN 的区别，并演示链式代理的配置方法和常见连接问题排查，适合从 Clash for Windows 迁移到 Clash Verge Rev 的新手参考。]。
 
-<div style="margin-top: 25px; text-align: center;">
-  <a href="[https://youtu.be/UvU213ebRQE?si=VoNFW8z99aY81oWC]" target="_blank" class="md-button md-button--neutral" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; font-size: 0.85rem; border-radius: 20px; text-decoration: none; font-weight: bold; border: 1px solid rgba(0,0,0,0.1); transition: all 0.3s ease;">
-    <svg viewBox="0 0 576 512" style="height: 1.1em; fill: #FF0000; margin: 0; display: block;"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.781 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
-    立即观看完整视频
+<div style="margin: 0 0 25px; text-align: center;">
+  <a href="https://youtu.be/UvU213ebRQE?si=JV1khvg2N1d5N1Kg"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="md-button md-button--neutral"
+     style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 24px; font-size: 0.85rem; border-radius: 20px; text-decoration: none; font-weight: bold; border: 1px solid rgba(0,0,0,0.1); transition: all 0.3s ease;">
+    <span aria-hidden="true"
+          style="display: inline-flex; align-items: center; justify-content: center; width: 1.4em; height: 1em; background-color: #ff0000; border-radius: 0.3em; flex: 0 0 auto;">
+      <span style="display: block; width: 0; height: 0; margin-left: 0.08em; border-top: 0.27em solid transparent; border-bottom: 0.27em solid transparent; border-left: 0.44em solid #ffffff;"></span>
+    </span>
+    <span>立即观看完整视频</span>
   </a>
 </div>
+
 
 <br clear="left">
 <!-- more -->
