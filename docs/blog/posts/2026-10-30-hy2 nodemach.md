@@ -9,7 +9,7 @@ tags:
   - 分流规则
 ---
 
-# 🎁 RackNerd推荐与HY2节点搭建指南
+# 🎁 VPS IP被墙终极解决方案
 
 ![封面图](../../assets/images/photomode_01082023_035351.jpg){ style="display:block; width:900px; max-width:100%; height:auto; margin:24px auto 14px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.16);" }
 
@@ -40,8 +40,6 @@ tags:
 - **NodeMach 精品线路 VPS（CN2 GIA，含 IPv4 + /64 IPv6）：**[Chris 专属链接，购买与续费终身额外享 95 折](https://www.nodemach.com/welcome?vcd=9f2694fe)
 
 - **TG交流群：**[点击加入](https://telegram.me/+BwyeTrhg9NQ5MjVl)
-
-- **美国地址生成器：**[点击跳转](https://www.meiguodizhi.com/)
 
 - **Sing-box 全家桶——一键多协议脚本：**[点击跳转](https://github.com/fscarmen/sing-box)
 
