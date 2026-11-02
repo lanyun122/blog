@@ -39,6 +39,8 @@ tags:
 
 - **NodeMach 精品线路 VPS（CN2 GIA，含 IPv4 + /64 IPv6）：**[Chris 专属链接，购买与续费终身额外享 95 折](https://www.nodemach.com/welcome?vcd=9f2694fe)
 
+- **各价位VPS推荐：**[点击查看](https://lanyun122.github.io/blog/recommend/1-vps/)
+
 - **TG交流群：**[点击加入](https://telegram.me/+BwyeTrhg9NQ5MjVl)
 
 - **Sing-box 全家桶——一键多协议脚本：**[点击跳转](https://github.com/fscarmen/sing-box)
