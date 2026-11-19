@@ -1,15 +1,17 @@
 ---
-date: 2026-10-30
+date: 2026-11-18
 categories:
   - 工具视频教程
-slug: v2rayn-routing-ruleset
+slug: onesproxy-isp-3x-ui
 tags:
-  - v2rayN
-  - Xray
-  - 分流规则
+  - 静态 ISP
+  - OnesProxy
+  - IP 检测
+  - 3x-ui
+  - 链式代理
 ---
 
-# 🎁 VPS IP被墙终极解决方案
+# 🎁 # 静态 ISP 原理与实测｜OnesProxy 三地出口与 3x-ui 链式代理
 
 ![封面图](../../assets/images/photomode_01082023_035351.jpg){ style="display:block; width:900px; max-width:100%; height:auto; margin:24px auto 14px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.16);" }
 
@@ -30,7 +32,7 @@ tags:
 
 ---
 
-**本期要点：** 本页整理本期视频会用到的相关网址、服务器远程连接工具、代理客户端和 IP 检测工具。
+**本期要点** ｜ 讲清静态 ISP 的地址来源，以及它与机房 IP、家庭宽带住宅 IP 的区别。以 OnesProxy 的美国、香港、日本节点为例，演示购买流程，并用 IPinfo 和 ping0.cc 查看 IP 归属与风险标记。最后用 3x-ui 搭建 VLESS 节点、配置链式代理，核对实际出口，再测试 AI 服务、YouTube 和 TikTok 的访问情况。
 
 <!-- more -->
 ---
