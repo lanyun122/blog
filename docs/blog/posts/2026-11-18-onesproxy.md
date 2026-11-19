@@ -84,21 +84,3 @@ bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.
 
 - **顶级线路 VPS 推荐：**[点击跳转](https://lanyun122.github.io/blog/recommend/1-vps/)
 
-### 日本、香港、美国常见宽带运营商 ASN
-
-| 地区 | 运营商／网络 | ASN 示例 |
-| --- | --- | --- |
-| 日本 | OCN（NTT DOCOMO BUSINESS，原 NTT Communications） | `AS4713` |
-| 日本 | KDDI | `AS2516` |
-| 日本 | SoftBank | `AS17676` |
-| 日本 | J:COM | `AS9824` |
-| 香港 | HKT／Netvigator（网上行） | `AS4760` |
-| 香港 | HKBN（香港宽频） | `AS9269`、`AS10103` |
-| 香港 | HGC Global Communications（环球全域电讯） | `AS9304` |
-| 美国 | Comcast／Xfinity | `AS7922` |
-| 美国 | AT&T | `AS7018` |
-| 美国 | Charter／Spectrum | `AS20115` |
-| 美国 | Verizon | `AS701` |
-| 美国 | Cox Communications | `AS22773` |
-
-> 连上代理后，用 IPinfo 或 ping0.cc 查询实际出口 IP，再对照 ASN 和运营商名称。ASN 可以帮助识别这条 IP 的路由网络。是否属于家庭宽带出口，以及有没有风险记录，还要按具体 IP 核对。
