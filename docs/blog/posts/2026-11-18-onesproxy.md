@@ -74,7 +74,8 @@ bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.
 ## 🔍 IP 工具
 
 - **IP 检测工具：**
-    - [Ping0](https://ping0.cc/)（查询当前网络 IP 地址类型）
+    - [Ping0](https://ping0.cc/)（查询当前网络 IP 纯净度）
+    - [IPinfo](https://ipinfo.io/tools/pingable-ips)（查询当前网络 IP 类型以及ASN）
     - [IP.NET](https://ip.net.coffee/)
     - [IPOK](https://ipok.io/)
     - [IPIPAI](https://ipipai.com/index-zh.html)
