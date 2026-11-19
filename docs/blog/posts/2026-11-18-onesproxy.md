@@ -82,5 +82,8 @@ bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.
 
 - **Speedtest 网络测速：**[点击测速](https://www.speedtest.net/)
 
-- **顶级线路 VPS 推荐：**[点击跳转](https://lanyun122.github.io/blog/recommend/1-vps/)
 
+## 🌐 指纹浏览器与视频教程
+
+- **AdsPower 指纹浏览器** ｜ [注册入口](https://www.adspower.net/share/ChrisTalk1334) · [YouTube 教程](https://youtu.be/VYjzBDPbols?si=RDYkr8RMsQdRd1-0) ｜ 邀请码／优惠码 `ChrisTalk1334`
+- **比特指纹浏览器** ｜ [注册或下载](https://www.bitbrowser.cn/?code=EXOste) · [YouTube 教程](https://youtu.be/6hosHx-Ad_A?si=5G7bxwS9dukZuCKz)
