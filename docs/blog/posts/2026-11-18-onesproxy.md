@@ -16,7 +16,7 @@ tags:
 ![封面图](../../assets/images/photomode_01082023_035351.jpg){ style="display:block; width:900px; max-width:100%; height:auto; margin:24px auto 14px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.16);" }
 
 <div style="margin: 0 0 25px; text-align: center;">
-  <a href="https://youtu.be/hVe9xlYEATI?si=__QEIFCwzK_Z3rnF"
+  <a href="https://youtu.be/yPb_hH-1-IY?si=ksmH2mw1UQZN0NJY"
      target="_blank"
      rel="noopener noreferrer"
      class="md-button md-button--neutral"
