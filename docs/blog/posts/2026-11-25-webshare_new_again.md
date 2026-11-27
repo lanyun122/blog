@@ -63,6 +63,8 @@ tags:
 
 **Windows / macOS（Clash Verge）：** [点击观看教程](https://youtu.be/UvU213ebRQE)
 
+**Windows （v2rayN）：** [点击观看教程](https://youtu.be/LdflraxfvEs?si=YiAPw2ERJLLbP1iR)
+
 ## 🔍 IP 质量检测工具
 
 - 👉 **[Ping0](https://ping0.cc/)（查询当前网络 IP 纯净度）**
