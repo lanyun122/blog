@@ -132,7 +132,7 @@ tags:
 | 排名 | 运营商 | 宽带用户 |
 | ---: | :--- | ---: |
 | 1 | Comcast（Xfinity） | 2834万 |
-| 2 | Charter（Spectrum） | 约2721万 |
+| 2 | Charter（Spectrum）（Communications ） | 约2721万 |
 | 3 | Verizon（Fios / 5G Home） | 1740万 |
 | 4 | AT&T（Fiber / Internet Air） | 1625万 |
 | 5 | T-Mobile（5G Home Internet） | 至少845万 |
