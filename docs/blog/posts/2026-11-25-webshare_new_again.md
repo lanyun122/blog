@@ -33,24 +33,6 @@ tags:
 
 <!-- more -->
 
-## 📱 代理工具
-
-- **Windows / macOS（Clash Verge Rev）：**[点击跳转](https://github.com/Clash-Verge-rev/clash-verge-rev/releases/latest)
-
-- **v2rayN：** [GitHub Releases 下载最新版](https://github.com/2dust/v2rayN/releases/latest)
-
-- **Android（NekoBox）：**[点击跳转](https://github.com/MatsuriDayo/NekoBoxForAndroid/releases)
-
-- **iOS / macOS（Shadowrocket）：**[点击跳转](https://apps.apple.com/us/app/shadowrocket/id932747118)
-
-## 🔍 IP 质量检测工具
-
-- 👉 **[Ping0](https://ping0.cc/)（查询当前网络 IP 纯净度）**
-- 👉 **[IPinfo](https://ipinfo.io/tools/pingable-ips)（查询当前网络 IP 类型以及ASN）**
-- 👉 **[ip.net IP 检测](https://ip.net.coffee/)**
-- 👉 **[ipok.io IP 检测](https://ipok.io/)**
-- 👉 **[IPIPAI IP 检测](https://ipipai.com/index-zh.html)**
-
 ## 🔗 本期相关服务推荐
 
 ### 🌐 静态住宅 IP
@@ -78,6 +60,34 @@ tags:
 ### 🖥️ VPS推荐
 - **NodeMach 精品线路 VPS（CN2 GIA，含 IPv4 + /64 IPv6）：** [Chris 专属链接，购买与续费终身额外享 95 折](https://www.nodemach.com/welcome?vcd=9f2694fe)
 - **各价位VPS推荐：** [点击查看](https://lanyun122.github.io/blog/recommend/1-vps/)
+
+
+## 📱 代理工具
+
+- **Windows / macOS（Clash Verge Rev）：**[点击跳转](https://github.com/Clash-Verge-rev/clash-verge-rev/releases/latest)
+
+- **v2rayN：** [GitHub Releases 下载最新版](https://github.com/2dust/v2rayN/releases/latest)
+
+- **Android（NekoBox）：**[点击跳转](https://github.com/MatsuriDayo/NekoBoxForAndroid/releases)
+
+- **iOS / macOS（Shadowrocket）：**[点击跳转](https://apps.apple.com/us/app/shadowrocket/id932747118)
+
+### 🎬 链式代理配置教程
+
+用静态住宅 IP 做前置代理时，可按下面两条视频配置链式代理。
+
+**iOS（Shadowrocket / 小火箭）：** [点击观看教程](https://youtu.be/tQCkRt8d5NA)
+
+**Windows / macOS（Clash Verge）：** [点击观看教程](https://youtu.be/UvU213ebRQE)
+
+## 🔍 IP 质量检测工具
+
+- 👉 **[Ping0](https://ping0.cc/)（查询当前网络 IP 纯净度）**
+- 👉 **[IPinfo](https://ipinfo.io/tools/pingable-ips)（查询当前网络 IP 类型以及ASN）**
+- 👉 **[ip.net IP 检测](https://ip.net.coffee/)**
+- 👉 **[ipok.io IP 检测](https://ipok.io/)**
+- 👉 **[IPIPAI IP 检测](https://ipipai.com/index-zh.html)**
+
 
 
 ## 💳 国际支付方式
