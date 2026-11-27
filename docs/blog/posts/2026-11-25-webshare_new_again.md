@@ -129,10 +129,10 @@ tags:
 
 按宽带用户数排序，数据截至 2026 年 9 月 30 日（各公司 2026 年三季报）。
 
-| 排名 | 运营商 | 宽带用户 |
-| ---: | :--- | ---: |
-| 1 | Comcast（Xfinity） | 2834万 |
-| 2 | Charter（Spectrum）（Communications ） | 约2721万 |
-| 3 | Verizon（Fios / 5G Home） | 1740万 |
-| 4 | AT&T（Fiber / Internet Air） | 1625万 |
-| 5 | T-Mobile（5G Home Internet） | 至少845万 |
+| 排名 | 公司 | 品牌 | 宽带用户 | 备注 |
+| --- | --- | --- | --- | --- |
+| 1 | Charter Communications | Spectrum | 约 3431 万 | 2026 年 8 月完成收购 Cox，用户已并入 |
+| 2 | Comcast | Xfinity | 约 2834 万 | 美国国内住宅宽带用户 |
+| 3 | Verizon | Fios / 5G Home | 约 1740 万 | 含光纤和固定无线 |
+| 4 | AT&T | AT&T Fiber / Internet Air | 约 1625 万 | 含光纤约 1331 万、固定无线约 294 万 |
+| 5 | T-Mobile | 5G Home Internet | 至少 845 万 | 这是 2025 年底官方数；2026 年三季报未再公布总数，但仍明显高于其后的 Optimum 等 |
