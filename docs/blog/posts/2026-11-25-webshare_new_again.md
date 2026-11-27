@@ -40,13 +40,6 @@ tags:
 - 👉 **本期视频同款静态 IP（Webshare）：** [点击跳转](https://www.webshare.io/?referral_code=lq6qy4n0ui6c)
 
 
-### ☁️ 良心云 机场推荐
-据官网说明，良心云主打高性价比直连线路，标称四网高可靠性互联，提供 **VLESS** 与 **Hysteria2** 协议，节点覆盖香港、新加坡、日本、美国、英国、台湾等地。
-主推套餐是 **1000G流量（王牌套餐）**：月付 **6 元**，每月 1000GB 流量（按月重置），带宽上限 **3Gbps**，支持同时在线 **20 台**设备；该套餐也提供季付 18 元、半年付 36 元、年付 72 元、两年付 144 元和三年付 216 元，折合均为每月 6 元。公开资料里部分节点带 0.1x、0.01x 低倍率，实际扣量以商家为准。
-邀请码：`zwTTkkF7`
-👉 **[点击注册良心云](https://xn--9kqz23b19z.com/#/register?code=zwTTkkF7)**
-
-
 ### 🖥️ VPS推荐
 - **NodeMach 精品线路 VPS（CN2 GIA，含 IPv4 + /64 IPv6）：** [Chris 专属链接，购买与续费终身额外享 95 折](https://www.nodemach.com/welcome?vcd=9f2694fe)
 - **各价位VPS推荐：** [点击查看](https://lanyun122.github.io/blog/recommend/1-vps/)
