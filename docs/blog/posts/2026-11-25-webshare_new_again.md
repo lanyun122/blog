@@ -84,6 +84,8 @@ tags:
   [▶ Bybit U卡（台湾）](https://partner.bybit.com/b/148332)
   [▶ Bybit U卡（哈萨克斯坦）](https://partner.bybit.com/b/148332)
 
+**Bybit 充值教程：** [点击观看教程](https://youtu.be/b0fhhFboCYw)
+
 ### 🏦 实体银行卡
 
 - **招商银行万事达人民币普卡（实体借记卡）：**
